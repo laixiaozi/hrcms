@@ -2,6 +2,7 @@
 //加载常用的组件模块
 use yii\helpers\Html;
 use app\assets\IviewAsset;
+use app\widget\iview\menu;
 
 IviewAsset::register($this);
 ?>
@@ -17,13 +18,41 @@ IviewAsset::register($this);
     <?php $this->head() ?>
 </head>
 <body>
-
 <?php $this->beginBody(); ?>
-<?= $content ?>
-<?php $this->endBody(); ?>
 
+<div id="layout">
+
+        <Layout>
+            <Header>
+                <?=menu::widget(['menuData' => ''])?>
+            </Header>
+             <Layout>
+<!--            <Sider></Sider>-->
+            <Content><?= $content ?></Content>
+             </Layout>
+            <Footer></Footer>
+        </Layout>
+</div>
+
+<?php $this->endBody(); ?>
 </body>
 </html>
+<?php $this->beginBlock('aa'); ?>
+  var layout = new Vue({
+    el:'#layout',
+    data:{
+
+    },
+    methods:{
+        func:function(e){
+         console.log(e);
+        }
+    }
+
+  });
+<?php $this->endBlock(); ?>
+<?php $this->registerJs($this->blocks['aa'], \yii\web\View::POS_END); ?>
 <?php $this->endPage(); ?>
+
 
 
