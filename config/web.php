@@ -49,8 +49,32 @@ $config = [
             'enablePrettyUrl' => true,
             'showScriptName' => false,
             'rules' => [
-            ],
-        ],
+                //测试正则匹配
+                '<controller:(site|post)>/<action:(index|test)>/<id:\d+>' => '<controller>/<action>',
+                [
+                    'pattern' => 'site/<id:\d+>/<tag>',
+                    'route' => 'site/test',
+                    'defaults' => ['id' => 0, 'tag' => ''],
+                ],
+                'POST site/test/<id:\d+>' => 'site/test',
+
+                //配置generate
+                'generate/<action>' => 'generate/default/<action>',
+                'generate/<action>/<widgetName:\w+>' => 'generate/default/<action>',
+                [
+                    'pattern' => 'generate/widget/<widgetName:\w+>/<tplType:\d+>',
+                    'route' => 'generate/default/widget',
+                    'defaults' => [
+                        'widgetName' => '',
+                        'tplType' => 0,
+                    ],
+                ],
+                //其他路由
+
+            ], //end rules
+
+        ], //end urlmanager
+
         //主题配置
         'view' => [
             'theme' => [
@@ -63,6 +87,12 @@ $config = [
         ],
 
     ],
+    //加载模块
+    'modules' => [
+        'generate' => [
+            'class' => 'app\modules\generate\modules',
+        ]
+    ],
     'params' => $params,
 ];
 
@@ -72,14 +102,14 @@ if (YII_ENV_DEV) {
     $config['modules']['debug'] = [
         'class' => 'yii\debug\Module',
         // uncomment the following to add your IP if you are not connecting from localhost.
-        //'allowedIPs' => ['127.0.0.1', '::1'],
+        'allowedIPs' => ['192.168.3.205', '::1'],
     ];
 
     $config['bootstrap'][] = 'gii';
     $config['modules']['gii'] = [
         'class' => 'yii\gii\Module',
         // uncomment the following to add your IP if you are not connecting from localhost.
-        //'allowedIPs' => ['127.0.0.1', '::1'],
+        'allowedIPs' => ['192.168.3.205', '::1'],
     ];
 }
 

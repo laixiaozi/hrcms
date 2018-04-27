@@ -11,8 +11,19 @@ use yii\helpers\ArrayHelper;
  * 支持的事件
  * on-select  选择菜单（MenuItem）时触发        返回name
  *  on-open-change  当 展开/收起 子菜单时触发    当前展开的 Submenu 的 name 值数组
+ * $demoMenu = array(
+ * ['name' => 'required', 'text' => '测试', 'icon' => 'leaf'],
+ * ['name' => 'required2', 'text' => '测试22', 'icon' => 'heart'],
+ * ['name' => 'required3', 'text' => '测试22', 'icon' => 'heart' , 'title' => '子菜单标题', 'items' => [
+ * ['name' => 'required2-1', 'text' => '测试22', 'icon' => 'heart'],
+ * ['name' => 'required2-2', 'text' => '测试22', 'icon' => 'heart'],
+ * ['name' => 'required2-3', 'text' => '测试22', 'icon' => 'heart'],
+ * ],
+ * ],
+ * );
+ *  <?= menu::widget(['menuData' => $demoMenu, 'event' => 'on-select', 'eventName' => 'func']) ?>
  */
-class menu extends widget
+class Menu extends widget
 {
 
     public $mode;  //菜单类型，可选值为 horizontal（水平） 和 vertical（垂直）

@@ -8,7 +8,7 @@ use yii\base\Widget;
 /**
  * iview 生成button
  */
-class button extends Widget
+class Button extends Widget
 {
     public $btntxt;
     public $btntype;

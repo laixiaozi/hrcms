@@ -16,6 +16,7 @@ class SiteController extends Controller
 
     public $layout = 'iview_layout';
 
+    public $enableCsrfValidation = false;
 
     /**
      * {@inheritdoc}
@@ -129,5 +130,27 @@ class SiteController extends Controller
     public function actionAbout()
     {
         return $this->render('about');
+    }
+
+
+    public function actionTest()
+    {
+        $request = Yii::$app->request;
+        $widgetExtension = '.php';
+        $widgetName = ucfirst(trim($request->get('name')));
+        $widgetFloder = Yii::getAlias('@app') . '/widget/iview';
+        $widgetFile = $widgetFloder . '/' . $widgetName . $widgetExtension;
+        echo 'GET<br>';
+        print_r($request->get());
+        echo '<br>POST<br>';
+        print_r($request->post());
+//        if (!file_exists($widgetFile)) {
+//             $fp = fopen($widgetFile , 'w+');
+//             fclose($fp);
+//        } else {
+//            echo $widgetFile;
+//            echo '<br>文件已经存在';
+//        }
+
     }
 }

@@ -41,8 +41,11 @@ IviewAsset::register($this);
   var layout = new Vue({
     el:'#layout',
     data:{
-
+       demoInput:'',
+       demoRadio:'',
+       radioGroupmodel:'',
     },
+
     methods:{
         func:function(e){
          console.log(e);

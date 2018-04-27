@@ -6,7 +6,7 @@ use yii\base\widget;
 use yii\helpers\Html;
 
 //测试begin和end的使用方式
-class test2 extends widget
+class {className} extends widget
 {
 
     public function init()

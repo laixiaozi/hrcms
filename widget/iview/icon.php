@@ -10,7 +10,7 @@ use yii\helpers\Html;
  *   iview icon图标列表
  *
  */
-class icon extends widget
+class Icon extends widget
 {
 
     public $icon;
