@@ -135,8 +135,12 @@ class Input extends Widget
             }
         }
         $code .= '>' . PHP_EOL;
-        if (isset($config['slot'])) {
+        if (isset($config['slot']) && !is_array($config['slot'])) {
             $code .= $config['slot'];
+        } else {
+            for ($i = 0; $i < count($config['slot']); $i++) {
+                $code .= $config['slot'][$i];
+            }
         }
         $code .= '</i-input>' . PHP_EOL;
         return $code;

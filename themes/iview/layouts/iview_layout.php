@@ -19,10 +19,7 @@ IviewAsset::register($this);
 </head>
 <body>
 <?php $this->beginBody(); ?>
-
-<div id="layout">
-
-        <Layout>
+       <Layout>
             <Header>
                 <?=menu::widget(['menuData' => ''])?>
             </Header>
@@ -38,22 +35,7 @@ IviewAsset::register($this);
 </body>
 </html>
 <?php $this->beginBlock('aa'); ?>
-  var layout = new Vue({
-    el:'#layout',
-    data:{
-       demoInput:'',
-       demoRadio:'',
-       radioGroupmodel:'',
-    },
-
-    methods:{
-        func:function(e){
-         console.log(e);
-        }
-    }
-
-  });
-<?php $this->endBlock(); ?>
+ <?php $this->endBlock(); ?>
 <?php $this->registerJs($this->blocks['aa'], \yii\web\View::POS_END); ?>
 <?php $this->endPage(); ?>
 

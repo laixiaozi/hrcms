@@ -5,6 +5,7 @@ namespace app\widget\iview;
 use yii\base\widget;
 use yii\helpers\Html;
 use yii\helpers\ArrayHelper;
+use Yii;
 
 /**
  * 一个菜单组件
@@ -21,7 +22,9 @@ use yii\helpers\ArrayHelper;
  * ],
  * ],
  * );
- *  <?= menu::widget(['menuData' => $demoMenu, 'event' => 'on-select', 'eventName' => 'func']) ?>
+ *   <div id="menu">
+ * <?= menu::widget(['menuData' => $demoMenu, 'event' => 'on-select', 'eventName' => 'func']) ?>
+ * </div>
  */
 class Menu extends widget
 {
@@ -63,6 +66,8 @@ class Menu extends widget
 
     public $eventName;
 
+    public $el;
+
     //用户传入的菜单数据
     /**
      * 用来生成菜单的三维/二维数组。* 注意。不能是多维数组
@@ -83,6 +88,8 @@ class Menu extends widget
      */
     public $menuData;
 
+    public $view;
+
     public function init()
     {
         parent::init();
@@ -92,7 +99,12 @@ class Menu extends widget
         if (is_null($this->theme)) {
             $this->theme = 'light';
         }
-
+        if (is_null($this->view)) {
+            $this->view = Yii::$app->getView();
+        }
+        if (is_null($this->el)) {
+            $this->el = 'menu';
+        }
     }
 
 
