@@ -169,7 +169,6 @@ $this->title = '测试';
                 radioGroupmodel:'',
                 demoRadio:'',
                 demoInput:'',
-                demoSelect:'',
                 demoSelectGroup:[]
             },
             methods:{

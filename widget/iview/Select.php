@@ -37,7 +37,7 @@ class Select extends Widget
 
     public function run()
     {
-        $this->clientJs();
+        $this->clientJs($this->config);
         $code = $this->createCode($this->config);
         return $code;
     }
@@ -78,14 +78,17 @@ class Select extends Widget
         return $code;
     }
 
-    public function clientJs()
+    public function clientJs($config)
     {
+        $model = '';
         $selectData = json_encode($this->config['data']);
+        if(!empty($config['model'])){$model = $config['model'].':""';}
         $js = <<<EOD
            var iSelect = Vue.extend({
                   data:function(){
                    return {
-                     selectData:$selectData,
+                     selectData:{$selectData},
+                     {$model}
                    }
                }
            });
