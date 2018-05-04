@@ -60,6 +60,7 @@ $config = [
 
                 //配置generate
                 'generate/<action>' => 'generate/default/<action>',
+                'generate/curl-get/<url:((http\:\/\/)|(https\:\/\/))?\w+(\.\w+)+((\/\w+)+|(\/\w+)?)>' => 'generate/default/curl-get',
                 'generate/<action>/<widgetName:\w+>' => 'generate/default/<action>',
                 [
                     'pattern' => 'generate/widget/<widgetName:\w+>/<tplType:\d+>',

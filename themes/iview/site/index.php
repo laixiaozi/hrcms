@@ -7,7 +7,9 @@ use app\widget\iview\Menu;
 use app\widget\iview\Icon;
 use app\widget\iview\Input;
 use app\widget\iview\Radio;
+use app\widget\iview\RadioGroup;
 use app\widget\iview\Checkbox;
+use app\widget\iview\CheckBoxGroup;
 use app\widget\iview\iswitch;
 use app\widget\iview\Table;
 use app\Widget\iview\Select;
@@ -15,8 +17,10 @@ use app\widget\iview\AutoComplete;
 use app\widget\iview\Slider;
 use app\widget\iview\Datepicker;
 use app\widget\iview\TimePicker;
+use app\widget\iview\Cascader;
 
 $demoMenu = array(
+    'debug' => true,
     ['name' => 'required', 'text' => '测试', 'icon' => 'leaf'],
     ['name' => 'required2', 'text' => '测试22', 'icon' => 'heart'],
     ['name' => 'required3', 'text' => '测试22', 'icon' => 'heart', 'title' => '子菜单标题', 'items' => [
@@ -28,6 +32,7 @@ $demoMenu = array(
 );
 
 $demoInput = array(
+    'debug' => true,
     'model' => 'demoInput',
 //    'icon' => 'search',
     'size' => 'large',
@@ -40,12 +45,14 @@ $demoInput = array(
 );
 
 $demoRadio = array(
-    'mode' => 'demoRadio',
+    'model' => 'demoRadio',
+    'debug' => true,
 );
 
 $demoRadio2 = array(
+    'debug' => true,
     'items' => array(
-        'parameters' => array('model' => 'radioGroupmodel', 'vertical' => 'vertical'),
+        'parameters' => array('model' => 'demoRadio', 'vertical' => 'vertical'),
         'list' => array(
             array('label' => 'radio2', 'icon' => 'social-android', 'text' => '显示的文字'),
             array('label' => 'radio3', 'icon' => 'social-android', 'text' => '显示的文字22'),
@@ -54,11 +61,13 @@ $demoRadio2 = array(
 );
 
 $demoCheckbox = array(
-    'mode' => 'demoCheckbox',
+    'debug' => true,
+    'model' => 'demoCheckbox',
     'label' => 'checkbox',
 );
 
 $demoCheckboxGroup = array(
+    'debug' => true,
     'items' => array(
         'parameters' => array('model' => 'checkboxGroupModel'),
         'list' => array(
@@ -69,6 +78,7 @@ $demoCheckboxGroup = array(
 );
 
 $demoIswitch = array(
+    'debug' => true,
     'slot' => 'open', // close
     'size' => 'large',
     'icon' => 'android-close',
@@ -76,6 +86,7 @@ $demoIswitch = array(
 
 
 $demoTable = array(
+    'debug' => true,
     'column' => array(
         array('title' => '名称', 'key' => 'name'),
         array('title' => '年龄', 'key' => 'age'),
@@ -87,96 +98,137 @@ $demoTable = array(
     ),
 );
 
-$selectData = array(
-    array('label' => 'new yourk', 'value' => '1'),
-    array('label' => 'new yourk2', 'value' => '2'),
-    array('label' => 'new yourk3', 'value' => '3'),
-    array('label' => 'new yourk4', 'value' => '4'),
-    array('label' => 'new yourk5', 'value' => '5'),
-    array('label' => 'new yourk6', 'value' => '6'),
-);
 
 $demoSelect = array(
+    'debug' => true,
     'model' => 'demoSelect',
-    'data' => $selectData,
+    'data' => array(
+        array('label' => 'new yourk', 'value' => '1'),
+        array('label' => 'new yourk2', 'value' => '2'),
+        array('label' => 'new yourk3', 'value' => '3'),
+        array('label' => 'new yourk4', 'value' => '4'),
+        array('label' => 'new yourk5', 'value' => '5'),
+        array('label' => 'new yourk6', 'value' => '6'),
+    ),
 );
 
 
 $demoSlider = array(
+    'debug' => true,
     'range' => 'range',
 );
 
 
 $demoDatePicker = array(
+    'debug' => true,
     'type' => 'daterange',
     'format' => 'yyyy/MM/dd'
 );
 
 $demoTimePicker = array(
-        'type' => 'timerange'
+    'debug' => true,
+    'type' => 'timerange'
+);
+
+$demoCascadeData = array(
+    'debug' => true,
+    'model' => 'cascade',
+    'dataName' => 'cascadeData',
+    'data' => array(
+        array('label' => '级联菜单', 'value' => '6', 'children' => array(
+            array('label' => '子集菜单一', 'value' => '5'),
+            array('label' => '子集菜单二', 'value' => '3'),
+            array('label' => '级联菜单1', 'value' => '6', 'children' => array(
+                array('label' => '子集菜单一1', 'value' => '5'),
+                array('label' => '子集菜单二2', 'value' => '3'),
+            )),
+            array('label' => '级联菜单2', 'value' => '6', 'children' => array(
+                array('label' => '子集菜单一2', 'value' => '5'),
+                array('label' => '子集菜单二2', 'value' => '3'),
+            )),
+        )),
+        array('label' => '级联菜单', 'value' => '6', 'children' => array(
+            array('label' => '子集菜单一', 'value' => '5'),
+            array('label' => '子集菜单二', 'value' => '3'),
+        )),
+    ),
 );
 
 $this->title = '测试';
 ?>
+<style>
+    div: {
+        margin: 10px 20px;
+        width: 500px;
+    }
+</style>
 
-<div style="height:300px;">
     <div id="menu">
         <?= menu::widget(['menuData' => $demoMenu, 'event' => 'on-select', 'eventName' => 'func']) ?>
+    </div>
+
+    <div id="input">
         <p style="width:30%;"><?= Input::widget(['message' => 'input测试', 'config' => $demoInput]); ?></p>
+    </div>
+
+    <div id="radio">
         <p style="width:30%;"><?= Radio::widget(['message' => 'input测试', 'config' => $demoRadio]); ?></p>
-        <p style="width:30%;"><?= Radio::widget(['message' => 'radio测试2', 'config' => $demoRadio2]); ?></p>
-
+    </div>
+<!---->
+    <div id="radiogroup">
+        <p style="width:30%;"><?= RadioGroup::widget(['message' => 'radio测试2', 'config' => $demoRadio2]); ?></p>
+    </div>
+<!---->
+    <div id="checkBox">
         <p style="width:30%;"><?= Checkbox::widget(['message' => '单个checkbox测试', 'config' => $demoCheckbox]); ?></p>
-
-        <p style="width:30%;"><?= Checkbox::widget(['message' => 'checkbox列表测试', 'config' => $demoCheckboxGroup]); ?></p>
-
-        <p style="width:30%;"><?= iswitch::widget(['message' => 'checkbox列表测试', 'config' => $demoIswitch]); ?></p>
-        <br/><br/>
-        <div>
-            <?= Icon::widget(['icon' => rand(0, 700)]); ?>
-        </div>
-        <br/>
-
-        <p style="width:30%;"><?= AutoComplete::widget(); ?></p><br/>
-
-        <p style="width:30%;"><?= Slider::widget(['message' => 'hello slider', 'config' => $demoSlider]); ?></p><br/>
-
-        <p style="width:30%;"><?= Datepicker::widget(['message' => 'hello datePicker', 'config' => $demoDatePicker]); ?></p>
-        <br/>
-
-
-        <p style="width:30%;"><?= TimePicker::widget(['message' => 'hello datePicker', 'config' => $demoTimePicker]); ?></p>
-        <br/>
-
     </div>
-
-    <!-- 不需要使用new vue()这种格式 -->
-    <p style="width:30%;" id="test"><?= Table::widget(['message' => 'table测试', 'data' => $demoTable]); ?></p>
-
-    <div id="select">
-        <p style="width:30%;"><?= Select::widget(['message' => 'select列表', 'config' => $demoSelect]); ?></p>
+<!---->
+    <div id="checkboxGroup">
+        <p style="width:30%;"><?= CheckBoxGroup::widget(['message' => 'checkbox列表测试', 'config' => $demoCheckboxGroup]); ?></p>
     </div>
+<!---->
+<!--    <div id="iswitch">-->
+<!--        <p style="width:30%;">--><?//= iswitch::widget(['message' => 'checkbox列表测试', 'config' => $demoIswitch]); ?><!--</p>-->
+<!--    </div>-->
 
-</div>
+<!--    <div>-->
+<!--        --><?//= Icon::widget(['icon' => rand(0, 700)]); ?>
+<!--    </div>-->
+<!---->
+<!--    <div id="autocomplete">-->
+<!--        <p style="width:30%;">--><?//= AutoComplete::widget(); ?><!--</p><br/>-->
+<!--    </div>-->
+<!---->
+<!---->
+<!--    <div id="slider">-->
+<!--        <p style="width:30%;">--><?//= Slider::widget(['message' => 'hello slider', 'config' => $demoSlider]); ?><!--</p><br/>-->
+<!--    </div>-->
+<!---->
+<!---->
+<!--    <div id="datepicker">-->
+<!--        <p style="width:30%;">--><?//= Datepicker::widget(['message' => 'hello datePicker', 'config' => $demoDatePicker]); ?><!--</p>-->
+<!--    </div>-->
+<!---->
+<!--    <div id="timepicker">-->
+<!--        <p style="width:30%;">--><?//= TimePicker::widget(['message' => 'hello datePicker', 'config' => $demoTimePicker]); ?><!--</p>-->
+<!--    </div>-->
+<!--    <div id="table">-->
+<!--        <!-- 不需要使用new vue()这种格式 -->-->
+<!--        <p style="width:30%;">--><?//= Table::widget(['message' => 'table测试', 'data' => $demoTable]); ?><!--</p>-->
+<!--    </div>-->
+<!---->
+<!--    <div id="select">-->
+<!--        <p style="width:30%;">--><?//= Select::widget(['message' => 'select列表', 'config' => $demoSelect]); ?><!--</p>-->
+<!--        <br>-->
+<!--    </div>-->
+<!---->
+<!---->
+<!--    <div id="cascader">-->
+<!--        <p style="width:30%;">--><?//= Cascader::widget(['message' => 'select列表', 'config' => $demoCascadeData]); ?><!--</p>-->
+<!--        <br>-->
+<!--    </div>-->
 
 
-<?php $this->beginBlock('vue'); ?>
-    new Vue({
-        el:'#menu',
-            data:{
-                demoCheckbox:'',
-                checkboxGroupModel:[],
-                radioGroupmodel:'',
-                demoRadio:'',
-                demoInput:'',
-                demoSelectGroup:[]
-            },
-            methods:{
-                func:function(e){
-                  console.log(e);
-                },
-
-        }
-    });
-<?php $this->endBlock(); ?>
-<?php $this->registerJs($this->blocks['vue'], \yii\web\View::POS_END); ?>
+    <?php $this->beginBlock('vue'); ?>
+    <?php $this->endBlock(); ?>
+    <?php $this->registerJs($this->blocks['vue'], \yii\web\View::POS_END); ?>

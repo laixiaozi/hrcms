@@ -2,6 +2,10 @@
 
 namespace app\widget\iview;
 
+use yii\base\Widget;
+use yii\helpers\Html;
+use Yii;
+
 /**
  *  API #
  * Input props #
@@ -54,8 +58,6 @@ namespace app\widget\iview;
  * 'disabled' => 'disabled',
  * );
  */
-use yii\base\Widget;
-use yii\helpers\Html;
 
 /**
  * 测试一个小部件
@@ -67,19 +69,160 @@ class Input extends Widget
 
     public $config;
 
+    public $view;
+
+    public $eventList = array(
+        'on-enter' => array(
+            'desc' => '按下回车键时触发',
+            'type' => '无',
+            'default' => '',
+        ),
+        'on-click' => array(
+            'desc' => '设置 icon 属性后，点击图标时触发',
+            'type' => '无',
+            'default' => '',
+        ),
+        'on-change' => array(
+            'desc' => '数据改变时触发',
+            'type' => 'event',
+            'default' => '',
+        ),
+        'on-focus' => array(
+            'desc' => '输入框聚焦时触发',
+            'type' => '无',
+            'default' => '',
+        ),
+        'on-blur' => array(
+            'desc' => '输入框失去焦点时触发',
+            'type' => '无',
+            'default' => '',
+        ),
+        'on-keyup' => array(
+            'desc' => '原生的 keyup 事件',
+            'type' => 'event',
+            'default' => '',
+        ),
+        'on-keydown' => array(
+            'desc' => '原生的 keydown 事件',
+            'type' => 'event',
+            'default' => '',
+        ),
+        'on-keypress' => array(
+            'desc' => '原生的 keypress 事件',
+            'type' => 'event',
+            'default' => '',
+        ),
+    );
+
+    public $attributeList = array(
+
+        'type' => array(
+            'value' => array('text', 'password', 'textarea', 'url', 'date'),
+            'desc' => '输入框类型',
+            'type' => 'String',
+            'default' => 'text',
+        ),
+
+        'value' => array(
+            'value' => array('text', 'password', 'textarea', 'url', 'date'),
+            'desc' => '绑定的值，可使用 v-model 双向绑定',
+            'type' => 'String | Number',
+            'default' => '',
+        ),
+
+        'size' => array(
+            'value' => array('large', 'small', 'default'),
+            'desc' => '输入框尺寸,或者不设置',
+            'type' => 'String',
+            'default' => '',
+        ),
+
+        'placeholder' => array(
+            'value' => '',
+            'desc' => '占位文本',
+            'type' => 'String',
+            'default' => '',
+        ),
+
+        'clearable' => array(
+            'value' => 'clearable',
+            'desc' => '是否显示清空按钮',
+            'type' => 'Boolean',
+            'default' => false,
+        ),
+
+        'disabled' => array(
+            'value' => 'disabled',
+            'desc' => '设置输入框为禁用状态',
+            'type' => 'Boolean',
+            'default' => false,
+        ),
+
+        'readonly' => array(
+            'value' => 'readonly',
+            'desc' => '设置输入框为只读',
+            'type' => 'Boolean',
+            'default' => false,
+        ),
+
+        'maxlength' => array(
+            'value' => array('text', 'password', 'textarea', 'url', 'date'),
+            'desc' => '最大输入长度',
+            'type' => 'String | Number',
+            'default' => '',
+        ),
+
+        'value' => array(
+            'value' => array('text', 'password', 'textarea', 'url', 'date'),
+            'desc' => '绑定的值，可使用 v-model 双向绑定',
+            'type' => 'String | Number',
+            'default' => '',
+        ),
+    );
+
+    public $solt = array(
+        'prepend' => array(
+            'desc' => '前置内容，仅在 text 类型下有效',
+            'type' => '',
+            'default' => '',
+        ),
+        'append' => array(
+            'desc' => '后置内容，仅在 text 类型下有效',
+            'type' => '',
+            'default' => '',
+        ),
+    );
+
+    public $methods = array(
+        'focus' => array(
+            'desc' => '手动聚焦输入框',
+            'type' => '无',
+            'default' => '',
+        ),
+    );
+
     public function init()
     {
         parent::init();
         if (is_null($this->message)) {
             $this->message = '你好,世界';
         }
+
         if (is_null($this->config)) {
             $this->config = array();
+        }
+
+        if (is_null($this->view)) {
+            $this->view = Yii::$app->getView();
         }
     }
 
     public function run()
     {
+        if (isset($this->config['debug'])) {
+            $this->clientJs();
+            unset($this->config['debug']);
+        }
         $code = $this->createCode($this->config);
         return $code;
     }
@@ -144,6 +287,26 @@ class Input extends Widget
         }
         $code .= '</i-input>' . PHP_EOL;
         return $code;
+    }
+
+    public function clientJs()
+    {
+        $js = <<<EOD
+          var Imenu = Vue.extend({
+                 data: function(){
+                    return {
+                      {$this->config['model']}:'',
+                    }
+                 },
+                  methods:{
+                   func:function(e){
+                     console.log(e);
+                   }
+                 }
+          });
+          new Imenu().\$mount('#input');
+EOD;
+        $this->view->registerJs($js, \yii\web\View::POS_END);
     }
 
 

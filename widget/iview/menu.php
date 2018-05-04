@@ -68,6 +68,10 @@ class Menu extends widget
 
     public $el;
 
+    public $view;
+
+    public $eventList = array('','');
+
     //用户传入的菜单数据
     /**
      * 用来生成菜单的三维/二维数组。* 注意。不能是多维数组
@@ -88,7 +92,6 @@ class Menu extends widget
      */
     public $menuData;
 
-    public $view;
 
     public function init()
     {
@@ -110,6 +113,10 @@ class Menu extends widget
 
     public function run()
     {
+        if(isset($this->menuData['debug'])){
+           $this->clientJs();
+           unset($this->menuData['debug']);
+        }
         $menu = $this->_getMenu();
         return $menu;
     }
@@ -187,6 +194,27 @@ class Menu extends widget
         $code .= '</submenu>' . PHP_EOL;
 
         return $code;
+    }
+
+    public function clientJs()
+    {
+        $data = json_encode($this->menuData);
+        $js = <<<EOD
+          var Menu = Vue.extend({
+                 data: function(){
+                    return {
+                      
+                    }
+                 },
+                 methods:{
+                   func:function(e){
+                     console.log(e);
+                   }
+                 }
+          });
+          new Menu().\$mount('#menu');
+EOD;
+        $this->view->registerJs($js, \yii\web\View::POS_END);
     }
 
 

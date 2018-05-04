@@ -18,6 +18,8 @@ class Select extends Widget
 
     public $view;
 
+    public $eventList = array('','');
+
     public function init()
     {
         parent::init();
@@ -37,7 +39,10 @@ class Select extends Widget
 
     public function run()
     {
-        $this->clientJs($this->config);
+        if(isset($this->config['debug'])){
+            $this->clientJs();
+            unset($this->config['debug']);
+        }
         $code = $this->createCode($this->config);
         return $code;
     }
@@ -78,11 +83,11 @@ class Select extends Widget
         return $code;
     }
 
-    public function clientJs($config)
+    public function clientJs()
     {
         $model = '';
         $selectData = json_encode($this->config['data']);
-        if(!empty($config['model'])){$model = $config['model'].':""';}
+        if(!empty($this->config['model'])){$model = $this->config['model'].':""';}
         $js = <<<EOD
            var iSelect = Vue.extend({
                   data:function(){
@@ -90,7 +95,12 @@ class Select extends Widget
                      selectData:{$selectData},
                      {$model}
                    }
-               }
+               },
+                methods:{
+                   func:function(e){
+                     console.log(e);
+                   }
+                 }
            });
            new iSelect().\$mount('#select');
 EOD;

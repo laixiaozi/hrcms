@@ -21,6 +21,8 @@ class Table extends Widget
 
     public $view;
 
+    public $eventList = array('','');
+
     public function init()
     {
         parent::init();
@@ -43,7 +45,10 @@ class Table extends Widget
 
     public function run()
     {
-        $this->clientScript();
+        if(isset($this->config['debug'])){
+            $this->clientJs();
+            unset($this->config['debug']);
+        }
         $code = $this->createCode($this->config);
         return $code;
     }
@@ -60,7 +65,7 @@ class Table extends Widget
         return $code;
     }
 
-    public function clientScript()
+    public function clientJs()
     {
         $column = json_encode($this->data['column']);
         $data    = json_encode($this->data['data']);
@@ -71,9 +76,14 @@ class Table extends Widget
                     column : $column,
                      data : $data
                    }
-               }
+               },
+                methods:{
+                   func:function(e){
+                     console.log(e);
+                   }
+                 }
           });
-          new Itable().\$mount('#test');
+          new Itable().\$mount('#table');
 EOD;
         $this->view->registerJs($js, \yii\web\view::POS_END);
     }
