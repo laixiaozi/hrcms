@@ -4,7 +4,7 @@
     <br>
     <textarea id="result" rows=10 cols=60>生成结果</textarea>
     <button id="submit">开始..</button>
-    <button id="clear">开始..</button>
+    <button id="clear">清理..</button>
 <?php $this->beginBlock('pregHtml') ?>
     $("#submit").on('click', function(){
        var htmlcode = $('#html').val();
@@ -19,7 +19,7 @@
     $("#clear").on('click', function(){
        $('#html').val('');
     $("#result").val('');
-    }
+    });
 
 
 <?php $this->endBlock() ?>
