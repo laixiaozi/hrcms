@@ -188,9 +188,6 @@ $inputNumberData = array(
     'placeholder' => '',
     'formatter' => '',
     'parser' => '',
-    '' => '',
-    '' => '',
-    '' => '',
 );
 
 $this->title = '测试';

@@ -59,10 +59,6 @@ class InputNumber extends Widget
              $code .=   '  ' .$config['clearable'] . ' ';
         }
 
-        if (isset($config['data'])) {
-            $code .=   '  v-bind:data="' .$config['clearable'] . '" ';
-        }
-
         if (isset($config['model'])) {
             $code .= ' v-model="' . $config['model'] . '"';
         }
@@ -81,8 +77,7 @@ class InputNumber extends Widget
                 var InputNumber = Vue.extend({
                     data: function(){
                         return {
-                              {$this->config['model']}:[],
-                              data:{$this->config['data']}
+                              {$this->config['model']}:'',
                         }
                     },
                     methods:{
