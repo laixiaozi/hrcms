@@ -22,6 +22,8 @@ class Icon extends widget
 
     public $eventList = array('', '');
 
+    public $config;
+
     public function init()
     {
         parent::init();
@@ -54,13 +56,10 @@ class Icon extends widget
 
     public function clientJs()
     {
-        $data = json_encode($this->config['data']);
         $js = <<<EOD
-          var Imenu = Vue.extend({
+          var IconWidget = Vue.extend({
                  data: function(){
                     return {
-                      {$this->config['model']}:[],
-                      cascadeData:{$data}
                     }
                  },
                   methods:{
@@ -69,7 +68,7 @@ class Icon extends widget
                    }
                  }
           });
-          new Imenu().\$mount('#icon');
+          new IconWidget().\$mount('#icon');
 EOD;
         $this->view->registerJs($js, \yii\web\View::POS_END);
     }

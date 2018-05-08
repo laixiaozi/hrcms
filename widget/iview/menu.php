@@ -200,7 +200,7 @@ class Menu extends widget
     {
         $data = json_encode($this->menuData);
         $js = <<<EOD
-          var Menu = Vue.extend({
+          var MenuWidget = Vue.extend({
                  data: function(){
                     return {
                       
@@ -212,7 +212,7 @@ class Menu extends widget
                    }
                  }
           });
-          new Menu().\$mount('#menu');
+          new MenuWidget().\$mount('#menu');
 EOD;
         $this->view->registerJs($js, \yii\web\View::POS_END);
     }

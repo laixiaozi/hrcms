@@ -69,6 +69,10 @@ class Datepicker extends Widget
             $this->config = array();
         }
 
+        if (is_null($this->view)) {
+            $this->view = Yii::$app->getView();
+        }
+
 
     }
 
@@ -150,13 +154,12 @@ class Datepicker extends Widget
 
     public function clientJs()
     {
-        $data = json_encode($this->config['data']);
+
         $js = <<<EOD
-          var Imenu = Vue.extend({
+          var DatePickerWidget = Vue.extend({
                  data: function(){
                     return {
                       {$this->config['model']}:[],
-                      cascadeData:{$data}
                     }
                  },
                   methods:{
@@ -165,7 +168,7 @@ class Datepicker extends Widget
                    }
                  }
           });
-          new Imenu().\$mount('#datepicker');
+          new DatePickerWidget().\$mount('#datepicker');
 EOD;
         $this->view->registerJs($js, \yii\web\View::POS_END);
     }

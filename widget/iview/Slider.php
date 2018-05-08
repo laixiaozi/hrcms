@@ -18,7 +18,7 @@ class Slider extends Widget
 
     public $view;
 
-    public $eventList = array('','');
+    public $eventList = array('', '');
 
     public function init()
     {
@@ -40,7 +40,7 @@ class Slider extends Widget
 
     public function run()
     {
-        if(isset($this->config['debug'])){
+        if (isset($this->config['debug'])) {
             $this->clientJs();
             unset($this->config['debug']);
         }
@@ -61,15 +61,15 @@ class Slider extends Widget
         }
 
         if (isset($config['range'])) {
-             $code .=   '  ' .$config['range'] . ' ';  //开启双滑块
+            $code .= '  ' . $config['range'] . ' ';  //开启双滑块
         }
 
         if (isset($config['disabled'])) {
-            $code .=   '  ' .$config['disabled'] . ' ';  //开启双滑块
+            $code .= '  ' . $config['disabled'] . ' ';  //开启双滑块
         }
 
         if (isset($config['show-input'])) {
-            $code .=   '  ' .$config['show-input'] . ' ';  //开启双滑块
+            $code .= '  ' . $config['show-input'] . ' ';  //开启双滑块
         }
 
         $code .= '>' . PHP_EOL;
@@ -79,13 +79,11 @@ class Slider extends Widget
 
     public function clientJs()
     {
-        $data = json_encode($this->config['data']);
         $js = <<<EOD
-          var Imenu = Vue.extend({
+          var SliderWidget = Vue.extend({
                  data: function(){
                     return {
-                      {$this->config['model']}:[],
-                      cascadeData:{$data}
+                      {$this->config['model']}:[10  ,30],
                     }
                  },
                   methods:{
@@ -94,7 +92,7 @@ class Slider extends Widget
                    }
                  }
           });
-          new Imenu().\$mount('#slider');
+          new SliderWidget().\$mount('#slider');
 EOD;
         $this->view->registerJs($js, \yii\web\View::POS_END);
     }

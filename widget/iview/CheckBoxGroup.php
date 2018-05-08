@@ -189,14 +189,14 @@ class CheckBoxGroup extends Widget
     public function clientJs()
     {
         $js = <<<EOD
-          var Imenu = Vue.extend({
+          var checkBoxGrouptWidget = Vue.extend({
                  data: function(){
                     return {
                       {$this->config['items']['parameters']['model']}:[],
                     }
                  }
           });
-          new Imenu().\$mount('#checkboxGroup');
+          new checkBoxGrouptWidget().\$mount('#checkboxGroup');
 EOD;
         $this->view->registerJs($js, \yii\web\View::POS_END);
     }

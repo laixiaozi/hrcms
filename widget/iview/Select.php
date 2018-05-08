@@ -89,7 +89,7 @@ class Select extends Widget
         $selectData = json_encode($this->config['data']);
         if(!empty($this->config['model'])){$model = $this->config['model'].':""';}
         $js = <<<EOD
-           var iSelect = Vue.extend({
+           var iSelectWidget = Vue.extend({
                   data:function(){
                    return {
                      selectData:{$selectData},
@@ -102,7 +102,7 @@ class Select extends Widget
                    }
                  }
            });
-           new iSelect().\$mount('#select');
+           new iSelectWidget().\$mount('#select');
 EOD;
 
         $this->view->registerJs($js, \yii\web\View::POS_END);

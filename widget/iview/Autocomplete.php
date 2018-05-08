@@ -72,11 +72,11 @@ class AutoComplete extends Widget
     {
         $data = json_encode($this->config['data']);
         $js = <<<EOD
-          var Imenu = Vue.extend({
+          var AutocomleteWidget = Vue.extend({
                  data: function(){
                     return {
-                      {$this->config['model']}:[],
-                      cascadeData:{$data}
+                      {$this->config['model']}: '',
+                      {$this->config['data']}:[],
                     }
                  },
                   methods:{
@@ -85,7 +85,7 @@ class AutoComplete extends Widget
                    }
                  }
           });
-          new Imenu().\$mount('#autocomplete');
+          new AutocomleteWidget().\$mount('#autocomplete');
 EOD;
         $this->view->registerJs($js, \yii\web\View::POS_END);
     }

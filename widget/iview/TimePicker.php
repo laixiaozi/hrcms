@@ -18,7 +18,7 @@ class TimePicker extends Widget
 
     public $view;
 
-    public $eventList = array('','');
+    public $eventList = array('', '');
 
     public function init()
     {
@@ -30,12 +30,17 @@ class TimePicker extends Widget
         if (is_null($this->config)) {
             $this->config = array();
         }
+
+        if (is_null($this->view)) {
+            $this->view = Yii::$app->getView();
+        }
+
     }
 
 
     public function run()
     {
-        if(isset($this->config['debug'])){
+        if (isset($this->config['debug'])) {
             $this->clientJs();
             unset($this->config['debug']);
         }
@@ -97,13 +102,12 @@ class TimePicker extends Widget
 
     public function clientJs()
     {
-        $data = json_encode($this->config['data']);
+
         $js = <<<EOD
-          var Imenu = Vue.extend({
+          var TimePickerWidget = Vue.extend({
                  data: function(){
                     return {
                       {$this->config['model']}:[],
-                      cascadeData:{$data}
                     }
                  },
                   methods:{
@@ -112,7 +116,7 @@ class TimePicker extends Widget
                    }
                  }
           });
-          new Imenu().\$mount('#cascader');
+          new TimePickerWidget().\$mount('#timepicker');
 EOD;
         $this->view->registerJs($js, \yii\web\View::POS_END);
     }

@@ -216,7 +216,7 @@ class RadioGroup extends Widget
     {
 
         $js = <<<EOD
-          var Imenu = Vue.extend({
+          var RadioGrouptWidget = Vue.extend({
                  data: function(){
                     return {
                       {$this->config['items']['parameters']['model']}:'',
@@ -228,7 +228,7 @@ class RadioGroup extends Widget
                    }
                  }
           });
-          new Imenu().\$mount('#radiogroup');
+          new RadioGrouptWidget().\$mount('#radiogroup');
 EOD;
         $this->view->registerJs($js, \yii\web\View::POS_END);
     }

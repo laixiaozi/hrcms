@@ -50,7 +50,7 @@ class Button extends Widget
     {
         $data = json_encode($this->config['data']);
         $js = <<<EOD
-          var Imenu = Vue.extend({
+          var ButtonWidget = Vue.extend({
                  data: function(){
                     return {
                       {$this->config['model']}:[],
@@ -63,7 +63,7 @@ class Button extends Widget
                    }
                  }
           });
-          new Imenu().\$mount('#button');
+          new ButtonWidget().\$mount('#button');
 EOD;
         $this->view->registerJs($js, \yii\web\View::POS_END);
     }

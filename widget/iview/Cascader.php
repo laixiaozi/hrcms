@@ -97,7 +97,7 @@ class Cascader extends Widget
     {
         $data = json_encode($this->config['data']);
         $js = <<<EOD
-          var Imenu = Vue.extend({
+          var CascaderWidget = Vue.extend({
                  data: function(){
                     return {
                       {$this->config['model']}:[],
@@ -110,7 +110,7 @@ class Cascader extends Widget
                    }
                  }
           });
-          new Imenu().\$mount('#cascader');
+          new CascaderWidget().\$mount('#cascader');
 EOD;
         $this->view->registerJs($js, \yii\web\View::POS_END);
     }

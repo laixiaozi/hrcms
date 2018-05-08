@@ -168,14 +168,14 @@ class Checkbox extends Widget
     public function clientJs()
     {
         $js = <<<EOD
-          var Imenu = Vue.extend({
+          var CheckBoxWidget = Vue.extend({
                  data: function(){
                     return {
                       {$this->config['model']}:'',
                     }
                  }
           });
-          new Imenu().\$mount('#checkBox');
+          new CheckBoxWidget().\$mount('#checkBox');
 EOD;
         $this->view->registerJs($js, \yii\web\View::POS_END);
     }

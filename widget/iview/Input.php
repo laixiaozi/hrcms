@@ -292,7 +292,7 @@ class Input extends Widget
     public function clientJs()
     {
         $js = <<<EOD
-          var Imenu = Vue.extend({
+          var InputWidget = Vue.extend({
                  data: function(){
                     return {
                       {$this->config['model']}:'',
@@ -304,7 +304,7 @@ class Input extends Widget
                    }
                  }
           });
-          new Imenu().\$mount('#input');
+          new InputWidget().\$mount('#input');
 EOD;
         $this->view->registerJs($js, \yii\web\View::POS_END);
     }

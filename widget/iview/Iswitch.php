@@ -79,13 +79,11 @@ class Iswitch extends Widget
 
     public function clientJs()
     {
-        $data = json_encode($this->config['data']);
         $js = <<<EOD
-          var Imenu = Vue.extend({
+          var IswitchWidget = Vue.extend({
                  data: function(){
                     return {
-                      {$this->config['model']}:[],
-                      cascadeData:{$data}
+                      {$this->config['model']}:'',
                     }
                  },
                   methods:{
@@ -94,7 +92,7 @@ class Iswitch extends Widget
                    }
                  }
           });
-          new Imenu().\$mount('#iswitch');
+          new IswitchWidget().\$mount('#iswitch');
 EOD;
         $this->view->registerJs($js, \yii\web\View::POS_END);
     }

@@ -187,7 +187,7 @@ class Radio extends Widget
     {
 
         $js = <<<EOD
-          var Imenu = Vue.extend({
+          var RadioWidget = Vue.extend({
                  data: function(){
                     return {
                       {$this->config['model']}:'',
@@ -199,7 +199,7 @@ class Radio extends Widget
                    }
                  }
           });
-          new Imenu().\$mount('#radio');
+          new RadioWidget().\$mount('#radio');
 EOD;
         $this->view->registerJs($js, \yii\web\View::POS_END);
     }

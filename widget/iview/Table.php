@@ -70,7 +70,7 @@ class Table extends Widget
         $column = json_encode($this->data['column']);
         $data    = json_encode($this->data['data']);
         $js = <<<EOD
-          var Itable = Vue.extend({
+          var ItableWidget = Vue.extend({
                data:function(){
                 return {
                     column : $column,
@@ -83,7 +83,7 @@ class Table extends Widget
                    }
                  }
           });
-          new Itable().\$mount('#table');
+          new ItableWidget().\$mount('#table');
 EOD;
         $this->view->registerJs($js, \yii\web\view::POS_END);
     }
