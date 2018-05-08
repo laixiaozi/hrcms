@@ -19,6 +19,7 @@ use app\widget\iview\Datepicker;
 use app\widget\iview\TimePicker;
 use app\widget\iview\Cascader;
 use app\widget\iview\Transfer;
+use app\widget\iview\InputNumber;
 
 $demoMenu = array(
     'debug' => true,
@@ -169,10 +170,27 @@ $transferData = array(
         array('key' => 3, 'label' => '内容3', 'disabled' => false),
         array('key' => 4, 'label' => '内容4', 'disabled' => false),
     ),
-    'dataName'=> 'data1',
+    'dataName' => 'data1',
     'targetKeys' => array(1, 2),
     'targetkeysName' => 'targetKeys',
     'renderFormat' => 'render1',
+);
+
+
+$inputNumberData = array(
+    'debug' => true,
+    'model' => 'inputnumber',
+    'size' => 'small',
+    'disabledName' => 'disabled1',
+    'max' => '',
+    'min' => '',
+    'step' => '',
+    'placeholder' => '',
+    'formatter' => '',
+    'parser' => '',
+    '' => '',
+    '' => '',
+    '' => '',
 );
 
 $this->title = '测试';
@@ -183,6 +201,14 @@ $this->title = '测试';
         width: 500px;
     }
 </style>
+
+
+<div id="InputNumber">
+    <p style="width:30%;">
+        <?= InputNumber::widget(['message' => 'inputNumber', 'config' => $inputNumberData]); ?>
+    </p>
+    <br>
+</div>
 
 <div id="Transfer">
     <p style="width:30%;">
@@ -259,9 +285,6 @@ $this->title = '测试';
     </p>
     <br>
 </div>
-
-
-
 
 
 <?php $this->beginBlock('vue'); ?>
