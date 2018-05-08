@@ -67,7 +67,7 @@ class {className} extends Widget
             $code .= ' v-model="' . $config['model'] . '"';
         }
 
-        if ($config['event']) {
+        if (isset($config['event'])) {
           $code .= '  v-on:' . $config['event'] . '="' . $config['eventName'] . '"';
         }
 
@@ -90,7 +90,7 @@ class {className} extends Widget
 
     public function clientJs(){
         $js = <<<EOD
-                var {className} = Vue.extends({
+                var {className} = Vue.extend({
                     data: function(){
                         return {
                               {$this->config['model']}:[],
@@ -110,7 +110,7 @@ class {className} extends Widget
 
                     }
                 });
-        new {className}().\$mount('#element');
+        new {className}().\$mount('#{className}');
 EOD;
     $this->view->registerJs($js , \yii\web\View::POS_END);
     }

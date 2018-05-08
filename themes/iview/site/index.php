@@ -18,6 +18,7 @@ use app\widget\iview\Slider;
 use app\widget\iview\Datepicker;
 use app\widget\iview\TimePicker;
 use app\widget\iview\Cascader;
+use app\widget\iview\Transfer;
 
 $demoMenu = array(
     'debug' => true,
@@ -159,6 +160,21 @@ $demoCascadeData = array(
     ),
 );
 
+
+$transferData = array(
+    'debug' => true,
+    'data' => array(
+        array('key' => 1, 'label' => '内容', 'disabled' => false),
+        array('key' => 2, 'label' => '内容2', 'disabled' => false),
+        array('key' => 3, 'label' => '内容3', 'disabled' => false),
+        array('key' => 4, 'label' => '内容4', 'disabled' => false),
+    ),
+    'dataName'=> 'data1',
+    'targetKeys' => array(1, 2),
+    'targetkeysName' => 'targetKeys',
+    'renderFormat' => 'render1',
+);
+
 $this->title = '测试';
 ?>
 <style>
@@ -167,6 +183,14 @@ $this->title = '测试';
         width: 500px;
     }
 </style>
+
+<div id="Transfer">
+    <p style="width:30%;">
+        <?= Transfer::widget(['message' => 'Transfer', 'config' => $transferData]); ?>
+    </p>
+    <br>
+</div>
+
 
 <div id="menu">
     <?= menu::widget(['menuData' => $demoMenu, 'event' => 'on-select', 'eventName' => 'func']) ?>
@@ -235,6 +259,9 @@ $this->title = '测试';
     </p>
     <br>
 </div>
+
+
+
 
 
 <?php $this->beginBlock('vue'); ?>
