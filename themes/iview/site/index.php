@@ -20,6 +20,10 @@ use app\widget\iview\TimePicker;
 use app\widget\iview\Cascader;
 use app\widget\iview\Transfer;
 use app\widget\iview\InputNumber;
+use app\widget\iview\Rate;
+use app\widget\iview\Upload;
+use app\widget\iview\ColorPicker;
+use app\widget\iview\Form;
 
 $demoMenu = array(
     'debug' => true,
@@ -190,14 +194,94 @@ $inputNumberData = array(
     'parser' => '',
 );
 
+$demoRateData = array(
+    'debug' => true,
+    'model' => 'rate',
+    'allow-half' => 'allow-half',
+    'show-text' => 'allow-half',
+//    'disabled' => true,
+    'count' => 5,
+
+);
+
+$demoUploadData = array(
+    'debug' => true,
+    'model' => 'upload',
+//    'multiple' => true,
+    'before-upload' => 'beforeUpload',
+    'type' => 'drag',
+    'action' => '',
+    'headers'
+);
+
+$demoColorPickerData = array(
+    'debug' => true,
+    'model' => 'colorPick',
+    'alpha' => 'alpha',
+    'recommend' => 'recommend',
+    'colors' => 'recommendcolors',
+    'size' => 'large',
+
+);
+
 $this->title = '测试';
 ?>
 <style>
     div: {
         margin: 10px 20px;
-        width: 500px;
+        width: 100px;
     }
 </style>
+<div id="FormWidget" style="width:30%;">
+    <?php
+    $formDataDemo = array(
+        'model' => 'formModel',
+    );
+    $form = new Form();
+    $form->begin(['config' => $formDataDemo]);
+    ?>
+    <form-item>
+        <i-input v-model="formModel.name"></i-input>
+        {{formModel.name}}
+    </form-item>
+    <form-item>
+
+        <div id="input">
+            <p style="width:30%;"><?= Input::widget(['message' => 'input测试', 'config' => $demoInput]); ?></p>
+        </div>
+    </form-item>
+    <form-item>
+
+    </form-item>
+
+    <?php
+    $form->end();
+    ?>
+</div>
+<div id="select">
+    <p style="width:30%;">
+        <?= Select::widget(['message' => 'select列表', 'config' => $demoSelect]); ?>
+    </p>
+    <br>
+</div>
+<br><br>
+
+<div id="ColorPicker" style="width:30%;">
+    <?= ColorPicker::widget(['message' => 'select列表', 'config' => $demoColorPickerData]); ?>
+</div>
+
+
+<div id="Upload" style="width:30%;">
+    <?= Upload::widget(['message' => 'select列表', 'config' => $demoUploadData]); ?>
+</div>
+
+
+<div id="Rate">
+    <p style="width:30%;">
+        <?= Rate::widget(['message' => 'select列表', 'config' => $demoRateData]); ?>
+    </p>
+    <br>
+</div>
 
 
 <div id="InputNumber">
@@ -219,9 +303,6 @@ $this->title = '测试';
     <?= menu::widget(['menuData' => $demoMenu, 'event' => 'on-select', 'eventName' => 'func']) ?>
 </div>
 
-<div id="input">
-    <p style="width:30%;"><?= Input::widget(['message' => 'input测试', 'config' => $demoInput]); ?></p>
-</div>
 
 <div id="radio">
     <p style="width:30%;"><?= Radio::widget(['message' => 'input测试', 'config' => $demoRadio]); ?></p>
@@ -269,18 +350,10 @@ $this->title = '测试';
     <?= Table::widget(['message' => 'table测试', 'data' => $demoTable, 'config' => array('debug' => true)]); ?>
 </div>
 
-<div id="select">
-    <p style="width:30%;">
-        <?= Select::widget(['message' => 'select列表', 'config' => $demoSelect]); ?>
-    </p>
-    <br>
-</div>
-
 <div id="cascader">
     <p style="width:30%;">
         <?= Cascader::widget(['message' => 'select列表', 'config' => $demoCascadeData]); ?>
     </p>
-    <br>
 </div>
 
 

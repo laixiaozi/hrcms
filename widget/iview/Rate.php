@@ -7,9 +7,9 @@ use yii\helpers\Html;
 use Yii;
 
 /**
- * 数字输入框小部件
+ * 评分小部件
  */
-class InputNumber extends Widget
+class Rate extends Widget
 {
 
     public $message;
@@ -18,7 +18,7 @@ class InputNumber extends Widget
 
     public $view;
 
-    public $eventList = array('','');
+    public $eventList = array('', '');
 
     public function init()
     {
@@ -31,7 +31,7 @@ class InputNumber extends Widget
             $this->config = array();
         }
 
-        if(is_null($this->view)){
+        if (is_null($this->view)) {
             $this->view = Yii::$app->getView();
         }
     }
@@ -39,9 +39,9 @@ class InputNumber extends Widget
 
     public function run()
     {
-        if(isset($this->config['debug'])){
-           $this->clientJs();
-           unset($this->config['debug']);
+        if (isset($this->config['debug'])) {
+            $this->clientJs();
+            unset($this->config['debug']);
         }
         $code = $this->createCode($this->config);
         return $code;
@@ -50,34 +50,36 @@ class InputNumber extends Widget
 
     public function createCode($config)
     {
-        $code = '<input-number ';
-        if (isset($config['icon'])) {
-            $code .= ' icon="' . $config['icon'] . '"';
+        $code = '<Rate ';
+
+        if (isset($config['allow-half'])) {
+            $code .= '  allow-half ';
         }
 
-        if (isset($config['clearable'])) {
-             $code .=   '  ' .$config['clearable'] . ' ';
+        if (isset($config['show-text'])) {
+            $code .= '  show-text ';
+        }
+
+        if (isset($config['disabled'])) {
+            $code .= '  disabled ';
         }
 
         if (isset($config['model'])) {
             $code .= ' v-model="' . $config['model'] . '"';
         }
 
-        if (isset($config['event'])) {
-          $code .= '  v-on:' . $config['event'] . '="' . $config['eventName'] . '"';
-        }
-
         $code .= '>' . PHP_EOL;
-        $code .= '</input-number>' . PHP_EOL;
+        $code .= '</Rate>' . PHP_EOL;
         return $code;
     }
 
-    public function clientJs(){
+    public function clientJs()
+    {
         $js = <<<EOD
-                var InputNumber = Vue.extend({
+                var Rate = Vue.extend({
                     data: function(){
                         return {
-                              {$this->config['model']}:0,
+                              {$this->config['model']}:3,
                         }
                     },
                     methods:{
@@ -93,9 +95,9 @@ class InputNumber extends Widget
 
                     }
                 });
-        new InputNumber().\$mount('#InputNumber');
+        new Rate().\$mount('#Rate');
 EOD;
-    $this->view->registerJs($js , \yii\web\View::POS_END);
+        $this->view->registerJs($js, \yii\web\View::POS_END);
     }
 
 

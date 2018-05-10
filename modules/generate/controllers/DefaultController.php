@@ -32,10 +32,10 @@ class DefaultController extends Controller
         $widgetFloder = Yii::getAlias('@app') . '/widget/iview';
         $widgetName = $request->get('widgetName');
         $tplType = $request->get('tplType');
-        $templateName = 'test.tpl';
+        $templateName = 'tpl.php';
         //begin end模式的模板
         if (!is_null($tplType) && !empty($tplType)) {
-            $templateName = 'test2.tpl';
+            $templateName = 'tpl2.php';
         }
         $template = $widgetFloder . '/' . $templateName;
 
