@@ -48,38 +48,38 @@ class {className} extends Widget
     }
 
 
-    public function createCode($config)
+    public function createCode()
     {
         $code = '<i-{className} ';
-        if (isset($config['icon'])) {
-            $code .= ' icon="' . $config['icon'] . '"';
+        if (isset($this->config['icon'])) {
+            $code .= ' icon="' . $this->config['icon'] . '"';
         }
 
-        if (isset($config['clearable'])) {
-             $code .=   '  ' .$config['clearable'] . ' ';
+        if (isset($this->config['clearable'])) {
+             $code .=   '  ' .$this->config['clearable'] . ' ';
         }
 
-        if (isset($config['data'])) {
-            $code .=   '  v-bind:data="' .$config['clearable'] . '" ';
+        if (isset($this->config['data'])) {
+            $code .=   '  v-bind:data="' .$this->config['clearable'] . '" ';
         }
 
-        if (isset($config['model'])) {
-            $code .= ' v-model="' . $config['model'] . '"';
+        if (isset($this->config['model'])) {
+            $code .= ' v-model="' . $this->config['model'] . '"';
         }
 
-        if (isset($config['event'])) {
-          $code .= '  v-on:' . $config['event'] . '="' . $config['eventName'] . '"';
+        if (isset($this->config['event'])) {
+          $code .= '  v-on:' . $this->config['event'] . '="' . $this->config['eventName'] . '"';
         }
 
 
 
-        if (isset($config['type']) && strtolower(trim($config['type'])) == 'textarea') {
+        if (isset($this->config['type']) && strtolower(trim($this->config['type'])) == 'textarea') {
              $code .= ' type="textarea" ';
-             if (isset($config['autosize'])) {
-                    if (is_array($config['autosize'])) {
-                           $code .= ' autosize="' . json_encode($config['autosize']) . '" ';
+             if (isset($this->config['autosize'])) {
+                    if (is_array($this->config['autosize'])) {
+                           $code .= ' autosize="' . json_encode($this->config['autosize']) . '" ';
                     } else {
-                           $code .= ' autosize="' . boolvale($config['autosize']) . '" ';
+                           $code .= ' autosize="' . boolvale($this->config['autosize']) . '" ';
                     }
              }
         }

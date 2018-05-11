@@ -230,8 +230,173 @@ $this->title = '测试';
     div: {
         margin: 10px 20px;
         width: 100px;
+        width: 30%;
     }
 </style>
+
+<?php
+//测试练习的代码
+?>
+
+<?php
+
+use app\widget\iview\AlertWidget;
+
+$alertDemo = array(
+    'debug' => true,
+    'type' => 'success',
+    'showIcon' => true,
+    'closeable' => true,
+)
+?>
+
+<?php
+
+use app\widget\iview\Collapse;
+
+$CollapseDemo = array(
+    'debug' => true,
+    'model' => 'collapsemodel',
+    'accordion ' => true,
+)
+?>
+
+<div id="Collapse" style="clean:both;">
+    <?php Collapse::begin(['config' => $CollapseDemo, 'message' => '头像小部件']); ?>
+     <?= Collapse::addPane('1', '标题', '内容') ?>
+    <?= Collapse::addPane('2', '标题', '<br></br><p>ceshi </p><a href="http://www.baidu.com">百度</a>') ?>
+    <?php Collapse::end(); ?>
+</div>
+<br/>
+<br/>
+<br/>
+<br/>
+<br/>
+<br/>
+<?php
+
+use app\widget\iview\Badge;
+
+$BadgeDemo = array(
+    'debug' => true,
+    'icon' => 'person',
+    'sieze' => 'large',
+    'count' => 1000,
+    'overflowCoun' => 999,
+//    'shape' => 'square',
+//    'vertical' => true,
+)
+?>
+
+<div id="Badge">
+    <?= Badge::widget(['config' => $BadgeDemo, 'message' => '头像小部件']); ?>
+</div>
+
+
+<?php
+
+use app\widget\iview\Avatar;
+
+$AvatarDemo = array(
+    'debug' => true,
+    'icon' => 'person',
+    'sieze' => 'large',
+//    'shape' => 'square',
+//    'vertical' => true,
+)
+?>
+
+<div id="Avatar">
+    <?= Avatar::widget(['config' => $AvatarDemo, 'message' => '头像小部件']); ?>
+</div>
+
+
+<?php
+
+use app\widget\iview\Progress;
+
+$ProgressDemo = array(
+    'debug' => true,
+    'percent' => 30,
+//    'vertical' => true,
+)
+?>
+
+<div id="Progress">
+    <?= Progress::widget(['config' => $ProgressDemo, 'message' => '进度条']); ?>
+</div>
+
+
+<?php
+
+use app\widget\iview\Modal;
+
+$ModalDemo = array(
+    'debug' => true,
+    'type' => 'info',//success , info , loading ,error
+    'content' => '一个弹出的测试框',
+    'title' => '标题钉钉ss',
+    'model' => 'model1',
+)
+?>
+
+<div id="Modal">
+    <?= Modal::widget(['config' => $ModalDemo, 'message' => 'ModalDemo对话框']); ?>{{model1}}
+</div>
+
+
+<?php
+
+use app\widget\iview\Notice;
+
+$NoticeDemo = array(
+    'debug' => true,
+    'type' => 'info',//success , info , loading ,error
+    'content' => '一个弹出的测试框',
+    'title' => '标题',
+
+)
+?>
+
+<div id="Notice">
+    <?= Notice::widget(['config' => $NoticeDemo, 'message' => 'Notice事件']); ?>
+</div>
+
+
+<?php
+
+use app\widget\iview\Message;
+
+$messageDemo = array(
+    'debug' => true,
+    'type' => 'warning',//success , info , loading ,error
+    'content' => '一个弹出的测试框',
+)
+?>
+
+<div id="Message">
+    <?= Message::widget(['config' => $messageDemo, 'message' => 'Message事件']); ?>
+</div>
+
+<div id="AlertWidget">
+    <?= AlertWidget::widget(['config' => $alertDemo]); ?>
+</div>
+
+<!--Card-->
+<?php
+
+use app\widget\iview\Card;
+
+$cardDemo = array(
+    'debug' => true,
+)
+?>
+
+<div id="Card">
+    <?= Card::widget(['config' => $cardDemo]); ?>
+</div>
+
+<!--Form-->
 <div id="FormWidget" style="width:30%;">
     <?php
     $formDataDemo = array(
@@ -258,6 +423,7 @@ $this->title = '测试';
     $form->end();
     ?>
 </div>
+<!--Select-->
 <div id="select">
     <p style="width:30%;">
         <?= Select::widget(['message' => 'select列表', 'config' => $demoSelect]); ?>
@@ -266,6 +432,7 @@ $this->title = '测试';
 </div>
 <br><br>
 
+<!--ColorPicker-->
 <div id="ColorPicker" style="width:30%;">
     <?= ColorPicker::widget(['message' => 'select列表', 'config' => $demoColorPickerData]); ?>
 </div>
@@ -275,7 +442,7 @@ $this->title = '测试';
     <?= Upload::widget(['message' => 'select列表', 'config' => $demoUploadData]); ?>
 </div>
 
-
+<!--Rate-->
 <div id="Rate">
     <p style="width:30%;">
         <?= Rate::widget(['message' => 'select列表', 'config' => $demoRateData]); ?>
@@ -283,7 +450,7 @@ $this->title = '测试';
     <br>
 </div>
 
-
+<!--InputNumber-->
 <div id="InputNumber">
     <p style="width:30%;">
         <?= InputNumber::widget(['message' => 'inputNumber', 'config' => $inputNumberData]); ?>
@@ -298,7 +465,7 @@ $this->title = '测试';
     <br>
 </div>
 
-
+<!--Menu-->
 <div id="menu">
     <?= menu::widget(['menuData' => $demoMenu, 'event' => 'on-select', 'eventName' => 'func']) ?>
 </div>
@@ -346,16 +513,16 @@ $this->title = '测试';
     <p style="width:30%;"><?= TimePicker::widget(['message' => 'hello datePicker', 'config' => $demoTimePicker]); ?></p>
 </div>
 
-<div id="table">
-    <?= Table::widget(['message' => 'table测试', 'data' => $demoTable, 'config' => array('debug' => true)]); ?>
-</div>
-
 <div id="cascader">
     <p style="width:30%;">
         <?= Cascader::widget(['message' => 'select列表', 'config' => $demoCascadeData]); ?>
     </p>
 </div>
 
+
+<div id="table" style="width:30%;height:200px;">
+    <?= Table::widget(['message' => 'table测试', 'data' => $demoTable, 'config' => array('debug' => true)]); ?>
+</div>
 
 <?php $this->beginBlock('vue'); ?>
 <?php $this->endBlock(); ?>
