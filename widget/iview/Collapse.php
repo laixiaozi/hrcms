@@ -57,18 +57,13 @@ class Collapse extends widget
     public function createCode()
     {
         $code = '<Collapse ';
-
         if (isset($this->config['model'])) {
             $code .= ' v-model="' . $this->config['model'] . '"';
         }
-
-
         if (isset($this->config['accordion'])) {
             $code .= '  accordion ';
         }
-
         $code .= '>' . PHP_EOL;
-
         return $code;
     }
 

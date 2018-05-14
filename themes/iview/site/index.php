@@ -24,6 +24,45 @@ use app\widget\iview\Rate;
 use app\widget\iview\Upload;
 use app\widget\iview\ColorPicker;
 use app\widget\iview\Form;
+use app\widget\iview\Collapse;
+use app\widget\iview\Badge;
+use app\widget\iview\AlertWidget;
+use app\widget\iview\Avatar;
+use app\widget\iview\Modal;
+use app\widget\iview\Progress;
+use app\widget\iview\Notice;
+use app\widget\iview\Message;
+use app\widget\iview\Card;
+
+$cardDemo = array(
+    'debug' => true,
+);
+$messageDemo = array(
+    'debug' => true,
+    'type' => 'warning',//success , info , loading ,error
+    'content' => '一个弹出的测试框',
+);
+
+$NoticeDemo = array(
+    'debug' => true,
+    'type' => 'info',//success , info , loading ,error
+    'content' => '一个弹出的测试框',
+    'title' => '标题',
+
+);
+$ProgressDemo = array(
+    'debug' => true,
+    'percent' => 30,
+//    'vertical' => true,
+);
+
+$ModalDemo = array(
+    'debug' => true,
+    'type' => 'info',//success , info , loading ,error
+    'content' => '一个弹出的测试框',
+    'title' => '标题钉钉ss',
+    'model' => 'model1',
+);
 
 $demoMenu = array(
     'debug' => true,
@@ -214,6 +253,32 @@ $demoUploadData = array(
     'headers'
 );
 
+
+$AvatarDemo = array(
+    'debug' => true,
+    'icon' => 'person',
+    'sieze' => 'large',
+//    'shape' => 'square',
+//    'vertical' => true,
+);
+
+$BadgeDemo = array(
+    'debug' => true,
+    'icon' => 'person',
+    'sieze' => 'large',
+    'count' => 1000,
+    'overflowCoun' => 999,
+//    'shape' => 'square',
+//    'vertical' => true,
+);
+
+$alertDemo = array(
+    'debug' => true,
+    'type' => 'success',
+    'showIcon' => true,
+    'closeable' => true,
+);
+
 $demoColorPickerData = array(
     'debug' => true,
     'model' => 'colorPick',
@@ -222,6 +287,15 @@ $demoColorPickerData = array(
     'colors' => 'recommendcolors',
     'size' => 'large',
 
+);
+$CollapseDemo = array(
+    'debug' => true,
+    'model' => 'collapsemodel',
+    'accordion' => true,
+);
+
+$formDataDemo = array(
+    'model' => 'formModel',
 );
 
 $this->title = '测试';
@@ -234,145 +308,54 @@ $this->title = '测试';
     }
 </style>
 
-<?php
-//测试练习的代码
-?>
+<div id="collapseDemo">
+    <collapse v-model="value1">
+        <panel name="aa">
+            测试
+            <p name="aa" solt="content">正文内容</p>
+        </panel>
+    </collapse>
 
-<?php
-
-use app\widget\iview\AlertWidget;
-
-$alertDemo = array(
-    'debug' => true,
-    'type' => 'success',
-    'showIcon' => true,
-    'closeable' => true,
-)
-?>
-
-<?php
-
-use app\widget\iview\Collapse;
-
-$CollapseDemo = array(
-    'debug' => true,
-    'model' => 'collapsemodel',
-    'accordion ' => true,
-)
-?>
-
-<div id="Collapse" style="clean:both;">
-    <?php Collapse::begin(['config' => $CollapseDemo, 'message' => '头像小部件']); ?>
-     <?= Collapse::addPane('1', '标题', '内容') ?>
-    <?= Collapse::addPane('2', '标题', '<br></br><p>ceshi </p><a href="http://www.baidu.com">百度</a>') ?>
-    <?php Collapse::end(); ?>
 </div>
-<br/>
-<br/>
-<br/>
-<br/>
-<br/>
-<br/>
-<?php
 
-use app\widget\iview\Badge;
 
-$BadgeDemo = array(
-    'debug' => true,
-    'icon' => 'person',
-    'sieze' => 'large',
-    'count' => 1000,
-    'overflowCoun' => 999,
-//    'shape' => 'square',
-//    'vertical' => true,
-)
-?>
+<div id="FormWidget" style="width:30%;">
+    <?php Form::begin(['config' => $formDataDemo]); ?>
+    <form-item>
+        <i-input v-model="formModel.name"></i-input>
+        {{formModel.name}}
+    </form-item>
+    <form-item>
+        <div id="input">
+            <p style="width:30%;"><?= Input::widget(['message' => 'input测试', 'config' => $demoInput]); ?></p>
+        </div>
+    </form-item>
+    <?php Form::end(); ?>
+</div>
 
 <div id="Badge">
     <?= Badge::widget(['config' => $BadgeDemo, 'message' => '头像小部件']); ?>
 </div>
 
 
-<?php
-
-use app\widget\iview\Avatar;
-
-$AvatarDemo = array(
-    'debug' => true,
-    'icon' => 'person',
-    'sieze' => 'large',
-//    'shape' => 'square',
-//    'vertical' => true,
-)
-?>
-
 <div id="Avatar">
     <?= Avatar::widget(['config' => $AvatarDemo, 'message' => '头像小部件']); ?>
 </div>
 
-
-<?php
-
-use app\widget\iview\Progress;
-
-$ProgressDemo = array(
-    'debug' => true,
-    'percent' => 30,
-//    'vertical' => true,
-)
-?>
 
 <div id="Progress">
     <?= Progress::widget(['config' => $ProgressDemo, 'message' => '进度条']); ?>
 </div>
 
 
-<?php
-
-use app\widget\iview\Modal;
-
-$ModalDemo = array(
-    'debug' => true,
-    'type' => 'info',//success , info , loading ,error
-    'content' => '一个弹出的测试框',
-    'title' => '标题钉钉ss',
-    'model' => 'model1',
-)
-?>
-
 <div id="Modal">
     <?= Modal::widget(['config' => $ModalDemo, 'message' => 'ModalDemo对话框']); ?>{{model1}}
 </div>
 
 
-<?php
-
-use app\widget\iview\Notice;
-
-$NoticeDemo = array(
-    'debug' => true,
-    'type' => 'info',//success , info , loading ,error
-    'content' => '一个弹出的测试框',
-    'title' => '标题',
-
-)
-?>
-
 <div id="Notice">
     <?= Notice::widget(['config' => $NoticeDemo, 'message' => 'Notice事件']); ?>
 </div>
-
-
-<?php
-
-use app\widget\iview\Message;
-
-$messageDemo = array(
-    'debug' => true,
-    'type' => 'warning',//success , info , loading ,error
-    'content' => '一个弹出的测试框',
-)
-?>
 
 <div id="Message">
     <?= Message::widget(['config' => $messageDemo, 'message' => 'Message事件']); ?>
@@ -382,47 +365,10 @@ $messageDemo = array(
     <?= AlertWidget::widget(['config' => $alertDemo]); ?>
 </div>
 
-<!--Card-->
-<?php
-
-use app\widget\iview\Card;
-
-$cardDemo = array(
-    'debug' => true,
-)
-?>
-
 <div id="Card">
     <?= Card::widget(['config' => $cardDemo]); ?>
 </div>
 
-<!--Form-->
-<div id="FormWidget" style="width:30%;">
-    <?php
-    $formDataDemo = array(
-        'model' => 'formModel',
-    );
-    $form = new Form();
-    $form->begin(['config' => $formDataDemo]);
-    ?>
-    <form-item>
-        <i-input v-model="formModel.name"></i-input>
-        {{formModel.name}}
-    </form-item>
-    <form-item>
-
-        <div id="input">
-            <p style="width:30%;"><?= Input::widget(['message' => 'input测试', 'config' => $demoInput]); ?></p>
-        </div>
-    </form-item>
-    <form-item>
-
-    </form-item>
-
-    <?php
-    $form->end();
-    ?>
-</div>
 <!--Select-->
 <div id="select">
     <p style="width:30%;">
@@ -431,6 +377,14 @@ $cardDemo = array(
     <br>
 </div>
 <br><br>
+
+
+<div id="Collapse" style="width:30%;height:200px;">
+    <?php Collapse::begin(['config' => $CollapseDemo, 'message' => '头像小部件']); ?>
+    <?= Collapse::addPane('1', '标题', '内容') ?>
+    <?= Collapse::addPane('2', '标题', '<br></br><p>ceshi </p><a href="http://www.baidu.com">百度</a>') ?>
+    <?php Collapse::end(); ?>
+</div>
 
 <!--ColorPicker-->
 <div id="ColorPicker" style="width:30%;">
@@ -525,5 +479,11 @@ $cardDemo = array(
 </div>
 
 <?php $this->beginBlock('vue'); ?>
+new Vue({
+data:{
+el:'#collapseDemo',
+value1:'aa',
+}
+});
 <?php $this->endBlock(); ?>
 <?php $this->registerJs($this->blocks['vue'], \yii\web\View::POS_END); ?>
