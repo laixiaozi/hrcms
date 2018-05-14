@@ -307,17 +307,19 @@ $this->title = '测试';
         width: 30%;
     }
 </style>
-
 <div id="collapseDemo">
-    <collapse v-model="value1">
-        <panel name="aa">
-            测试
-            <p name="aa" solt="content">正文内容</p>
-        </panel>
-    </collapse>
 
 </div>
 
+
+<div id="Collapse" style="width:30%;">
+
+    <?php Collapse::begin(['config' => $CollapseDemo, 'message' => '头像小部件']); ?>
+    <?= Collapse::addPane('1', '标题', '内容') ?>
+    <?= Collapse::addPane('2', '百度·乔布斯', '史蒂夫·乔布斯（Steve Jobs），1955年2月24日生于美国加利福尼亚州旧金山，美国发明家、企业家、美国苹果公司联合创办人。ry Wozniak），美国电脑工程师，曾与史蒂夫·乔布斯合伙创立苹果电脑（今之苹果公司）。斯蒂夫·盖瑞·沃兹尼亚克曾就读于美国科罗拉多大学，后转学入美国著名高等学府加州大学伯克利分校（UC Berkeley）并获得电机工程及计算机（EECS）本科学位（1987年）') ?>
+    <?php Collapse::end(); ?>
+
+</div>
 
 <div id="FormWidget" style="width:30%;">
     <?php Form::begin(['config' => $formDataDemo]); ?>
@@ -379,12 +381,7 @@ $this->title = '测试';
 <br><br>
 
 
-<div id="Collapse" style="width:30%;height:200px;">
-    <?php Collapse::begin(['config' => $CollapseDemo, 'message' => '头像小部件']); ?>
-    <?= Collapse::addPane('1', '标题', '内容') ?>
-    <?= Collapse::addPane('2', '标题', '<br></br><p>ceshi </p><a href="http://www.baidu.com">百度</a>') ?>
-    <?php Collapse::end(); ?>
-</div>
+
 
 <!--ColorPicker-->
 <div id="ColorPicker" style="width:30%;">
@@ -479,11 +476,11 @@ $this->title = '测试';
 </div>
 
 <?php $this->beginBlock('vue'); ?>
-new Vue({
-data:{
-el:'#collapseDemo',
-value1:'aa',
-}
-});
+    new Vue({
+         el:'#collapseDemo',
+         data:{
+           value1:'1',
+         }
+    });
 <?php $this->endBlock(); ?>
 <?php $this->registerJs($this->blocks['vue'], \yii\web\View::POS_END); ?>

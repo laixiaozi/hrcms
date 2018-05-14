@@ -72,7 +72,7 @@ class Collapse extends widget
     {
         $panel = '<Panel name="' . trim($name) . '" >';
         $panel .= $title;
-        $panel .= '<P solt ="content">' . Html::encode($content) . '</P>';
+        $panel .= '<P slot ="content">' . Html::encode($content) . '</P>';
         $panel .= '</Panel>';
         return $panel;
 
