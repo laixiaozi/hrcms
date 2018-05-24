@@ -33,6 +33,12 @@ use app\widget\iview\Progress;
 use app\widget\iview\Notice;
 use app\widget\iview\Message;
 use app\widget\iview\Card;
+use app\widget\iview\TimeLine;
+use app\widget\iview\Tag;
+use app\widget\iview\ToolTip;
+use app\widget\iview\PopTip;
+use app\widget\iview\Carousel;
+use app\widget\iview\Tree;
 
 $cardDemo = array(
     'debug' => true,
@@ -298,15 +304,156 @@ $formDataDemo = array(
     'model' => 'formModel',
 );
 
+$timelineData = array(
+    'debug' => true,
+    'timeLineItem' => array(
+        'aaa', '<p>aa</p><p>bb</p>'
+    )
+);
+
+$tagData = array(
+    'debug' => true,
+    'checkable' => true,
+    'closable' => true,
+    'color' => 'blue',
+);
+
+$toolTipData = array(
+    'debug' => true,
+    'placement' => 'top',
+    'content' => '提示文字',
+    'delay' => 1000, //延时
+
+);
+
+$PopTipTipData = array(
+    'debug' => true,
+    'placement' => 'top',
+    'model' => 'visibile',
+    'confirm' => array(
+        'okText' => 'ok',
+        'cancelText' => 'cancel',
+        'onOk' => 'POk',
+        'onCancel' => 'Pcancel',
+        'title' => '确定？',
+    ),
+);
+
+$carousel = array(
+    'debug' => true,
+    'autoplay' => 'autoplay1',
+    'loop' => 'loop1',
+    'arrow' => 'always',
+
+    'radiusDot' => 'radiusdot1',
+    'trigger' => 'hover',
+    'model' => 'value3',
+    'dots' => 'dots1',
+    'carouselItem' => array(
+        "<div class='demo-carousel'>测试1</div>", "<div class='demo-carousel'>测试2</div>", "<div class='demo-carousel'>测试3</div>", "<div class='demo-carousel'>测试完成</div>",
+    ),
+);
+
+$treeData = array(
+    'debug' => true,
+    'showCheckbox' => true,
+    'data' => array(
+        array(
+            'title' => '标题',
+            'expand' => true,
+            'selected' => true,
+            'children' => array(
+                array(
+                    'title' => '标题1-1',
+                    'expand' => true,
+                    'children' => array(
+                        array(
+                            'title' => '标题1-1-1',
+                        ),
+                        array(
+                            'title' => '标题1-1-2',
+                        ),
+                    ),
+                ),
+                array(
+                    'title' => '标题1-1',
+                    'children' => array(
+                        array(
+                            'title' => '标题1-1-1',
+                        ),
+                        array(
+                            'title' => '标题1-1-2',
+                        ),
+                    ),
+                ),
+
+            ),
+
+        ),
+        array(
+            'title' => '标题二',
+            'childrend' => array(
+                array(
+                    'title' => '标题2v2',
+                    'disable' => true,
+                ),
+                array(
+                    'title' => '标题2v3',
+                    'disable' => true,
+                ),
+
+            ),
+        ),
+    ),
+
+);
+
 $this->title = '测试';
 ?>
+
 <style>
     div: {
         margin: 10px 20px;
         width: 100px;
         width: 30%;
     }
+
+    .demo-carousel {
+        background: #df2525;
+        color: #fff;
+        font-size: 16px;
+        height: 300px;
+        line-height: 300px;
+        font-weight: 900;
+        text-align: center;
+    }
 </style>
+
+<div id="Tree">
+    <?= Tree::widget(['message' => '跑马灯', 'config' => $treeData]); ?>
+</div>
+
+<div id="Carousel">
+    <?= Carousel::widget(['message' => '跑马灯', 'config' => $carousel]); ?>
+</div>
+
+<div id="PopTip">
+    <?= PopTip::widget(['message' => '<i-button>Poptip提示</i-button>', 'config' => $PopTipTipData]); ?>
+</div>
+
+<div id="ToolTip">
+    <?= ToolTip::widget(['message' => 'Tooltip提示', 'config' => $toolTipData]); ?>
+</div>
+
+<div id="Tag">
+    <?= Tag::widget(['message' => 'timeline1', 'config' => $tagData]); ?>
+</div>
+
+<div id="TimeLine">
+    <?= TimeLine::widget(['message' => 'timeline1', 'config' => $timelineData]); ?>
+</div>
+
+
 <div id="collapseDemo">
 
 </div>
@@ -379,8 +526,6 @@ $this->title = '测试';
     <br>
 </div>
 <br><br>
-
-
 
 
 <!--ColorPicker-->
@@ -476,11 +621,11 @@ $this->title = '测试';
 </div>
 
 <?php $this->beginBlock('vue'); ?>
-    new Vue({
-         el:'#collapseDemo',
-         data:{
-           value1:'1',
-         }
-    });
+new Vue({
+el:'#collapseDemo',
+data:{
+value1:'1',
+}
+});
 <?php $this->endBlock(); ?>
 <?php $this->registerJs($this->blocks['vue'], \yii\web\View::POS_END); ?>
