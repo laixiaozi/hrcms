@@ -39,6 +39,8 @@ use app\widget\iview\ToolTip;
 use app\widget\iview\PopTip;
 use app\widget\iview\Carousel;
 use app\widget\iview\Tree;
+use app\widget\iview\Tabs;
+use app\widget\iview\DropdownMenu;
 
 $cardDemo = array(
     'debug' => true,
@@ -408,6 +410,39 @@ $treeData = array(
 
 );
 
+$tabsData = array(
+    'debug' => true,
+    'size' => 'small',
+//    'type' => 'card',
+    'TabPane' => array(
+        array(
+            'label' => '标签1',
+            'content' => '标签内容',
+            'name' => 'name1',
+        ),
+        array(
+            'label' => '标签2222',
+            'content' => '标签内容222',
+            'name' => 'name2',
+            'disabled' => true,
+        ),
+        array(
+            'label' => '标签33',
+            'content' => '标签内容3333',
+            'name' => 'name3',
+        ),
+
+    ),
+);
+
+
+$DropdownMenuData = array(
+    'debug' => true,
+    'dropdownmenu' => array(
+        array('菜单一'), array('路打滚','disabled','devided'), array('豆汁儿'), array('冰糖葫芦'), array('北京烤鸭'), array('炸酱面')),
+
+);
+
 $this->title = '测试';
 ?>
 
@@ -428,6 +463,15 @@ $this->title = '测试';
         text-align: center;
     }
 </style>
+
+
+<div id="DropdownMenu">
+    <?= DropdownMenu::widget(['message' => '标签页', 'config' => $DropdownMenuData]); ?>
+</div>
+
+<div id="Tabs">
+    <?= Tabs::widget(['message' => '标签页', 'config' => $tabsData]); ?>
+</div>
 
 <div id="Tree">
     <?= Tree::widget(['message' => '跑马灯', 'config' => $treeData]); ?>
