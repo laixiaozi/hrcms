@@ -41,6 +41,8 @@ use app\widget\iview\Carousel;
 use app\widget\iview\Tree;
 use app\widget\iview\Tabs;
 use app\widget\iview\DropdownMenu;
+use app\widget\iview\Page;
+use app\widget\iview\BreadCrumb;
 
 $cardDemo = array(
     'debug' => true,
@@ -439,10 +441,26 @@ $tabsData = array(
 $DropdownMenuData = array(
     'debug' => true,
     'dropdownmenu' => array(
-        array('菜单一'), array('路打滚','disabled','devided'), array('豆汁儿'), array('冰糖葫芦'), array('北京烤鸭'), array('炸酱面')),
+        array('菜单一'), array('路打滚', 'disabled', 'devided'), array('豆汁儿'), array('冰糖葫芦'), array('北京烤鸭'), array('炸酱面')),
 
 );
 
+
+$pageData = array(
+    'debug' => true,
+    'total' => 30,
+    'showSize' => true,
+    'showElevator' => true,
+);
+
+$breadcrumb = array(
+    'debug' => true,
+    'items' => array(
+        array('label' => '首页', 'to' => '/'),
+        array('label' => '百度', 'to' => 'http://www.baidu.com'),
+        array('label' => '终端页面'),
+    ),
+);
 $this->title = '测试';
 ?>
 
@@ -465,8 +483,17 @@ $this->title = '测试';
 </style>
 
 
-<div id="DropdownMenu">
-    <?= DropdownMenu::widget(['message' => '标签页', 'config' => $DropdownMenuData]); ?>
+<div id="BreadCrumb" style="margin:30px auto;">
+    <?= BreadCrumb::widget(['message' => '面包屑导航', 'config' => $breadcrumb]); ?>
+</div>
+
+
+<div id="Page">
+    <?= Page::widget(['message' => '分页', 'config' => $pageData]); ?>
+</div>
+
+<div id="DropdownMenu" style="margin:30px auto;">
+    <?= DropdownMenu::widget(['message' => '下拉菜单', 'config' => $DropdownMenuData]); ?>
 </div>
 
 <div id="Tabs">
