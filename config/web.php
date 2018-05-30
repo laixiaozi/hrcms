@@ -11,6 +11,7 @@ $config = [
         '@bower' => '@vendor/bower-asset',
         '@npm' => '@vendor/npm-asset',
         '@iview' => '@app/themes/iview',
+        '@mui'  => '@app/themes/mui',
     ],
     'components' => [
         'request' => [
@@ -79,10 +80,10 @@ $config = [
         //主题配置
         'view' => [
             'theme' => [
-                'basePath' => '@app/themes/iview',
-                'baseUrl' => '@web/themes/iview',
+                'basePath' => '@app/themes/mui',
+                'baseUrl' => '@web/themes/mui',
                 'pathMap' => [
-                    '@app/views' => '@app/themes/iview',
+                    '@app/views' => '@app/themes/mui',
                 ],
             ],
         ],

@@ -11,6 +11,7 @@ class IviewAsset extends AssetBundle
 {
 
     public $sourcePath = '@iview/public';
+
     public $baseUrl = '@web';
 
 

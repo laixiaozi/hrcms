@@ -14,7 +14,7 @@ use yii\base\ErrorException;
 class SiteController extends Controller
 {
 
-    public $layout = 'iview_layout';
+    public $layout = 'mui_layout';
 
     public $enableCsrfValidation = false;
 

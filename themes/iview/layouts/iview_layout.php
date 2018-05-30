@@ -29,8 +29,6 @@ IviewAsset::register($this);
              </Layout>
             <Footer></Footer>
         </Layout>
-</div>
-
 <?php $this->endBody(); ?>
 </body>
 </html>
