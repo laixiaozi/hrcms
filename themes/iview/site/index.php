@@ -43,6 +43,7 @@ use app\widget\iview\Tabs;
 use app\widget\iview\DropdownMenu;
 use app\widget\iview\Page;
 use app\widget\iview\BreadCrumb;
+use app\widget\iview\Steps;
 
 $cardDemo = array(
     'debug' => true,
@@ -461,6 +462,29 @@ $breadcrumb = array(
         array('label' => '终端页面'),
     ),
 );
+
+$StepsData = array(
+    'debug' => true,
+    'items' => array(
+        array(
+            'title' => '步骤一',
+            'icon' => 'camera',
+            'content' => '描述内容'
+        ),
+        array(
+            'title' => '步骤二',
+            'icon' => 'person-add',
+            'content' => '描述内容'
+        ),
+        array(
+            'title' => '步骤三',
+            'icon' => 'email',
+            'content' => '描述内容'
+        ),
+    ),
+    'current' => 0,
+);
+
 $this->title = '测试';
 ?>
 
@@ -481,6 +505,11 @@ $this->title = '测试';
         text-align: center;
     }
 </style>
+
+
+<div id="Steps" style="margin:30px auto;">
+    <?= Steps::widget(['message' => '面包屑导航', 'config' => $StepsData]); ?>
+</div>
 
 
 <div id="BreadCrumb" style="margin:30px auto;">

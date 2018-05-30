@@ -1,0 +1,127 @@
+<!doctype html>
+<html>
+<meta http-equiv="content-type" content='text/html;charset=utf8'/>
+<script type="text/javascript" src="http://webapi.amap.com/maps?v=1.4.4&key=3506317c8895788a170f01cb37761411"></script>
+<head>
+    <title>地图接口,在地图上选择一个区域范围</title>
+    <style type='text/css'>
+        #map{
+            width:880px;
+            height: 550px;
+            margin:10px auto ;
+            float:right;
+        }
+        #container{
+            width:90%;
+            margin: 10px auto;
+        }
+        #latlng{
+            width:200px;
+        }
+        #container_right{
+            width:200px;
+        }
+        textarea{
+            width:300px;height:100px;
+        }
+    </style>
+</head>
+<body>
+
+<div id='container'>
+    <div id='map'></div>
+    <div id='latlng'>
+        <h3>地图坐标</h3>
+        <textarea id='text'></textarea>
+    </div>
+    <div  id ='container_right'>
+        <h3>坐标名称</h3>
+        <textarea id='message'></textarea>
+    </div>
+</div>
+</body>
+<script type='text/javascript'>
+    var map = new AMap.Map('map',{
+        resizeEnable:true,
+        zoom:12,
+        center: [108.949250, 34.205270]
+    });
+
+    // AMap.plugin('AMap.ToolBar', function(){
+    //    var toolbar = new AMap.ToolBar();
+    //    map.addControl(toolbar);
+    // });
+
+    AMap.plugin(['AMap.Geocoder','AMap.Polygon'],function(){
+        var geocoder  =  new AMap.Geocoder({
+            // city: '010',
+            zoom:3,
+        });
+        var marker = new AMap.Marker({
+            map:map,
+            bubble:true
+        });
+
+        var polygon = new AMap.Polygon({
+            // map:map,
+            bubble:true, //事件是否冒泡
+            strokeColor: '#df2525',
+            strokeOpacity: 0.3,
+            fillColor:'#df2525',
+            fillOpacity:0.3,
+            strokeStyle:'dashed',
+        });
+
+        var input = document.getElementById('message');
+        var area = document.getElementById('text');
+        var txt = '';
+        var path  = new Array();
+        map.on('click', function(e){
+            marker.setPosition(e.lnglat);
+            geocoder.getAddress(e.lnglat , function(status , result){
+                if(status == 'complete'){
+                    input.value = result.regeocode.formattedAddress
+                }else{
+                    alert('无法获取地址');
+                }
+            });
+
+            path.push([e.lnglat.lng , e.lnglat.lat]);
+            polygon.setPath(path);
+            polygon.setMap(map);
+            text.value = path.join(';');
+        });
+
+        input.onchange = function(e){
+            var address = input.value;
+            geocoder.getLocation(address,function(status,result){
+                console.log(status);
+                console.log(result);
+                if(status=='complete'&&result.geocodes.length){
+                    marker.setPosition(result.geocodes[0].location);
+                    map.setCenter(marker.getPosition())
+                }else{
+                    message.innerHTML = '无法获取位置'
+                }
+            })
+        };
+        area.onchange = function(){
+            var pathData = new Array();
+            var tmp  =  area.value.split(';');
+            var n = tmp.length;
+            if(tmp.length){
+                for(var i = 0 ; i < n ; i++){
+                    pathData.push(tmp[i].split(','));
+                }
+            }
+            polygon.setPath(pathData);
+            polygon.setMap(map);
+        }
+
+
+
+    });
+
+
+</script>
+</html>
