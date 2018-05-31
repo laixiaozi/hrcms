@@ -1,0 +1,567 @@
+<!DOCTYPE html>
+<html><head>
+<meta http-equiv="content-type" content="text/html; charset=UTF-8">
+    <meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<title>MUI-最接近原生APP体验的高性能前端框架</title>
+<meta name="description" content="MUI: 最接近原生APP体验的高性能前端框架">
+<meta name="keywords" content="MUI,框架,官网，JS, JavaScript, framework,css,css3,开源,html,html5,前端框架,api,文档,开发,教程,hbuilder,hybrid,native,webview">
+<meta name="viewport" content="initial-scale=1, maximum-scale=1">
+<link rel="shortcut icon" href="http://dev.dcloud.net.cn/mui/favicon.ico">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black">
+
+<link rel="stylesheet" href="MUI-util_files/bootstrap.css">
+<link rel="stylesheet" href="MUI-util_files/mui.css">
+<link rel="stylesheet" href="MUI-util_files/docs.css">
+<script src="MUI-util_files/hm.js"></script><script src="MUI-util_files/mui.js"></script>
+<link rel="apple-touch-icon-precomposed" sizes="114x114" href="http://dev.dcloud.net.cn/mui/assets/img/apple-touch-icon-114x114.png">
+<script>
+var _hmt = _hmt || [];
+(function() {
+  var hm = document.createElement("script");
+  hm.src = "//hm.baidu.com/hm.js?2b98e9d77bf9772982afa81412cfb9c5";
+  var s = document.getElementsByTagName("script")[0]; 
+  s.parentNode.insertBefore(hm, s);
+})();
+</script>
+
+
+  </head>
+  <body ontouchstart="" data-spy="scroll" data-target="#scrollspy">
+    <!--[if lt IE 9]>
+  <div class="bs-callout bs-callout-danger">
+    <h4>Attention!</h4>
+    <p>
+      Looks like your current browser is old and doesn't support many features used in this page.
+      Please take a second to <a href="https://browsehappy.com/">upgrade to a more modern browser</a>.
+    </p>
+  </div>
+<![endif]-->
+
+    <div class="docs-sub-header">
+  <header class="docs-masthead mui-clearfix">
+  <div class="container">
+    <div class="column" style="width:100%">
+      <h1 class="docs-title">
+        <a href="http://dev.dcloud.net.cn/mui/">MUI</a>
+      </h1>
+      <nav class="docs-nav mui-clearfix">
+        <a class="docs-nav-trigger mui-icon mui-icon-bars mui-pull-right js-docs-nav-trigger" href="#"></a>
+        <div class="docs-nav-group">
+          <a class="docs-nav-item" href="http://dev.dcloud.net.cn/mui/">首页</a>
+          <a class="docs-nav-item" href="http://dev.dcloud.net.cn/mui/getting-started">新手指南</a>
+          <a class="docs-nav-item" href="http://dev.dcloud.net.cn/mui/ui">文档</a>
+          <a class="docs-nav-item" href="http://ask.dcloud.net.cn/explore/category-3">问答社区</a>
+          <a class="docs-nav-item" href="https://github.com/dcloudio/mui">GitHub地址</a>
+          <a class="docs-nav-item" href="http://dev.dcloud.net.cn/sponsor/?channel=mui" target="_blank">支持我们</a>
+        </div>
+      </nav>
+    </div>
+  </div>
+</header>
+
+  <div class="container">
+    <div class="docs-sub-content">
+      <h2 class="page-title">JavaScript</h2>
+      <p class="page-description">极简的JS函数</p>
+    </div>
+  </div>
+</div>
+
+<div class="container">
+  <style>
+    .description{
+      display: block;
+    }
+    /*.nav .nav {
+      display: none;
+      padding-bottom: 10px;
+    }*/
+  </style>
+  <!-- Components -->
+  <div class="docs-components column-group">
+    
+    <div class="column col-xs-3" id="scrollspy">
+        <div class="sidebar hidden-print hidden-xs hidden-sm">
+            <ul class="nav sidenav affix-top" id="nav" data-spy="affix" data-offset-top="250">
+                <li>
+                    <a href="http://dev.dcloud.net.cn/mui/ui/">UI组件</a>
+                </li>
+                 <li>
+                    <a href="http://dev.dcloud.net.cn/mui/window">窗口管理</a>
+                </li>
+                 <li>
+                    <a href="http://dev.dcloud.net.cn/mui/event">事件管理</a>
+                </li>
+                <li class="active">
+                    <a href="#event">utils</a>
+                    <ul class="nav">
+                        <li class="active"><a href="#init">init()</a></li>
+                        <li><a href="#selector">mui()</a></li>
+                        <li><a href="#each">each()</a></li>
+                        <li><a href="#extend">extend()</a></li>
+                        <li><a href="#later">later()</a></li>
+                        <li><a href="#scrollTo">scrollTo()</a></li>
+                        <li><a href="#os">os</a></li>
+                    </ul>
+                </li>
+        
+                
+                <li><a href="http://dev.dcloud.net.cn/mui/ajax">AJAX</a></li>
+                <li>
+                    <a href="http://dev.dcloud.net.cn/mui/pulldown">下拉刷新</a>
+                </li>
+                <li><a href="http://dev.dcloud.net.cn/mui/pullup">上拉加载</a></li>
+                <li><a href="http://dev.dcloud.net.cn/mui/snippet">代码块</a></li>
+          </ul>
+      </div>
+    </div>
+
+    <div class="column col-xs-9 docs-content" style="float:right">
+    
+    <!-- mui.extend() -->
+    <article class="component mui-active" id="init">
+	<h3 class="component-title"><a href="#init">init</a></h3>
+		<p class="component-description">mui框架将很多功能配置都集中在mui.init方法中，要使用某项功能，只需要在mui.init方法中完成对应参数配置即可，目前支持在mui.init方法中配置的功能包括：<a href="http://dev.dcloud.net.cn/mui/window/#subpage">创建子页面</a>、<a href="http://dev.dcloud.net.cn/mui/window/#closewindow">关闭页面</a>、<a href="http://dev.dcloud.net.cn/mui/event/#gesture">手势事件配置</a>、<a href="http://dev.dcloud.net.cn/mui/window/#preload">预加载</a>、<a href="http://dev.dcloud.net.cn/mui/pulldown/#pullrefresh-down">下拉刷新</a>、<a href="http://dev.dcloud.net.cn/mui/pullup/#pullrefresh-up">上拉加载</a>、<a href="#statusbar">设置系统状态栏背景颜色</a>。</p>
+		 <div id="faq_popGesture" class="comment comment-danger">
+    <h4>mui需要在页面加载时初始化很多基础控件,如监听返回键,因此务必在每个页面中调用</h4>
+  </div>
+		 <div id="faq_popGesture" class="comment comment-pink">
+    <h4>以下各配置模块在其对应文档中有详细阐述,请点击链接查看,这里只列出所有可配置项</h4>
+  </div>
+		<figure class="highlight"><pre><code class="language-js" data-lang="js"><span class="nx">mui</span><span class="p">.</span><span class="nx">init</span><span class="p">({</span>
+<span class="c1">//子页面</span>
+	<span class="nx">subpages</span><span class="o">:</span> <span class="p">[{</span>
+		<span class="c1">//...</span>
+	<span class="p">}],</span>
+<span class="c1">//预加载</span>
+	 <span class="nx">preloadPages</span><span class="o">:</span><span class="p">[</span>
+	    <span class="c1">//...</span>
+ 	 <span class="p">],</span>
+<span class="c1">//下拉刷新、上拉加载</span>
+ 	<span class="nx">pullRefresh</span> <span class="o">:</span> <span class="p">{</span>
+	   <span class="c1">//...</span>
+     	<span class="p">},</span>
+<span class="c1">//手势配置</span>
+ 	 <span class="nx">gestureConfig</span><span class="o">:</span><span class="p">{</span>
+	   <span class="c1">//...</span>
+	<span class="p">},</span>
+<span class="c1">//侧滑关闭</span>
+	<span class="nx">swipeBack</span><span class="o">:</span><span class="kc">true</span><span class="p">,</span> <span class="c1">//Boolean(默认false)启用右滑关闭功能</span>
+	
+<span class="c1">//监听Android手机的back、menu按键</span>
+	<span class="nx">keyEventBind</span><span class="o">:</span> <span class="p">{</span>
+		<span class="nx">backbutton</span><span class="o">:</span> <span class="kc">false</span><span class="p">,</span>  <span class="c1">//Boolean(默认true)关闭back按键监听</span>
+		<span class="nx">menubutton</span><span class="o">:</span> <span class="kc">false</span>   <span class="c1">//Boolean(默认true)关闭menu按键监听</span>
+	<span class="p">},</span>
+<span class="c1">//处理窗口关闭前的业务</span>
+	<span class="nx">beforeback</span><span class="o">:</span> <span class="kd">function</span><span class="p">()</span> <span class="p">{</span>
+		<span class="c1">//... //窗口关闭前处理其他业务详情点击 ↑ "关闭页面"链接查看</span>
+	<span class="p">},</span>
+<span class="c1">//设置状态栏颜色</span>
+	<span class="nx">statusBarBackground</span><span class="o">:</span> <span class="s1">'#9defbcg'</span><span class="p">,</span> <span class="c1">//设置状态栏颜色,仅iOS可用</span>
+	<span class="nx">preloadLimit</span><span class="o">:</span><span class="mi">5</span><span class="c1">//预加载窗口数量限制(一旦超出,先进先出)默认不限制</span>
+<span class="p">})</span>
+		</code><button class="clip"><img src="data:image/svg+xml;base64,PHN2ZyBoZWlnaHQ9IjEwMjQiIHdpZHRoPSI4OTYiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyI+ICA8cGF0aCBkPSJNMTI4IDc2OGgyNTZ2NjRIMTI4di02NHogbTMyMC0zODRIMTI4djY0aDMyMHYtNjR6IG0xMjggMTkyVjQ0OEwzODQgNjQwbDE5MiAxOTJWNzA0aDMyMFY1NzZINTc2eiBtLTI4OC02NEgxMjh2NjRoMTYwdi02NHpNMTI4IDcwNGgxNjB2LTY0SDEyOHY2NHogbTU3NiA2NGg2NHYxMjhjLTEgMTgtNyAzMy0xOSA0NXMtMjcgMTgtNDUgMTlINjRjLTM1IDAtNjQtMjktNjQtNjRWMTkyYzAtMzUgMjktNjQgNjQtNjRoMTkyQzI1NiA1NyAzMTMgMCAzODQgMHMxMjggNTcgMTI4IDEyOGgxOTJjMzUgMCA2NCAyOSA2NCA2NHYzMjBoLTY0VjMyMEg2NHY1NzZoNjQwVjc2OHpNMTI4IDI1Nmg1MTJjMC0zNS0yOS02NC02NC02NGgtNjRjLTM1IDAtNjQtMjktNjQtNjRzLTI5LTY0LTY0LTY0LTY0IDI5LTY0IDY0LTI5IDY0LTY0IDY0aC02NGMtMzUgMC02NCAyOS02NCA2NHoiIC8+PC9zdmc+"></button></pre></figure>
+      <div id="faq_popGesture" class="comment comment-pink">
+    <h4>以上各配置模块在其对应文档中有详细阐述,请点击链接查看,以下只补充单独配置项</h4>
+  </div>
+    <p class="component-description" id="statusbar">通过<code>statusBarBackground:rgb </code>属性设置状态栏颜色（iOS7.0+、安卓不支持）格式为#RRGGBB。</p>
+    <figure class="highlight"><pre><code class="language-js" data-lang="js"><span class="nx">mui</span><span class="p">.</span><span class="nx">init</span><span class="p">({</span>
+	<span class="nx">statusBarBackground</span><span class="o">:</span> <span class="s1">'#9defbcg'</span><span class="p">,</span>
+<span class="p">})</span></code><button class="clip"><img src="data:image/svg+xml;base64,PHN2ZyBoZWlnaHQ9IjEwMjQiIHdpZHRoPSI4OTYiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyI+ICA8cGF0aCBkPSJNMTI4IDc2OGgyNTZ2NjRIMTI4di02NHogbTMyMC0zODRIMTI4djY0aDMyMHYtNjR6IG0xMjggMTkyVjQ0OEwzODQgNjQwbDE5MiAxOTJWNzA0aDMyMFY1NzZINTc2eiBtLTI4OC02NEgxMjh2NjRoMTYwdi02NHpNMTI4IDcwNGgxNjB2LTY0SDEyOHY2NHogbTU3NiA2NGg2NHYxMjhjLTEgMTgtNyAzMy0xOSA0NXMtMjcgMTgtNDUgMTlINjRjLTM1IDAtNjQtMjktNjQtNjRWMTkyYzAtMzUgMjktNjQgNjQtNjRoMTkyQzI1NiA1NyAzMTMgMCAzODQgMHMxMjggNTcgMTI4IDEyOGgxOTJjMzUgMCA2NCAyOSA2NCA2NHYzMjBoLTY0VjMyMEg2NHY1NzZoNjQwVjc2OHpNMTI4IDI1Nmg1MTJjMC0zNS0yOS02NC02NC02NGgtNjRjLTM1IDAtNjQtMjktNjQtNjRzLTI5LTY0LTY0LTY0LTY0IDI5LTY0IDY0LTI5IDY0LTY0IDY0aC02NGMtMzUgMC02NCAyOS02NCA2NHoiIC8+PC9zdmc+"></button></pre></figure>
+    <p class="component-description" id="statusbar">mui默认会监听Android手机的物理按键<code>(back&amp;menu)</code>,若不希望自动处理按键可通过以下方式关闭</p>
+    <figure class="highlight"><pre><code class="language-js" data-lang="js"><span class="nx">mui</span><span class="p">.</span><span class="nx">init</span><span class="p">({</span>
+	<span class="c1">//监听Android手机的back、menu按键</span>
+	<span class="nx">keyEventBind</span><span class="o">:</span> <span class="p">{</span>
+		<span class="nx">backbutton</span><span class="o">:</span> <span class="kc">true</span><span class="p">,</span>  <span class="c1">//Boolean(默认true)关闭back按键监听</span>
+		<span class="nx">menubutton</span><span class="o">:</span> <span class="kc">true</span>   <span class="c1">//Boolean(默认true)关闭menu按键监听</span>
+	<span class="p">},</span>
+<span class="p">})</span></code><button class="clip"><img src="data:image/svg+xml;base64,PHN2ZyBoZWlnaHQ9IjEwMjQiIHdpZHRoPSI4OTYiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyI+ICA8cGF0aCBkPSJNMTI4IDc2OGgyNTZ2NjRIMTI4di02NHogbTMyMC0zODRIMTI4djY0aDMyMHYtNjR6IG0xMjggMTkyVjQ0OEwzODQgNjQwbDE5MiAxOTJWNzA0aDMyMFY1NzZINTc2eiBtLTI4OC02NEgxMjh2NjRoMTYwdi02NHpNMTI4IDcwNGgxNjB2LTY0SDEyOHY2NHogbTU3NiA2NGg2NHYxMjhjLTEgMTgtNyAzMy0xOSA0NXMtMjcgMTgtNDUgMTlINjRjLTM1IDAtNjQtMjktNjQtNjRWMTkyYzAtMzUgMjktNjQgNjQtNjRoMTkyQzI1NiA1NyAzMTMgMCAzODQgMHMxMjggNTcgMTI4IDEyOGgxOTJjMzUgMCA2NCAyOSA2NCA2NHYzMjBoLTY0VjMyMEg2NHY1NzZoNjQwVjc2OHpNMTI4IDI1Nmg1MTJjMC0zNS0yOS02NC02NC02NGgtNjRjLTM1IDAtNjQtMjktNjQtNjRzLTI5LTY0LTY0LTY0LTY0IDI5LTY0IDY0LTI5IDY0LTY0IDY0aC02NGMtMzUgMC02NCAyOS02NCA2NHoiIC8+PC9zdmc+"></button></pre></figure>
+<h3>扩展阅读</h3>
+代码块激活字符:&nbsp;&nbsp;&nbsp;&nbsp;<div class="kbd">minit</div>
+
+</article>
+
+     <article id="selector" class="component">
+      <h3 class="component-title"><a href="#selector">mui()</a></h3>
+      <p class="description">mui使用css选择器获取HTML元素，返回mui对象数组。<br>
+        <code>mui("p")</code>：选取所有<code>&lt;p&gt;</code>元素<br>
+        <code>mui("p.title")</code>：选取所有包含<code>.title</code>类的<code>&lt;p&gt;</code>元素
+      </p>
+      <p class="description">若要将mui对象转化成dom对象，可使用如下方法（类似jquery对象转成dom对象）：</p>
+<figure class="highlight"><pre><code class="language-js" data-lang="js"><span class="c1">//obj1是mui对象</span>
+<span class="kd">var</span> <span class="nx">obj1</span> <span class="o">=</span> <span class="nx">mui</span><span class="p">(</span><span class="s2">"#title"</span><span class="p">);</span>
+<span class="c1">//obj2是dom对象</span>
+<span class="kd">var</span> <span class="nx">obj2</span> <span class="o">=</span> <span class="nx">obj1</span><span class="p">[</span><span class="mi">0</span><span class="p">];</span> </code><button class="clip"><img src="data:image/svg+xml;base64,PHN2ZyBoZWlnaHQ9IjEwMjQiIHdpZHRoPSI4OTYiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyI+ICA8cGF0aCBkPSJNMTI4IDc2OGgyNTZ2NjRIMTI4di02NHogbTMyMC0zODRIMTI4djY0aDMyMHYtNjR6IG0xMjggMTkyVjQ0OEwzODQgNjQwbDE5MiAxOTJWNzA0aDMyMFY1NzZINTc2eiBtLTI4OC02NEgxMjh2NjRoMTYwdi02NHpNMTI4IDcwNGgxNjB2LTY0SDEyOHY2NHogbTU3NiA2NGg2NHYxMjhjLTEgMTgtNyAzMy0xOSA0NXMtMjcgMTgtNDUgMTlINjRjLTM1IDAtNjQtMjktNjQtNjRWMTkyYzAtMzUgMjktNjQgNjQtNjRoMTkyQzI1NiA1NyAzMTMgMCAzODQgMHMxMjggNTcgMTI4IDEyOGgxOTJjMzUgMCA2NCAyOSA2NCA2NHYzMjBoLTY0VjMyMEg2NHY1NzZoNjQwVjc2OHpNMTI4IDI1Nmg1MTJjMC0zNS0yOS02NC02NC02NGgtNjRjLTM1IDAtNjQtMjktNjQtNjRzLTI5LTY0LTY0LTY0LTY0IDI5LTY0IDY0LTI5IDY0LTY0IDY0aC02NGMtMzUgMC02NCAyOS02NCA2NHoiIC8+PC9zdmc+"></button></pre></figure>
+    <p class="description">MUI框架的定位是“最接近原生体验的移动App的UI框架”，
+    		因此和jQuery有所区别，很少为简化DOM操作而封装API，具体可参考<a href="http://ask.dcloud.net.cn/article/91" target="_blank">MUI产品概述</a>；
+   	 	该函数的设计目的，更多是为了配合MUI插件使用，比如图片轮播、下拉刷新、区域滚动等，如下为详细示例：
+    </p>
+    <p class="description">示例1：跳转到图片轮播的第二张图片</p>
+<figure class="highlight"><pre><code class="language-js" data-lang="js"><span class="nx">mui</span><span class="p">(</span><span class="s1">'.mui-slider'</span><span class="p">).</span><span class="nx">slider</span><span class="p">().</span><span class="nx">gotoItem</span><span class="p">(</span><span class="mi">1</span><span class="p">);</span></code><button class="clip"><img src="data:image/svg+xml;base64,PHN2ZyBoZWlnaHQ9IjEwMjQiIHdpZHRoPSI4OTYiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyI+ICA8cGF0aCBkPSJNMTI4IDc2OGgyNTZ2NjRIMTI4di02NHogbTMyMC0zODRIMTI4djY0aDMyMHYtNjR6IG0xMjggMTkyVjQ0OEwzODQgNjQwbDE5MiAxOTJWNzA0aDMyMFY1NzZINTc2eiBtLTI4OC02NEgxMjh2NjRoMTYwdi02NHpNMTI4IDcwNGgxNjB2LTY0SDEyOHY2NHogbTU3NiA2NGg2NHYxMjhjLTEgMTgtNyAzMy0xOSA0NXMtMjcgMTgtNDUgMTlINjRjLTM1IDAtNjQtMjktNjQtNjRWMTkyYzAtMzUgMjktNjQgNjQtNjRoMTkyQzI1NiA1NyAzMTMgMCAzODQgMHMxMjggNTcgMTI4IDEyOGgxOTJjMzUgMCA2NCAyOSA2NCA2NHYzMjBoLTY0VjMyMEg2NHY1NzZoNjQwVjc2OHpNMTI4IDI1Nmg1MTJjMC0zNS0yOS02NC02NC02NGgtNjRjLTM1IDAtNjQtMjktNjQtNjRzLTI5LTY0LTY0LTY0LTY0IDI5LTY0IDY0LTI5IDY0LTY0IDY0aC02NGMtMzUgMC02NCAyOS02NCA2NHoiIC8+PC9zdmc+"></button></pre></figure> 
+   <p class="description">示例2：重新开启上拉加载</p>
+<figure class="highlight"><pre><code class="language-js" data-lang="js"><span class="nx">mui</span><span class="p">(</span><span class="s1">'#pullup-container'</span><span class="p">).</span><span class="nx">pullRefresh</span><span class="p">().</span><span class="nx">refresh</span><span class="p">(</span><span class="kc">true</span><span class="p">);</span></code><button class="clip"><img src="data:image/svg+xml;base64,PHN2ZyBoZWlnaHQ9IjEwMjQiIHdpZHRoPSI4OTYiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyI+ICA8cGF0aCBkPSJNMTI4IDc2OGgyNTZ2NjRIMTI4di02NHogbTMyMC0zODRIMTI4djY0aDMyMHYtNjR6IG0xMjggMTkyVjQ0OEwzODQgNjQwbDE5MiAxOTJWNzA0aDMyMFY1NzZINTc2eiBtLTI4OC02NEgxMjh2NjRoMTYwdi02NHpNMTI4IDcwNGgxNjB2LTY0SDEyOHY2NHogbTU3NiA2NGg2NHYxMjhjLTEgMTgtNyAzMy0xOSA0NXMtMjcgMTgtNDUgMTlINjRjLTM1IDAtNjQtMjktNjQtNjRWMTkyYzAtMzUgMjktNjQgNjQtNjRoMTkyQzI1NiA1NyAzMTMgMCAzODQgMHMxMjggNTcgMTI4IDEyOGgxOTJjMzUgMCA2NCAyOSA2NCA2NHYzMjBoLTY0VjMyMEg2NHY1NzZoNjQwVjc2OHpNMTI4IDI1Nmg1MTJjMC0zNS0yOS02NC02NC02NGgtNjRjLTM1IDAtNjQtMjktNjQtNjRzLTI5LTY0LTY0LTY0LTY0IDI5LTY0IDY0LTI5IDY0LTY0IDY0aC02NGMtMzUgMC02NCAyOS02NCA2NHoiIC8+PC9zdmc+"></button></pre></figure> 
+<h3>扩展阅读</h3>
+代码块激活字符:&nbsp;&nbsp;&nbsp;&nbsp;<div class="kbd">mmui</div>
+    </article>
+    <article id="each" class="component">
+      <h3 class="component-title"><a href="#each">each()</a></h3>
+      <p class="description">each既是一个类方法，同时也是一个对象方法，两个方法适用场景不同；换言之，你可以使用<code>mui.each()</code>去遍历数组或json对象，也可以使用<code>mui(selector).each()</code>去遍历DOM结构。
+      </p>      
+      <ul class="mui-table-view api">
+        <li class="mui-table-view-cell mui-collapse mui-active">
+            <a id="on-events-selector-data-handler" href="#on-events-selector-data-handler">
+          <h4 class="name">
+              <span class="icon-link"></span>mui.each( obj , handler )
+          </h4>
+            </a>
+          <ul class="mui-table-view">
+            <li class="mui-table-view-cell">
+              <div><strong>obj</strong></div>
+              <div>Type: <a href="">Array</a>||<a href="">JSONObj</a></div>
+              <div>需遍历的对象或数组；若为对象，仅遍历对象根节点下的key</div>
+            </li>
+            <li class="mui-table-view-cell">
+              <div><strong>handler</strong></div>
+              <div>Type: <a href="">Function</a>( <a href="">Integer</a>||<a href="">String</a> index,<a href="">Anything</a> element)</div>
+              <div>为每个元素执行的回调函数；其中，index表示当前元素的下标或key，element表示当前匹配元素</div>
+            </li>
+          </ul>
+        </li>
+        <li class="mui-table-view-cell mui-collapse mui-active" id="eachselect">
+            <a id="on-events-selector-data-handler" href="#on-events-selector-data-handler">
+          <h4 class="name">
+              <span class="icon-link"></span>mui(selector).each( handler )
+          </h4>
+            </a>
+          <ul class="mui-table-view">
+            <li class="mui-table-view-cell">
+              <div><strong>handler</strong></div>
+              <div>Type: <a href="">Function</a>( <a href="">Integer</a> index,<a href="">Element</a> element)</div>
+              <div>为每个匹配元素执行的回调函数；其中，index表示当前元素在匹配元素中的位置（下标，从0开始），element表示当前匹配元素，可用<code>this</code>关键字代替</div>
+            </li>
+          </ul>
+        </li>
+      </ul>
+
+
+      <h4>示例1</h4>
+      <p class="description">输出当前数组中每个元素的平方</p>
+<figure class="highlight"><pre><code class="language-js" data-lang="js"><span class="kd">var</span> <span class="nx">array</span> <span class="o">=</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="mi">3</span><span class="p">]</span>
+<span class="nx">mui</span><span class="p">.</span><span class="nx">each</span><span class="p">(</span><span class="nx">array</span><span class="p">,</span><span class="kd">function</span><span class="p">(</span><span class="nx">index</span><span class="p">,</span><span class="nx">item</span><span class="p">){</span>
+  <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">item</span><span class="o">*</span><span class="nx">item</span><span class="p">);</span>
+<span class="p">})</span> </code><button class="clip"><img src="data:image/svg+xml;base64,PHN2ZyBoZWlnaHQ9IjEwMjQiIHdpZHRoPSI4OTYiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyI+ICA8cGF0aCBkPSJNMTI4IDc2OGgyNTZ2NjRIMTI4di02NHogbTMyMC0zODRIMTI4djY0aDMyMHYtNjR6IG0xMjggMTkyVjQ0OEwzODQgNjQwbDE5MiAxOTJWNzA0aDMyMFY1NzZINTc2eiBtLTI4OC02NEgxMjh2NjRoMTYwdi02NHpNMTI4IDcwNGgxNjB2LTY0SDEyOHY2NHogbTU3NiA2NGg2NHYxMjhjLTEgMTgtNyAzMy0xOSA0NXMtMjcgMTgtNDUgMTlINjRjLTM1IDAtNjQtMjktNjQtNjRWMTkyYzAtMzUgMjktNjQgNjQtNjRoMTkyQzI1NiA1NyAzMTMgMCAzODQgMHMxMjggNTcgMTI4IDEyOGgxOTJjMzUgMCA2NCAyOSA2NCA2NHYzMjBoLTY0VjMyMEg2NHY1NzZoNjQwVjc2OHpNMTI4IDI1Nmg1MTJjMC0zNS0yOS02NC02NC02NGgtNjRjLTM1IDAtNjQtMjktNjQtNjRzLTI5LTY0LTY0LTY0LTY0IDI5LTY0IDY0LTI5IDY0LTY0IDY0aC02NGMtMzUgMC02NCAyOS02NCA2NHoiIC8+PC9zdmc+"></button></pre></figure>
+      <h4>示例2</h4>
+      <p class="description">当前页面中有三个字段，如下：</p>
+<figure class="highlight"><pre><code class="language-html" data-lang="html"><span class="nt">&lt;div</span> <span class="na">class=</span><span class="s">"mui-input-group"</span><span class="nt">&gt;</span>
+  <span class="nt">&lt;div</span> <span class="na">class=</span><span class="s">"mui-input-row"</span><span class="nt">&gt;</span>
+    <span class="nt">&lt;label&gt;</span>字段1：<span class="nt">&lt;/label&gt;</span>
+    <span class="nt">&lt;input</span> <span class="na">type=</span><span class="s">"text"</span> <span class="na">class=</span><span class="s">"mui-input-clear"</span> <span class="na">id=</span><span class="s">"col1"</span> <span class="na">placeholder=</span><span class="s">"请输入"</span><span class="nt">&gt;</span>
+  <span class="nt">&lt;/div&gt;</span>
+  <span class="nt">&lt;div</span> <span class="na">class=</span><span class="s">"mui-input-row"</span><span class="nt">&gt;</span>
+    <span class="nt">&lt;label&gt;</span>字段2：<span class="nt">&lt;/label&gt;</span>
+    <span class="nt">&lt;input</span> <span class="na">type=</span><span class="s">"text"</span> <span class="na">class=</span><span class="s">"mui-input-clear"</span> <span class="na">id=</span><span class="s">"col2"</span> <span class="na">placeholder=</span><span class="s">"请输入"</span><span class="nt">&gt;</span>
+  <span class="nt">&lt;/div&gt;</span>
+  <span class="nt">&lt;div</span> <span class="na">class=</span><span class="s">"mui-input-row"</span><span class="nt">&gt;</span>
+    <span class="nt">&lt;label&gt;</span>字段3：<span class="nt">&lt;/label&gt;</span>
+    <span class="nt">&lt;input</span> <span class="na">type=</span><span class="s">"text"</span> <span class="na">class=</span><span class="s">"mui-input-clear"</span> <span class="na">id=</span><span class="s">"col3"</span> <span class="na">placeholder=</span><span class="s">"请输入"</span><span class="nt">&gt;</span>
+  <span class="nt">&lt;/div&gt;</span>
+<span class="nt">&lt;/div&gt;</span></code><button class="clip"><img src="data:image/svg+xml;base64,PHN2ZyBoZWlnaHQ9IjEwMjQiIHdpZHRoPSI4OTYiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyI+ICA8cGF0aCBkPSJNMTI4IDc2OGgyNTZ2NjRIMTI4di02NHogbTMyMC0zODRIMTI4djY0aDMyMHYtNjR6IG0xMjggMTkyVjQ0OEwzODQgNjQwbDE5MiAxOTJWNzA0aDMyMFY1NzZINTc2eiBtLTI4OC02NEgxMjh2NjRoMTYwdi02NHpNMTI4IDcwNGgxNjB2LTY0SDEyOHY2NHogbTU3NiA2NGg2NHYxMjhjLTEgMTgtNyAzMy0xOSA0NXMtMjcgMTgtNDUgMTlINjRjLTM1IDAtNjQtMjktNjQtNjRWMTkyYzAtMzUgMjktNjQgNjQtNjRoMTkyQzI1NiA1NyAzMTMgMCAzODQgMHMxMjggNTcgMTI4IDEyOGgxOTJjMzUgMCA2NCAyOSA2NCA2NHYzMjBoLTY0VjMyMEg2NHY1NzZoNjQwVjc2OHpNMTI4IDI1Nmg1MTJjMC0zNS0yOS02NC02NC02NGgtNjRjLTM1IDAtNjQtMjktNjQtNjRzLTI5LTY0LTY0LTY0LTY0IDI5LTY0IDY0LTI5IDY0LTY0IDY0aC02NGMtMzUgMC02NCAyOS02NCA2NHoiIC8+PC9zdmc+"></button></pre></figure>
+<p class="description">提交时校验三个字段均不能为空，若为空则提醒并终止业务逻辑运行，使用<code>each()</code>方法循环校验，如下：</p>
+<figure class="highlight"><pre><code class="language-js" data-lang="js"><span class="kd">var</span> <span class="nx">check</span> <span class="o">=</span> <span class="kc">true</span><span class="p">;</span>
+<span class="nx">mui</span><span class="p">(</span><span class="s2">".mui-input-group input"</span><span class="p">).</span><span class="nx">each</span><span class="p">(</span><span class="kd">function</span> <span class="p">()</span> <span class="p">{</span>
+  <span class="c1">//若当前input为空，则alert提醒</span>
+  <span class="k">if</span><span class="p">(</span><span class="o">!</span><span class="k">this</span><span class="p">.</span><span class="nx">value</span><span class="o">||</span><span class="nx">trim</span><span class="p">(</span><span class="k">this</span><span class="p">.</span><span class="nx">value</span><span class="p">)</span><span class="o">==</span><span class="s2">""</span><span class="p">){</span>
+    <span class="kd">var</span> <span class="nx">label</span> <span class="o">=</span> <span class="k">this</span><span class="p">.</span><span class="nx">previousElementSibling</span><span class="p">;</span>
+    <span class="nx">mui</span><span class="p">.</span><span class="nx">alert</span><span class="p">(</span><span class="nx">label</span><span class="p">.</span><span class="nx">innerText</span><span class="o">+</span><span class="s2">"不允许为空"</span><span class="p">);</span>
+    <span class="nx">check</span> <span class="o">=</span> <span class="kc">false</span><span class="p">;</span>
+    <span class="k">return</span> <span class="kc">false</span><span class="p">;</span>
+  <span class="p">}</span>
+<span class="p">});</span>
+<span class="c1">//校验通过，继续执行业务逻辑</span>
+<span class="k">if</span><span class="p">(</span><span class="nx">check</span><span class="p">){</span>
+  <span class="c1">//.....</span>
+<span class="p">}</span></code><button class="clip"><img src="data:image/svg+xml;base64,PHN2ZyBoZWlnaHQ9IjEwMjQiIHdpZHRoPSI4OTYiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyI+ICA8cGF0aCBkPSJNMTI4IDc2OGgyNTZ2NjRIMTI4di02NHogbTMyMC0zODRIMTI4djY0aDMyMHYtNjR6IG0xMjggMTkyVjQ0OEwzODQgNjQwbDE5MiAxOTJWNzA0aDMyMFY1NzZINTc2eiBtLTI4OC02NEgxMjh2NjRoMTYwdi02NHpNMTI4IDcwNGgxNjB2LTY0SDEyOHY2NHogbTU3NiA2NGg2NHYxMjhjLTEgMTgtNyAzMy0xOSA0NXMtMjcgMTgtNDUgMTlINjRjLTM1IDAtNjQtMjktNjQtNjRWMTkyYzAtMzUgMjktNjQgNjQtNjRoMTkyQzI1NiA1NyAzMTMgMCAzODQgMHMxMjggNTcgMTI4IDEyOGgxOTJjMzUgMCA2NCAyOSA2NCA2NHYzMjBoLTY0VjMyMEg2NHY1NzZoNjQwVjc2OHpNMTI4IDI1Nmg1MTJjMC0zNS0yOS02NC02NC02NGgtNjRjLTM1IDAtNjQtMjktNjQtNjRzLTI5LTY0LTY0LTY0LTY0IDI5LTY0IDY0LTI5IDY0LTY0IDY0aC02NGMtMzUgMC02NCAyOS02NCA2NHoiIC8+PC9zdmc+"></button></pre></figure>
+<h3>扩展阅读</h3>
+代码块激活字符:&nbsp;&nbsp;&nbsp;&nbsp;<div class="kbd">meach</div><div class="kbd">mmeach(遍历DOM)</div>
+    </article>
+    <article id="extend" class="component">
+      <h3 class="component-title"><a href="#extend">extend()</a></h3>
+      <p class="component-description">将两个对象合并成一个对象。</p>
+      <ul class="mui-table-view api">
+        <li class="mui-table-view-cell mui-collapse mui-active">
+            <a id="on-events-selector-data-handler" href="#on-events-selector-data-handler">
+          <h4 class="name">
+              <span class="icon-link"></span>.extend( target , object1 [, objectN] )
+          </h4>
+            </a>
+          <ul class="mui-table-view">
+            <li class="mui-table-view-cell">
+              <div><strong>target</strong></div>
+              <div>Type: <a href="">Object</a></div>
+              <div>需合并的目标对象</div>
+            </li>
+           <li class="mui-table-view-cell">
+              <div><strong>object1</strong></div>
+              <div>Type: <a href="">Object</a></div>
+              <div>需合并的对象</div>
+            </li>
+            <li class="mui-table-view-cell">
+              <div><strong>objectN</strong></div>
+              <div>Type: <a href="">Object</a></div>
+              <div>需合并的对象</div>
+            </li>
+          </ul>
+        </li>
+        <li class="mui-table-view-cell mui-collapse mui-active">
+            <a id="on-events-selector-data-handler" href="#on-events-selector-data-handler">
+          <h4 class="name">
+              <span class="icon-link"></span>.extend( deep , target , object1 [, objectN] )
+          </h4>
+            </a>
+          <ul class="mui-table-view">
+            <li class="mui-table-view-cell">
+              <div><strong>deep</strong></div>
+              <div>Type: <a href="">Boolean</a></div>
+              <div>若为true，则递归合并</div>
+            </li>
+            <li class="mui-table-view-cell">
+              <div><strong>target</strong></div>
+              <div>Type: <a href="">Object</a></div>
+              <div>需合并的目标对象</div>
+            </li>
+           <li class="mui-table-view-cell">
+              <div><strong>object1</strong></div>
+              <div>Type: <a href="">Object</a></div>
+              <div>需合并的对象</div>
+            </li>
+            <li class="mui-table-view-cell">
+              <div><strong>objectN</strong></div>
+              <div>Type: <a href="">Object</a></div>
+              <div>需合并的对象</div>
+            </li>
+          </ul>
+        </li>
+      </ul>
+      <h3>示例</h3>
+<figure class="highlight"><pre><code class="language-js" data-lang="js"><span class="kd">var</span> <span class="nx">target</span> <span class="o">=</span> <span class="p">{</span>
+  <span class="nx">company</span><span class="o">:</span><span class="s2">"dcloud"</span><span class="p">,</span>
+  <span class="nx">product</span><span class="o">:</span><span class="p">{</span>
+    <span class="nx">mui</span><span class="o">:</span><span class="s2">"小巧、高效"</span>
+  <span class="p">}</span>
+<span class="p">}</span> 
+<span class="kd">var</span> <span class="nx">obj1</span> <span class="o">=</span> <span class="p">{</span>
+  <span class="nx">city</span><span class="o">:</span><span class="s2">"beijing"</span><span class="p">,</span>
+  <span class="nx">product</span><span class="o">:</span><span class="p">{</span>
+    <span class="nx">HBuilder</span><span class="o">:</span><span class="s2">"飞一样的编码"</span>
+  <span class="p">}</span>
+<span class="p">}</span>
+<span class="nx">mui</span><span class="p">.</span><span class="nx">extend</span><span class="p">(</span><span class="nx">target</span><span class="p">,</span><span class="nx">obj1</span><span class="p">);</span>
+<span class="c1">//输出：{"company":"dcloud","product":{"HBuilder":"飞一样的编码"},"city":"beijing"}</span>
+<span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">JSON</span><span class="p">.</span><span class="nx">stringify</span><span class="p">(</span><span class="nx">target</span><span class="p">));</span></code><button class="clip"><img src="data:image/svg+xml;base64,PHN2ZyBoZWlnaHQ9IjEwMjQiIHdpZHRoPSI4OTYiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyI+ICA8cGF0aCBkPSJNMTI4IDc2OGgyNTZ2NjRIMTI4di02NHogbTMyMC0zODRIMTI4djY0aDMyMHYtNjR6IG0xMjggMTkyVjQ0OEwzODQgNjQwbDE5MiAxOTJWNzA0aDMyMFY1NzZINTc2eiBtLTI4OC02NEgxMjh2NjRoMTYwdi02NHpNMTI4IDcwNGgxNjB2LTY0SDEyOHY2NHogbTU3NiA2NGg2NHYxMjhjLTEgMTgtNyAzMy0xOSA0NXMtMjcgMTgtNDUgMTlINjRjLTM1IDAtNjQtMjktNjQtNjRWMTkyYzAtMzUgMjktNjQgNjQtNjRoMTkyQzI1NiA1NyAzMTMgMCAzODQgMHMxMjggNTcgMTI4IDEyOGgxOTJjMzUgMCA2NCAyOSA2NCA2NHYzMjBoLTY0VjMyMEg2NHY1NzZoNjQwVjc2OHpNMTI4IDI1Nmg1MTJjMC0zNS0yOS02NC02NC02NGgtNjRjLTM1IDAtNjQtMjktNjQtNjRzLTI5LTY0LTY0LTY0LTY0IDI5LTY0IDY0LTI5IDY0LTY0IDY0aC02NGMtMzUgMC02NCAyOS02NCA2NHoiIC8+PC9zdmc+"></button></pre></figure> 
+ <p class="component-description">从如上输出可以看到，product节点下的mui被替换成了HBuilder，因为默认仅合并对象根节点下的key、value；如果想深度合并，则可以传入<code>deep</code>参数，如下：</p>
+ <figure class="highlight"><pre><code class="language-js" data-lang="js"><span class="kd">var</span> <span class="nx">target</span> <span class="o">=</span> <span class="p">{</span>
+  <span class="nx">company</span><span class="o">:</span><span class="s2">"dcloud"</span><span class="p">,</span>
+  <span class="nx">product</span><span class="o">:</span><span class="p">{</span>
+    <span class="nx">mui</span><span class="o">:</span><span class="s2">"小巧、高效"</span>
+  <span class="p">}</span>
+<span class="p">}</span> 
+<span class="kd">var</span> <span class="nx">obj1</span> <span class="o">=</span> <span class="p">{</span>
+  <span class="nx">city</span><span class="o">:</span><span class="s2">"beijing"</span><span class="p">,</span>
+  <span class="nx">product</span><span class="o">:</span><span class="p">{</span>
+    <span class="nx">HBuilder</span><span class="o">:</span><span class="s2">"飞一样的编码"</span>
+  <span class="p">}</span>
+<span class="p">}</span>
+<span class="c1">//支持深度合并</span>
+<span class="nx">mui</span><span class="p">.</span><span class="nx">extend</span><span class="p">(</span><span class="kc">true</span><span class="p">,</span><span class="nx">target</span><span class="p">,</span><span class="nx">obj1</span><span class="p">);</span>
+<span class="c1">//输出：{"company":"dcloud","product":{"mui":"小巧、高效","HBuilder":"飞一样的编码"},"city":"beijing"}</span>
+<span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">JSON</span><span class="p">.</span><span class="nx">stringify</span><span class="p">(</span><span class="nx">target</span><span class="p">));</span></code><button class="clip"><img src="data:image/svg+xml;base64,PHN2ZyBoZWlnaHQ9IjEwMjQiIHdpZHRoPSI4OTYiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyI+ICA8cGF0aCBkPSJNMTI4IDc2OGgyNTZ2NjRIMTI4di02NHogbTMyMC0zODRIMTI4djY0aDMyMHYtNjR6IG0xMjggMTkyVjQ0OEwzODQgNjQwbDE5MiAxOTJWNzA0aDMyMFY1NzZINTc2eiBtLTI4OC02NEgxMjh2NjRoMTYwdi02NHpNMTI4IDcwNGgxNjB2LTY0SDEyOHY2NHogbTU3NiA2NGg2NHYxMjhjLTEgMTgtNyAzMy0xOSA0NXMtMjcgMTgtNDUgMTlINjRjLTM1IDAtNjQtMjktNjQtNjRWMTkyYzAtMzUgMjktNjQgNjQtNjRoMTkyQzI1NiA1NyAzMTMgMCAzODQgMHMxMjggNTcgMTI4IDEyOGgxOTJjMzUgMCA2NCAyOSA2NCA2NHYzMjBoLTY0VjMyMEg2NHY1NzZoNjQwVjc2OHpNMTI4IDI1Nmg1MTJjMC0zNS0yOS02NC02NC02NGgtNjRjLTM1IDAtNjQtMjktNjQtNjRzLTI5LTY0LTY0LTY0LTY0IDI5LTY0IDY0LTI5IDY0LTY0IDY0aC02NGMtMzUgMC02NCAyOS02NCA2NHoiIC8+PC9zdmc+"></button></pre></figure> 
+	<h3>扩展阅读</h3>
+	代码块激活字符:&nbsp;&nbsp;&nbsp;&nbsp;<div class="kbd">mextend</div>
+    </article>
+    <article id="later" class="component">
+      <h3 class="component-title"><a href="#later">later()</a></h3>
+      <p class="component-description">setTimeOut封装</p>
+      <ul class="mui-table-view api">
+        <li class="mui-table-view-cell mui-collapse mui-active">
+            <a id="on-events-selector-data-handler" href="#on-events-selector-data-handler">
+          <h4 class="name">
+              <span class="icon-link"></span>.later( func , delay [, context, data] )
+          </h4>
+            </a>
+          <ul class="mui-table-view">
+            <li class="mui-table-view-cell">
+              <div><strong>func</strong></div>
+              <div>Type: <a href="">Function</a></div>
+              <div>delay毫秒后要执行的函数</div>
+            </li>
+           <li class="mui-table-view-cell">
+              <div><strong>delay</strong></div>
+              <div>Type: <a href="">Int</a></div>
+              <div>延迟的毫秒数</div>
+            </li>
+            <li class="mui-table-view-cell">
+              <div><strong>context</strong></div>
+              <div>Type: <a href="">Object</a></div>
+              <div>上下文</div>
+            </li>
+          </ul>
+        </li>
+      </ul>
+	<h3>扩展阅读</h3>
+	代码块激活字符:&nbsp;&nbsp;&nbsp;&nbsp;<div class="kbd">mlater</div>
+    </article>
+    <article id="scrollTo" class="component">
+      <h3 class="component-title"><a href="#scrollTo">scrollTo()</a></h3>
+      <p class="component-description">滚动窗口屏幕到指定位置，该方法是对<code>window.scrollTo()</code>方法在手机端的增强实现，可设定滚动动画时间及滚动结束后的回调函数;鉴于手机屏幕大小，该方法仅可实现屏幕纵向滚动。</p>
+      <ul class="mui-table-view api">
+        <li class="mui-table-view-cell mui-collapse mui-active">
+            <a id="on-events-selector-data-handler" href="#on-events-selector-data-handler">
+          <h4 class="name">
+              <span class="icon-link"></span>.scrollTo( ypos [, duration] [, handler] )
+          </h4>
+            </a>
+          <ul class="mui-table-view">
+            <li class="mui-table-view-cell">
+              <div><strong>ypos</strong></div>
+              <div>Type: <a href="">Integer</a></div>
+              <div>要在窗口文档显示区左上角显示的文档的 y 坐标</div>
+            </li>
+           <li class="mui-table-view-cell">
+              <div><strong>duration</strong></div>
+              <div>Type: <a href="">Integer</a></div>
+              <div>滚动时间周期，单位是毫秒</div>
+            </li>
+            <li class="mui-table-view-cell">
+              <div><strong>handler</strong></div>
+              <div>Type: <a href="">Function</a></div>
+              <div>滚动结束后执行的回调函数</div>
+            </li>
+          </ul>
+        </li>
+      </ul>
+      <h3>示例</h3>
+      <p class="component-description">1秒钟之内滚动到页面顶部</p>
+<figure class="highlight"><pre><code class="language-js" data-lang="js"><span class="nx">mui</span><span class="p">.</span><span class="nx">scrollTo</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="mi">1000</span><span class="p">);</span></code><button class="clip"><img src="data:image/svg+xml;base64,PHN2ZyBoZWlnaHQ9IjEwMjQiIHdpZHRoPSI4OTYiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyI+ICA8cGF0aCBkPSJNMTI4IDc2OGgyNTZ2NjRIMTI4di02NHogbTMyMC0zODRIMTI4djY0aDMyMHYtNjR6IG0xMjggMTkyVjQ0OEwzODQgNjQwbDE5MiAxOTJWNzA0aDMyMFY1NzZINTc2eiBtLTI4OC02NEgxMjh2NjRoMTYwdi02NHpNMTI4IDcwNGgxNjB2LTY0SDEyOHY2NHogbTU3NiA2NGg2NHYxMjhjLTEgMTgtNyAzMy0xOSA0NXMtMjcgMTgtNDUgMTlINjRjLTM1IDAtNjQtMjktNjQtNjRWMTkyYzAtMzUgMjktNjQgNjQtNjRoMTkyQzI1NiA1NyAzMTMgMCAzODQgMHMxMjggNTcgMTI4IDEyOGgxOTJjMzUgMCA2NCAyOSA2NCA2NHYzMjBoLTY0VjMyMEg2NHY1NzZoNjQwVjc2OHpNMTI4IDI1Nmg1MTJjMC0zNS0yOS02NC02NC02NGgtNjRjLTM1IDAtNjQtMjktNjQtNjRzLTI5LTY0LTY0LTY0LTY0IDI5LTY0IDY0LTI5IDY0LTY0IDY0aC02NGMtMzUgMC02NCAyOS02NCA2NHoiIC8+PC9zdmc+"></button></pre></figure> 
+<h3>扩展阅读</h3>
+代码块激活字符:&nbsp;&nbsp;&nbsp;&nbsp;<div class="kbd">mscrollto</div>
+</article>
+     <article id="os" class="component">
+	<h3 class="component-title"><a href="#os">os</a></h3>
+	<p class="component-description">我们经常会有通过<code>navigator.userAgent</code>判断当前运行环境的需求,mui对此进行了封装,通过调用mui.os.XXX即可</p>
+	<ul class="mui-table-view api">
+		<li class="mui-table-view-cell mui-collapse mui-active">
+            <a id="on-events-selector-data-handler" href="#on-events-selector-data-handler">
+			<h4 class="name">
+              <span class="icon-link"></span>plus(可以访问的参数为:)
+          </h4>
+            </a>
+			<ul class="mui-table-view">
+				<li class="mui-table-view-cell">
+					<div><strong>.plus</strong></div>
+					<div>返回是否在 5+ App(包括流应用)运行</div>
+					<div><strong>.stream</strong></div>
+					<div>返回是否为流应用</div>
+				</li>
+			</ul>
+		</li>
+		</ul>
+			<ul class="mui-table-view api">
+		<li class="mui-table-view-cell mui-collapse mui-active">
+            <a id="on-events-selector-data-handler" href="#on-events-selector-data-handler">
+			<h4 class="name">
+              <span class="icon-link"></span>Android(可以访问的参数为:)
+          </h4>
+            </a>
+			<ul class="mui-table-view">
+				<li class="mui-table-view-cell">
+					<div><strong>.android</strong></div>
+					<div>返回是否为安卓手机</div>
+					<div><strong>.version</strong></div>
+					<div>安卓版本号</div>
+					<div><strong>.isBadAndroid</strong></div>
+					<div>android非Chrome环境</div>
+				</li>
+			</ul>
+		</li>
+		<li class="mui-table-view-cell mui-collapse mui-active">
+            <a id="on-events-selector-data-handler" href="#on-events-selector-data-handler">
+			<h4 class="name">
+              <span class="icon-link"></span>iOS(可以访问的参数为:)
+          </h4>
+            </a>
+			<ul class="mui-table-view">
+				<li class="mui-table-view-cell">
+					<div><strong>.ios</strong></div>
+					<div>返回是否为苹果设备</div>
+					<div><strong>.version</strong></div>
+					<div>返回手机版本号</div>
+					<div><strong>.iphone</strong></div>
+					<div>返回是否为苹果手机</div>
+					<div><strong>.ipad</strong></div>
+					<div>返回是否为ipad</div>
+				</li>
+			</ul>
+		</li>
+		
+		
+	</ul>
+	<ul class="mui-table-view api">
+		<li class="mui-table-view-cell mui-collapse mui-active">
+            <a id="on-events-selector-data-handler" href="#on-events-selector-data-handler">
+			<h4 class="name">
+              <span class="icon-link"></span>Wechat(可以访问的参数为:)
+          </h4>
+            </a>
+			<ul class="mui-table-view">
+				<li class="mui-table-view-cell">
+					<div><strong>.wechat</strong></div>
+					<div>返回是否在微信中运行</div>
+				</li>
+			</ul>
+		</li>
+	</ul>
+	<h3>示例</h3>
+	<p class="component-description">检测是否为iOS或安卓系统版本是否小于4.4</p>
+	<figure class="highlight"><pre><code class="language-js" data-lang="js"> <span class="k">if</span><span class="p">(</span><span class="nx">mui</span><span class="p">.</span><span class="nx">os</span><span class="p">.</span><span class="nx">ios</span><span class="o">||</span><span class="p">(</span><span class="nx">mui</span><span class="p">.</span><span class="nx">os</span><span class="p">.</span><span class="nx">android</span><span class="o">&amp;&amp;</span><span class="nb">parseFloat</span><span class="p">(</span><span class="nx">mui</span><span class="p">.</span><span class="nx">os</span><span class="p">.</span><span class="nx">version</span><span class="p">)</span><span class="o">&lt;</span><span class="mf">4.4</span><span class="p">)){</span>
+   <span class="c1">//...</span>
+ <span class="p">}</span> </code><button class="clip"><img src="data:image/svg+xml;base64,PHN2ZyBoZWlnaHQ9IjEwMjQiIHdpZHRoPSI4OTYiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyI+ICA8cGF0aCBkPSJNMTI4IDc2OGgyNTZ2NjRIMTI4di02NHogbTMyMC0zODRIMTI4djY0aDMyMHYtNjR6IG0xMjggMTkyVjQ0OEwzODQgNjQwbDE5MiAxOTJWNzA0aDMyMFY1NzZINTc2eiBtLTI4OC02NEgxMjh2NjRoMTYwdi02NHpNMTI4IDcwNGgxNjB2LTY0SDEyOHY2NHogbTU3NiA2NGg2NHYxMjhjLTEgMTgtNyAzMy0xOSA0NXMtMjcgMTgtNDUgMTlINjRjLTM1IDAtNjQtMjktNjQtNjRWMTkyYzAtMzUgMjktNjQgNjQtNjRoMTkyQzI1NiA1NyAzMTMgMCAzODQgMHMxMjggNTcgMTI4IDEyOGgxOTJjMzUgMCA2NCAyOSA2NCA2NHYzMjBoLTY0VjMyMEg2NHY1NzZoNjQwVjc2OHpNMTI4IDI1Nmg1MTJjMC0zNS0yOS02NC02NC02NGgtNjRjLTM1IDAtNjQtMjktNjQtNjRzLTI5LTY0LTY0LTY0LTY0IDI5LTY0IDY0LTI5IDY0LTY0IDY0aC02NGMtMzUgMC02NCAyOS02NCA2NHoiIC8+PC9zdmc+"></button></pre></figure>
+	 代码块激活字符:&nbsp;&nbsp;&nbsp;&nbsp;<div class="kbd">mos</div>
+</article>
+
+     <!-- Footer -->
+      <div class="docs-footer">
+	<p class="docs-footer-text">mui遵循 <a href="https://github.com/dcloudio/mui/blob/master/LICENSE">MIT License</a> 
+	</p>
+	<ul class="docs-footer-links">
+		<li>最新版本 v3.7.2</li>
+		<li>·</li>
+		<li><a href="http://ask.dcloud.net.cn/explore/category-3">问答社区</a></li>
+		<li>·</li>
+		<li><a href="https://github.com/dcloudio/mui/issues">Issues</a>
+		</li>
+		<li>·</li>
+		<li><a href="https://github.com/dcloudio/mui/releases">Releases</a>
+		</li>
+		<li>·</li>
+	</ul>
+</div>
+<script src="MUI-util_files/jquery-2.js"></script>
+<script src="MUI-util_files/bootstrap.js"></script>
+<script src="MUI-util_files/docs.js"></script>
+<script src="MUI-util_files/clipboard.js"></script>
+
+    </div>    
+  </div>
+</div>
+<script>
+  $(document).ready(function(){
+    $("body").attr("data-spy","scroll").attr("data-target","#scrollspy");
+  });
+</script>
+
+  
+
+</body></html>

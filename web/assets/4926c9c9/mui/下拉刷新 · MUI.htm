@@ -1,0 +1,393 @@
+<!DOCTYPE html>
+<html><head>
+<meta http-equiv="content-type" content="text/html; charset=UTF-8">
+    <meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<title>下拉刷新 · MUI</title>
+<meta name="description" content="MUI: 最接近原生APP体验的高性能前端框架">
+<meta name="keywords" content="MUI,框架,官网，JS, JavaScript, framework,css,css3,开源,html,html5,前端框架,api,文档,开发,教程,hbuilder,hybrid,native,webview">
+<meta name="viewport" content="initial-scale=1, maximum-scale=1">
+<link rel="shortcut icon" href="http://dev.dcloud.net.cn/mui/favicon.ico">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black">
+
+<link rel="stylesheet" href="%E4%B8%8B%E6%8B%89%E5%88%B7%E6%96%B0%20%C2%B7%20MUI_files/bootstrap.css">
+<link rel="stylesheet" href="%E4%B8%8B%E6%8B%89%E5%88%B7%E6%96%B0%20%C2%B7%20MUI_files/mui.css">
+<link rel="stylesheet" href="%E4%B8%8B%E6%8B%89%E5%88%B7%E6%96%B0%20%C2%B7%20MUI_files/docs.css">
+<script src="%E4%B8%8B%E6%8B%89%E5%88%B7%E6%96%B0%20%C2%B7%20MUI_files/hm.js"></script><script src="%E4%B8%8B%E6%8B%89%E5%88%B7%E6%96%B0%20%C2%B7%20MUI_files/mui.js"></script>
+<link rel="apple-touch-icon-precomposed" sizes="114x114" href="http://dev.dcloud.net.cn/mui/assets/img/apple-touch-icon-114x114.png">
+<script>
+var _hmt = _hmt || [];
+(function() {
+  var hm = document.createElement("script");
+  hm.src = "//hm.baidu.com/hm.js?2b98e9d77bf9772982afa81412cfb9c5";
+  var s = document.getElementsByTagName("script")[0]; 
+  s.parentNode.insertBefore(hm, s);
+})();
+</script>
+
+
+  </head>
+  <body ontouchstart="" data-spy="scroll" data-target="#scrollspy">
+    <!--[if lt IE 9]>
+  <div class="bs-callout bs-callout-danger">
+    <h4>Attention!</h4>
+    <p>
+      Looks like your current browser is old and doesn't support many features used in this page.
+      Please take a second to <a href="https://browsehappy.com/">upgrade to a more modern browser</a>.
+    </p>
+  </div>
+<![endif]-->
+
+    <div class="docs-sub-header">
+  <header class="docs-masthead mui-clearfix">
+  <div class="container">
+    <div class="column" style="width:100%">
+      <h1 class="docs-title">
+        <a href="http://dev.dcloud.net.cn/mui/">MUI</a>
+      </h1>
+      <nav class="docs-nav mui-clearfix">
+        <a class="docs-nav-trigger mui-icon mui-icon-bars mui-pull-right js-docs-nav-trigger" href="#"></a>
+        <div class="docs-nav-group">
+          <a class="docs-nav-item" href="http://dev.dcloud.net.cn/mui/">首页</a>
+          <a class="docs-nav-item" href="http://dev.dcloud.net.cn/mui/getting-started">新手指南</a>
+          <a class="docs-nav-item" href="http://dev.dcloud.net.cn/mui/ui">文档</a>
+          <a class="docs-nav-item" href="http://ask.dcloud.net.cn/explore/category-3">问答社区</a>
+          <a class="docs-nav-item" href="https://github.com/dcloudio/mui">GitHub地址</a>
+          <a class="docs-nav-item" href="http://dev.dcloud.net.cn/sponsor/?channel=mui" target="_blank">支持我们</a>
+        </div>
+      </nav>
+    </div>
+  </div>
+</header>
+
+  <div class="container">
+    <div class="docs-sub-content">
+      <h2 class="page-title">JavaScript</h2>
+      <p class="page-description">极简的JS函数</p>
+    </div>
+  </div>
+</div>
+
+<div class="container">
+  <style>
+    .component-description{
+      display: block;
+    }
+    /*.nav .nav {
+      display: none;
+      padding-bottom: 10px;
+    }*/
+  </style>
+  <!-- Components -->
+  <div class="docs-components column-group">
+    
+    <div class="column col-xs-3" id="scrollspy">
+        <div class="sidebar hidden-print hidden-xs hidden-sm">
+            <ul class="nav sidenav affix-top" id="nav" data-spy="affix" data-offset-top="250">
+                <li>
+                    <a href="http://dev.dcloud.net.cn/mui/ui/">UI组件</a>
+                </li>
+
+               <!--  <li>
+                    <a href="#ui_template">UI模板</a>
+                </li> -->
+                 <li>
+                    <a href="http://dev.dcloud.net.cn/mui/window">窗口管理</a>
+                </li>
+                 <li>
+                    <a href="http://dev.dcloud.net.cn/mui/event">事件管理</a>
+                </li>
+                <li><a href="http://dev.dcloud.net.cn/mui/util">utils</a></li>
+                <li><a href="http://dev.dcloud.net.cn/mui/ajax/">AJAX</a></li>
+                <li class="active">
+                  <a href="http://dev.dcloud.net.cn/mui/pulldown">下拉刷新</a>
+                   <ul class="nav">
+                      <li class="active"><a href="#singleWVpull">单 webview 模式</a></li>
+                      <li class=""><a href="#doubleWVpull">双 webview 模式</a></li>
+                      <li><a href="#autopull">自动触发下拉刷新</a></li>
+                      <li><a href="#endPulldown">下拉刷新结束</a></li>
+                    </ul>
+                  </li>
+                <li><a href="http://dev.dcloud.net.cn/mui/pullup">上拉加载</a></li> 
+                 <li><a href="http://dev.dcloud.net.cn/mui/snippet">代码块</a></li>
+          </ul>
+      </div>
+    </div>
+
+    <div class="column col-xs-9 docs-content" style="float:right">
+    <!-- mui.extend() -->
+      <article class="component mui-active">
+  <h3><a href="#">概述</a></h3>
+   <p> 为实现下拉刷新功能，大多数 H5 框架都是通过 DIV 模拟下拉回弹动画，在低端 android 手机上，DIV 动画经常出现卡顿现象（特别是图文列表的情况);
+       mui 通过使用原生 webview 下拉刷新解决这个 DIV 动画的卡顿问题，并且拖动效果更加流畅；</p>
+    <p>这里提供两种模式的下拉刷新，以适用不同场景：</p>
+
+  <h3 class="component-title" id="singleWVpull"><a href="#singleWVpull">单 webview 模式</a></h3>
+  <ul>
+    <li>
+      <h5><a href="javascript:void(0)">效果展示：</a></h5>
+      <div class="component-example">
+        <img class="content-padded " src="%E4%B8%8B%E6%8B%89%E5%88%B7%E6%96%B0%20%C2%B7%20MUI_files/pullDown4-a.gif" alt="" style="margin-top: 20px;margin-bottom: 30px">
+      </div>
+    </li>
+    <li>
+      <h5><a href="javascript:void(0)">动画原理：</a></h5>
+      <p class="component-description">下拉刷新时，触发的是原生下拉刷新控件，而整个<code>webview</code>位置不会发生变化，所以不会在拖动过程中发生DOM重绘，当控件拖动到一定位置触发动态加载数据以及刷新操作。此模式下拉刷新，相比双webview 模式，不创建额外 webview，性能更优。</p>
+    </li>
+    <li>
+      <h5><a href="javascript:void(0)">使用方法：</a></h5>
+      <p style="margin-bottom: 10px">mui 初始化时设置<code>pullRefresh</code>各项参数，与双 webview 模式的子页面设置是一样的。</p>
+      <div>
+      说明：<ol>
+          <!-- <li><span>下拉刷新样式目前仅支持'circle'样式，并且目前仅支持此样式的颜色自定义 color: ‘#RRGGBB’ </span></li> -->
+          <li><span>DOM结构无特殊要求，只需要指定一个下拉刷新容器标识即可 </span></li>
+      </ol>
+      </div>
+      <figure class="highlight"><pre><code class="language-js" data-lang="js"><span class="nx">mui</span><span class="p">.</span><span class="nx">init</span><span class="p">({</span>
+  <span class="nx">pullRefresh</span> <span class="o">:</span> <span class="p">{</span>
+    <span class="nx">container</span><span class="o">:</span><span class="s2">"#refreshContainer"</span><span class="p">,</span><span class="c1">//下拉刷新容器标识，querySelector能定位的css选择器均可，比如：id、.class等</span>
+    <span class="nx">down</span> <span class="o">:</span> <span class="p">{</span>
+      <span class="nx">style</span><span class="o">:</span><span class="s1">'circle'</span><span class="p">,</span><span class="c1">//必选，下拉刷新样式，目前支持原生5+ ‘circle’ 样式</span>
+      <span class="nx">color</span><span class="o">:</span><span class="s1">'#2BD009'</span><span class="p">,</span> <span class="c1">//可选，默认“#2BD009” 下拉刷新控件颜色</span>
+      <span class="nx">height</span><span class="o">:</span><span class="s1">'50px'</span><span class="p">,</span><span class="c1">//可选,默认50px.下拉刷新控件的高度,</span>
+      <span class="nx">range</span><span class="o">:</span><span class="s1">'100px'</span><span class="p">,</span> <span class="c1">//可选 默认100px,控件可下拉拖拽的范围</span>
+      <span class="nx">offset</span><span class="o">:</span><span class="s1">'0px'</span><span class="p">,</span> <span class="c1">//可选 默认0px,下拉刷新控件的起始位置</span>
+      <span class="nx">auto</span><span class="o">:</span> <span class="kc">true</span><span class="p">,</span><span class="c1">//可选,默认false.首次加载自动上拉刷新一次</span>
+      <span class="nx">callback</span> <span class="o">:</span><span class="nx">pullfresh</span><span class="o">-</span><span class="kd">function</span> <span class="c1">//必选，刷新函数，根据具体业务来编写，比如通过ajax从服务器获取新数据；</span>
+    <span class="p">}</span>
+  <span class="p">}</span>
+<span class="p">});</span></code><button class="clip"><img src="data:image/svg+xml;base64,PHN2ZyBoZWlnaHQ9IjEwMjQiIHdpZHRoPSI4OTYiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyI+ICA8cGF0aCBkPSJNMTI4IDc2OGgyNTZ2NjRIMTI4di02NHogbTMyMC0zODRIMTI4djY0aDMyMHYtNjR6IG0xMjggMTkyVjQ0OEwzODQgNjQwbDE5MiAxOTJWNzA0aDMyMFY1NzZINTc2eiBtLTI4OC02NEgxMjh2NjRoMTYwdi02NHpNMTI4IDcwNGgxNjB2LTY0SDEyOHY2NHogbTU3NiA2NGg2NHYxMjhjLTEgMTgtNyAzMy0xOSA0NXMtMjcgMTgtNDUgMTlINjRjLTM1IDAtNjQtMjktNjQtNjRWMTkyYzAtMzUgMjktNjQgNjQtNjRoMTkyQzI1NiA1NyAzMTMgMCAzODQgMHMxMjggNTcgMTI4IDEyOGgxOTJjMzUgMCA2NCAyOSA2NCA2NHYzMjBoLTY0VjMyMEg2NHY1NzZoNjQwVjc2OHpNMTI4IDI1Nmg1MTJjMC0zNS0yOS02NC02NC02NGgtNjRjLTM1IDAtNjQtMjktNjQtNjRzLTI5LTY0LTY0LTY0LTY0IDI5LTY0IDY0LTI5IDY0LTY0IDY0aC02NGMtMzUgMC02NCAyOS02NCA2NHoiIC8+PC9zdmc+"></button></pre></figure>
+      <p></p>
+    </li>
+    <li>
+      <h5><a href="javascript:void(0)">模式说明：</a></h5>
+      <ul class="disc">
+        <li>优点：<br>
+          <ul class="disc"> 
+            <li>性能更优，体现在两点：
+              <ol>
+                <li>相比双webview，不创建额外子 webview 性能消耗更少</li>
+                <li>下拉拖动过程中不会发生重绘，也减少了性能消耗</li>
+              </ol>
+            </li>
+          </ul>
+          </li>
+          <li>
+            缺点：
+            <ul class="disc">
+              <li>目前仅支持‘cricle’样式以及该样式的颜色自定义</li>
+            </ul>
+          </li>
+      </ul>
+    </li>
+
+  </ul>
+  <h3 id="doubleWVpull" class="component-title"><a href="#doubleWVpull">双 webview 模式</a></h3>
+      <ul>
+        <li>
+          <h5><a href="javascript:void(0)">效果展示：</a></h5>
+           <div class="component-example">
+              <img class="content-padded " src="%E4%B8%8B%E6%8B%89%E5%88%B7%E6%96%B0%20%C2%B7%20MUI_files/pullDown5-a.gif" alt="" style="margin-top: 20px;margin-bottom: 30px">
+          </div>
+        </li>
+        <li>
+          <h5><a href="javascript:void(0)">动画原理：</a></h5>
+         <p class="component-description">
+        使用双 webview 模式的下拉刷新，创建一个子 webview 添加列表；拖动时，拖动的是一个完整的 
+webview，避免了类似 DIV 拖动流畅度不好的问题，回弹动画使用原生动画；在 iOS 平台，H5 的动画已经比较流畅，故依然使用 H5 
+方案。两个平台实现虽有差异，但 mui 经过封装，可使用一套代码实现下拉刷新。</p>
+        </li>
+        <li>
+          <h5><a href="javascript:void(0)">使用方法：</a></h5>
+          <p>主页面内容比较简单，只需要创建子页面即可：</p>
+          <figure class="highlight"><pre><code class="language-js" data-lang="js"><span class="nx">mui</span><span class="p">.</span><span class="nx">init</span><span class="p">({</span>
+    <span class="nx">subpages</span><span class="o">:</span><span class="p">[{</span>
+      <span class="nx">url</span><span class="o">:</span><span class="nx">pullrefresh</span><span class="o">-</span><span class="nx">subpage</span><span class="o">-</span><span class="nx">url</span><span class="p">,</span><span class="c1">//下拉刷新内容页面地址</span>
+      <span class="nx">id</span><span class="o">:</span><span class="nx">pullrefresh</span><span class="o">-</span><span class="nx">subpage</span><span class="o">-</span><span class="nx">id</span><span class="p">,</span><span class="c1">//内容页面标志</span>
+      <span class="nx">styles</span><span class="o">:</span><span class="p">{</span>
+        <span class="nx">top</span><span class="o">:</span><span class="nx">subpage</span><span class="o">-</span><span class="nx">top</span><span class="o">-</span><span class="nx">position</span><span class="p">,</span><span class="c1">//内容页面顶部位置,需根据实际页面布局计算，若使用标准mui导航，顶部默认为48px；</span>
+        <span class="p">.....</span><span class="c1">//其它参数定义</span>
+      <span class="p">}</span>
+    <span class="p">}]</span>
+<span class="p">});</span>
+          </code><button class="clip"><img src="data:image/svg+xml;base64,PHN2ZyBoZWlnaHQ9IjEwMjQiIHdpZHRoPSI4OTYiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyI+ICA8cGF0aCBkPSJNMTI4IDc2OGgyNTZ2NjRIMTI4di02NHogbTMyMC0zODRIMTI4djY0aDMyMHYtNjR6IG0xMjggMTkyVjQ0OEwzODQgNjQwbDE5MiAxOTJWNzA0aDMyMFY1NzZINTc2eiBtLTI4OC02NEgxMjh2NjRoMTYwdi02NHpNMTI4IDcwNGgxNjB2LTY0SDEyOHY2NHogbTU3NiA2NGg2NHYxMjhjLTEgMTgtNyAzMy0xOSA0NXMtMjcgMTgtNDUgMTlINjRjLTM1IDAtNjQtMjktNjQtNjRWMTkyYzAtMzUgMjktNjQgNjQtNjRoMTkyQzI1NiA1NyAzMTMgMCAzODQgMHMxMjggNTcgMTI4IDEyOGgxOTJjMzUgMCA2NCAyOSA2NCA2NHYzMjBoLTY0VjMyMEg2NHY1NzZoNjQwVjc2OHpNMTI4IDI1Nmg1MTJjMC0zNS0yOS02NC02NC02NGgtNjRjLTM1IDAtNjQtMjktNjQtNjRzLTI5LTY0LTY0LTY0LTY0IDI5LTY0IDY0LTI5IDY0LTY0IDY0aC02NGMtMzUgMC02NCAyOS02NCA2NHoiIC8+PC9zdmc+"></button></pre></figure>
+          <p class="component-description">
+  iOS平台的下拉刷新，使用的是 mui 封装的<a href="http://dev.dcloud.net.cn/mui/ui/index.html#scroll">区域滚动组件</a>，
+  为保证两个平台的 DOM 结构一致，内容页面需统一按照如下 DOM 结构构建：</p>
+ 
+    
+<figure class="highlight"><pre><code class="language-html" data-lang="html"><span class="c">&lt;!--下拉刷新容器--&gt;</span>
+<span class="nt">&lt;div</span> <span class="na">id=</span><span class="s">"refreshContainer"</span> <span class="na">class=</span><span class="s">"mui-content mui-scroll-wrapper"</span><span class="nt">&gt;</span>
+  <span class="nt">&lt;div</span> <span class="na">class=</span><span class="s">"mui-scroll"</span><span class="nt">&gt;</span>
+    <span class="c">&lt;!--数据列表--&gt;</span>
+    <span class="nt">&lt;ul</span> <span class="na">class=</span><span class="s">"mui-table-view mui-table-view-chevron"</span><span class="nt">&gt;</span>
+      
+    <span class="nt">&lt;/ul&gt;</span>
+  <span class="nt">&lt;/div&gt;</span>
+<span class="nt">&lt;/div&gt;</span></code><button class="clip"><img src="data:image/svg+xml;base64,PHN2ZyBoZWlnaHQ9IjEwMjQiIHdpZHRoPSI4OTYiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyI+ICA8cGF0aCBkPSJNMTI4IDc2OGgyNTZ2NjRIMTI4di02NHogbTMyMC0zODRIMTI4djY0aDMyMHYtNjR6IG0xMjggMTkyVjQ0OEwzODQgNjQwbDE5MiAxOTJWNzA0aDMyMFY1NzZINTc2eiBtLTI4OC02NEgxMjh2NjRoMTYwdi02NHpNMTI4IDcwNGgxNjB2LTY0SDEyOHY2NHogbTU3NiA2NGg2NHYxMjhjLTEgMTgtNyAzMy0xOSA0NXMtMjcgMTgtNDUgMTlINjRjLTM1IDAtNjQtMjktNjQtNjRWMTkyYzAtMzUgMjktNjQgNjQtNjRoMTkyQzI1NiA1NyAzMTMgMCAzODQgMHMxMjggNTcgMTI4IDEyOGgxOTJjMzUgMCA2NCAyOSA2NCA2NHYzMjBoLTY0VjMyMEg2NHY1NzZoNjQwVjc2OHpNMTI4IDI1Nmg1MTJjMC0zNS0yOS02NC02NC02NGgtNjRjLTM1IDAtNjQtMjktNjQtNjRzLTI5LTY0LTY0LTY0LTY0IDI5LTY0IDY0LTI5IDY0LTY0IDY0aC02NGMtMzUgMC02NCAyOS02NCA2NHoiIC8+PC9zdmc+"></button></pre></figure>
+<p class="component-description">其次，通过 mui.init 方法中 pullRefresh 参数配置下拉刷新各项参数，如下：</p>
+    
+<figure class="highlight"><pre><code class="language-js" data-lang="js"><span class="nx">mui</span><span class="p">.</span><span class="nx">init</span><span class="p">({</span>
+  <span class="nx">pullRefresh</span> <span class="o">:</span> <span class="p">{</span>
+    <span class="nx">container</span><span class="o">:</span><span class="s2">"#refreshContainer"</span><span class="p">,</span><span class="c1">//下拉刷新容器标识，querySelector能定位的css选择器均可，比如：id、.class等</span>
+    <span class="nx">down</span> <span class="o">:</span> <span class="p">{</span>
+      <span class="nx">height</span><span class="o">:</span><span class="mi">50</span><span class="p">,</span><span class="c1">//可选,默认50.触发下拉刷新拖动距离,</span>
+      <span class="nx">auto</span><span class="o">:</span> <span class="kc">true</span><span class="p">,</span><span class="c1">//可选,默认false.首次加载自动下拉刷新一次</span>
+      <span class="nx">contentdown</span> <span class="o">:</span> <span class="s2">"下拉可以刷新"</span><span class="p">,</span><span class="c1">//可选，在下拉可刷新状态时，下拉刷新控件上显示的标题内容</span>
+      <span class="nx">contentover</span> <span class="o">:</span> <span class="s2">"释放立即刷新"</span><span class="p">,</span><span class="c1">//可选，在释放可刷新状态时，下拉刷新控件上显示的标题内容</span>
+      <span class="nx">contentrefresh</span> <span class="o">:</span> <span class="s2">"正在刷新..."</span><span class="p">,</span><span class="c1">//可选，正在刷新状态时，下拉刷新控件上显示的标题内容</span>
+      <span class="nx">callback</span> <span class="o">:</span><span class="nx">pullfresh</span><span class="o">-</span><span class="kd">function</span> <span class="c1">//必选，刷新函数，根据具体业务来编写，比如通过ajax从服务器获取新数据；</span>
+    <span class="p">}</span>
+  <span class="p">}</span>
+<span class="p">});</span></code><button class="clip"><img src="data:image/svg+xml;base64,PHN2ZyBoZWlnaHQ9IjEwMjQiIHdpZHRoPSI4OTYiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyI+ICA8cGF0aCBkPSJNMTI4IDc2OGgyNTZ2NjRIMTI4di02NHogbTMyMC0zODRIMTI4djY0aDMyMHYtNjR6IG0xMjggMTkyVjQ0OEwzODQgNjQwbDE5MiAxOTJWNzA0aDMyMFY1NzZINTc2eiBtLTI4OC02NEgxMjh2NjRoMTYwdi02NHpNMTI4IDcwNGgxNjB2LTY0SDEyOHY2NHogbTU3NiA2NGg2NHYxMjhjLTEgMTgtNyAzMy0xOSA0NXMtMjcgMTgtNDUgMTlINjRjLTM1IDAtNjQtMjktNjQtNjRWMTkyYzAtMzUgMjktNjQgNjQtNjRoMTkyQzI1NiA1NyAzMTMgMCAzODQgMHMxMjggNTcgMTI4IDEyOGgxOTJjMzUgMCA2NCAyOSA2NCA2NHYzMjBoLTY0VjMyMEg2NHY1NzZoNjQwVjc2OHpNMTI4IDI1Nmg1MTJjMC0zNS0yOS02NC02NC02NGgtNjRjLTM1IDAtNjQtMjktNjQtNjRzLTI5LTY0LTY0LTY0LTY0IDI5LTY0IDY0LTI5IDY0LTY0IDY0aC02NGMtMzUgMC02NCAyOS02NCA2NHoiIC8+PC9zdmc+"></button></pre></figure>
+        </li>
+         <li>
+      <h5><a href="javascript:void(0)">模式说明：</a></h5>
+       <ul class="disc">
+        <li>优点：<br>
+          <ul class="disc"> 
+            <li>可自定义下拉刷新样式，更改文字等等.<a href="http://ask.dcloud.net.cn/question/8288">参考关于自定义下拉刷新样式问答</a></li>
+          </ul>
+          </li>
+          <li>
+            缺点：
+            <ul class="disc">
+              <li>相比单 webview，性能消耗更大，不过都比 div 模式的要好用</li>
+              <li>DOM结构需要统一配置</li>
+            </ul>
+          </li>
+      </ul>
+    </li>
+        <li>
+          <h5><a href="javascript:void(0)">滚动到特定位置</a></h5>
+           <p class="description">下拉刷新组件滚动到特定位置的方法类似区域滚动组件</p>
+            <div id="faq_popGesture" class="comment comment-danger">
+    <h4>目前仅支持 双 webview 模式</h4>
+  </div>
+    <ul class="mui-table-view api">
+        <li class="mui-table-view-cell mui-collapse mui-active">
+            <a id="on-events-selector-data-handler" href="#on-events-selector-data-handler">
+          <h4 class="name">
+              <span class="icon-link"></span>scrollTo( xpos , ypos [, duration] )
+          </h4>
+            </a>
+          <ul class="mui-table-view">
+             <li class="mui-table-view-cell">
+              <div><strong>xpos</strong></div>
+              <div>Type: <a href="">Integer</a></div>
+              <div>要在窗口文档显示区左上角显示的文档的 x 坐标</div>
+            </li>
+            <li class="mui-table-view-cell">
+              <div><strong>ypos</strong></div>
+              <div>Type: <a href="">Integer</a></div>
+              <div>要在窗口文档显示区左上角显示的文档的 y 坐标</div>
+            </li>
+           <li class="mui-table-view-cell">
+              <div><strong>duration</strong></div>
+              <div>Type: <a href="">Integer</a></div>
+              <div>滚动时间周期，单位是毫秒</div>
+            </li>
+          </ul>
+        </li>
+        
+      </ul>
+         <p class="description">示例：在 hello mui 下拉刷新示例中，实现了双击标题栏，让列表快速回滚到顶部的功能；代码如下：</p>
+    
+<figure class="highlight"><pre><code class="language-js" data-lang="js"><span class="kd">var</span> <span class="nx">contentWebview</span> <span class="o">=</span> <span class="kc">null</span><span class="p">;</span>
+<span class="c1">//监听标题栏的双击事件</span>
+<span class="nb">document</span><span class="p">.</span><span class="nx">querySelector</span><span class="p">(</span><span class="s1">'header'</span><span class="p">).</span><span class="nx">addEventListener</span><span class="p">(</span><span class="s1">'doubletap'</span><span class="p">,</span><span class="kd">function</span> <span class="p">()</span> <span class="p">{</span>
+  <span class="k">if</span><span class="p">(</span><span class="nx">contentWebview</span><span class="o">==</span><span class="kc">null</span><span class="p">){</span>
+    <span class="nx">contentWebview</span> <span class="o">=</span> <span class="nx">plus</span><span class="p">.</span><span class="nx">webview</span><span class="p">.</span><span class="nx">currentWebview</span><span class="p">().</span><span class="nx">children</span><span class="p">()[</span><span class="mi">0</span><span class="p">];</span>
+  <span class="p">}</span>
+  <span class="c1">//内容区滚动到顶部</span>
+  <span class="nx">contentWebview</span><span class="p">.</span><span class="nx">evalJS</span><span class="p">(</span><span class="s2">"mui('#pullrefresh').pullRefresh().scrollTo(0,0,100)"</span><span class="p">);</span>
+<span class="p">});</span></code><button class="clip"><img src="data:image/svg+xml;base64,PHN2ZyBoZWlnaHQ9IjEwMjQiIHdpZHRoPSI4OTYiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyI+ICA8cGF0aCBkPSJNMTI4IDc2OGgyNTZ2NjRIMTI4di02NHogbTMyMC0zODRIMTI4djY0aDMyMHYtNjR6IG0xMjggMTkyVjQ0OEwzODQgNjQwbDE5MiAxOTJWNzA0aDMyMFY1NzZINTc2eiBtLTI4OC02NEgxMjh2NjRoMTYwdi02NHpNMTI4IDcwNGgxNjB2LTY0SDEyOHY2NHogbTU3NiA2NGg2NHYxMjhjLTEgMTgtNyAzMy0xOSA0NXMtMjcgMTgtNDUgMTlINjRjLTM1IDAtNjQtMjktNjQtNjRWMTkyYzAtMzUgMjktNjQgNjQtNjRoMTkyQzI1NiA1NyAzMTMgMCAzODQgMHMxMjggNTcgMTI4IDEyOGgxOTJjMzUgMCA2NCAyOSA2NCA2NHYzMjBoLTY0VjMyMEg2NHY1NzZoNjQwVjc2OHpNMTI4IDI1Nmg1MTJjMC0zNS0yOS02NC02NC02NGgtNjRjLTM1IDAtNjQtMjktNjQtNjRzLTI5LTY0LTY0LTY0LTY0IDI5LTY0IDY0LTI5IDY0LTY0IDY0aC02NGMtMzUgMC02NCAyOS02NCA2NHoiIC8+PC9zdmc+"></button></pre></figure> 
+        </li>
+         <li>
+           <h5><a href="javascript:void(0)">更改下拉刷新文字位置</a></h5>
+           <p class="description"> <a href="javascript:void(0);" class="snippet_a">*</a>可以解决修改下拉刷新子页面默认<code>top</code>值后,下拉刷新提示框位置异常问题</p>
+ <p class="description"> 根据实际需求在<b>父页面</b>给mui-content设置top属性</p>
+           <div id="faq_popGesture" class="comment comment-danger">
+    <h4>目前仅支持 双 webview 模式</h4>
+  </div>
+     
+<figure class="highlight"><pre><code class="language-css" data-lang="css"><span class="nc">.mui-bar-nav</span> <span class="o">~</span> <span class="nc">.mui-content</span> <span class="nc">.mui-pull-top-pocket</span><span class="p">{</span>
+  <span class="k">top</span><span class="o">:</span> <span class="m">180px</span> <span class="cp">!important</span><span class="p">;</span>
+<span class="p">}</span></code><button class="clip"><img src="data:image/svg+xml;base64,PHN2ZyBoZWlnaHQ9IjEwMjQiIHdpZHRoPSI4OTYiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyI+ICA8cGF0aCBkPSJNMTI4IDc2OGgyNTZ2NjRIMTI4di02NHogbTMyMC0zODRIMTI4djY0aDMyMHYtNjR6IG0xMjggMTkyVjQ0OEwzODQgNjQwbDE5MiAxOTJWNzA0aDMyMFY1NzZINTc2eiBtLTI4OC02NEgxMjh2NjRoMTYwdi02NHpNMTI4IDcwNGgxNjB2LTY0SDEyOHY2NHogbTU3NiA2NGg2NHYxMjhjLTEgMTgtNyAzMy0xOSA0NXMtMjcgMTgtNDUgMTlINjRjLTM1IDAtNjQtMjktNjQtNjRWMTkyYzAtMzUgMjktNjQgNjQtNjRoMTkyQzI1NiA1NyAzMTMgMCAzODQgMHMxMjggNTcgMTI4IDEyOGgxOTJjMzUgMCA2NCAyOSA2NCA2NHYzMjBoLTY0VjMyMEg2NHY1NzZoNjQwVjc2OHpNMTI4IDI1Nmg1MTJjMC0zNS0yOS02NC02NC02NGgtNjRjLTM1IDAtNjQtMjktNjQtNjRzLTI5LTY0LTY0LTY0LTY0IDI5LTY0IDY0LTI5IDY0LTY0IDY0aC02NGMtMzUgMC02NCAyOS02NCA2NHoiIC8+PC9zdmc+"></button></pre></figure>
+         </li>
+      </ul>
+      
+    
+<h3 id="autopull" class="component-title"><a href="#autopull">自动触发下拉刷新</a></h3>
+<p class="component-description">mui 支持设置首次加载时自动触发一次下拉刷新，配置如下<code>auto</code>参数为:<code>true</code>即可，上拉加载同样支持此配置</p>
+<figure class="highlight"><pre><code class="language-js" data-lang="js"><span class="nx">mui</span><span class="p">.</span><span class="nx">init</span><span class="p">({</span>
+  <span class="nx">pullRefresh</span> <span class="o">:</span> <span class="p">{</span>
+    <span class="nx">container</span><span class="o">:</span><span class="s2">"#refreshContainer"</span><span class="p">,</span><span class="c1">//下拉刷新容器标识，querySelector能定位的css选择器均可，比如：id、.class等</span>
+    <span class="nx">down</span> <span class="o">:</span> <span class="p">{</span>
+      <span class="nx">auto</span><span class="o">:</span> <span class="kc">true</span><span class="p">,</span><span class="c1">//可选,默认false.首次加载自动下拉刷新一次</span>
+    <span class="p">},</span>
+    <span class="nx">up</span> <span class="o">:</span> <span class="p">{</span>
+      <span class="nx">auto</span><span class="o">:</span> <span class="kc">true</span> <span class="c1">//可选,默认false.首次加载自动上拉加载一次</span>
+    <span class="p">}</span>
+  <span class="p">}</span>
+<span class="p">});</span></code><button class="clip"><img src="data:image/svg+xml;base64,PHN2ZyBoZWlnaHQ9IjEwMjQiIHdpZHRoPSI4OTYiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyI+ICA8cGF0aCBkPSJNMTI4IDc2OGgyNTZ2NjRIMTI4di02NHogbTMyMC0zODRIMTI4djY0aDMyMHYtNjR6IG0xMjggMTkyVjQ0OEwzODQgNjQwbDE5MiAxOTJWNzA0aDMyMFY1NzZINTc2eiBtLTI4OC02NEgxMjh2NjRoMTYwdi02NHpNMTI4IDcwNGgxNjB2LTY0SDEyOHY2NHogbTU3NiA2NGg2NHYxMjhjLTEgMTgtNyAzMy0xOSA0NXMtMjcgMTgtNDUgMTlINjRjLTM1IDAtNjQtMjktNjQtNjRWMTkyYzAtMzUgMjktNjQgNjQtNjRoMTkyQzI1NiA1NyAzMTMgMCAzODQgMHMxMjggNTcgMTI4IDEyOGgxOTJjMzUgMCA2NCAyOSA2NCA2NHYzMjBoLTY0VjMyMEg2NHY1NzZoNjQwVjc2OHpNMTI4IDI1Nmg1MTJjMC0zNS0yOS02NC02NC02NGgtNjRjLTM1IDAtNjQtMjktNjQtNjRzLTI5LTY0LTY0LTY0LTY0IDI5LTY0IDY0LTI5IDY0LTY0IDY0aC02NGMtMzUgMC02NCAyOS02NCA2NHoiIC8+PC9zdmc+"></button></pre></figure>
+
+
+<h3 class="component-title" id="endPulldown"><a href="#endPulldown">下拉刷新结束</a></h3>
+<p class="description">两种模式在下拉刷新过程中，当获取新数据后，都需要执行 <code>endPulldown</code> 方法，
+      	该方法的作用是关闭“正在刷新”的样式提示，内容区域回滚顶部位置，如下：</p>
+
+<figure class="highlight"><pre><code class="language-js" data-lang="js"><span class="kd">function</span> <span class="nx">pullfresh</span><span class="o">-</span><span class="kd">function</span><span class="p">()</span> <span class="p">{</span>
+     <span class="c1">//业务逻辑代码，比如通过ajax从服务器获取新数据；</span>
+     <span class="p">......</span>
+     <span class="c1">//注意，加载完新数据后，必须执行如下代码，注意：若为ajax请求，则需将如下代码放置在处理完ajax响应数据之后</span>
+     <span class="c1">//没有更多内容了，endPulldown 传入true， 不再执行下拉刷新</span>
+     <span class="nx">mui</span><span class="p">(</span><span class="s1">'#refreshContainer'</span><span class="p">).</span><span class="nx">pullRefresh</span><span class="p">().</span><span class="nx">endPulldown</span><span class="p">();</span>
+<span class="p">}</span></code><button class="clip"><img src="data:image/svg+xml;base64,PHN2ZyBoZWlnaHQ9IjEwMjQiIHdpZHRoPSI4OTYiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyI+ICA8cGF0aCBkPSJNMTI4IDc2OGgyNTZ2NjRIMTI4di02NHogbTMyMC0zODRIMTI4djY0aDMyMHYtNjR6IG0xMjggMTkyVjQ0OEwzODQgNjQwbDE5MiAxOTJWNzA0aDMyMFY1NzZINTc2eiBtLTI4OC02NEgxMjh2NjRoMTYwdi02NHpNMTI4IDcwNGgxNjB2LTY0SDEyOHY2NHogbTU3NiA2NGg2NHYxMjhjLTEgMTgtNyAzMy0xOSA0NXMtMjcgMTgtNDUgMTlINjRjLTM1IDAtNjQtMjktNjQtNjRWMTkyYzAtMzUgMjktNjQgNjQtNjRoMTkyQzI1NiA1NyAzMTMgMCAzODQgMHMxMjggNTcgMTI4IDEyOGgxOTJjMzUgMCA2NCAyOSA2NCA2NHYzMjBoLTY0VjMyMEg2NHY1NzZoNjQwVjc2OHpNMTI4IDI1Nmg1MTJjMC0zNS0yOS02NC02NC02NGgtNjRjLTM1IDAtNjQtMjktNjQtNjRzLTI5LTY0LTY0LTY0LTY0IDI5LTY0IDY0LTI5IDY0LTY0IDY0aC02NGMtMzUgMC02NCAyOS02NCA2NHoiIC8+PC9zdmc+"></button></pre></figure>
+	<!-- <h3 class="component-title" id="scrollTo"><a href="#scrollTo">滚动到特定位置</a></h3> -->
+   
+<!--  -->
+<!-- <h3 class="component-title" id="changeposition"><a href="#changeposition">更改下拉刷新文字位置</a></h3> -->
+ 
+
+<h3>扩展阅读</h3>
+<p class="component-description">问答社区话题讨论：
+  <a href="http://ask.dcloud.net.cn/topic/%E4%B8%8B%E6%8B%89%E5%88%B7%E6%96%B0" target="_blank">下拉刷新</a>
+</p>
+代码块激活字符:&nbsp;&nbsp;&nbsp;&nbsp;<div class="kbd"> mpull (DOM结构)</div><div class="kbd"> minitpull (初始化组件)</div><div class="kbd">mmpull(组件方法)</div>
+  </article>
+    <!-- Footer -->
+      <div class="docs-footer">
+	<p class="docs-footer-text">mui遵循 <a href="https://github.com/dcloudio/mui/blob/master/LICENSE">MIT License</a> 
+	</p>
+	<ul class="docs-footer-links">
+		<li>最新版本 v3.7.2</li>
+		<li>·</li>
+		<li><a href="http://ask.dcloud.net.cn/explore/category-3">问答社区</a></li>
+		<li>·</li>
+		<li><a href="https://github.com/dcloudio/mui/issues">Issues</a>
+		</li>
+		<li>·</li>
+		<li><a href="https://github.com/dcloudio/mui/releases">Releases</a>
+		</li>
+		<li>·</li>
+	</ul>
+</div>
+<script src="%E4%B8%8B%E6%8B%89%E5%88%B7%E6%96%B0%20%C2%B7%20MUI_files/jquery-2.js"></script>
+<script src="%E4%B8%8B%E6%8B%89%E5%88%B7%E6%96%B0%20%C2%B7%20MUI_files/bootstrap.js"></script>
+<script src="%E4%B8%8B%E6%8B%89%E5%88%B7%E6%96%B0%20%C2%B7%20MUI_files/docs.js"></script>
+<script src="%E4%B8%8B%E6%8B%89%E5%88%B7%E6%96%B0%20%C2%B7%20MUI_files/clipboard.js"></script>
+
+    </div>    
+  </div>
+</div>
+<script>
+  $(document).ready(function(){
+    $("body").attr("data-spy","scroll").attr("data-target","#scrollspy");
+  });
+</script>
+
+  
+
+</body></html>
