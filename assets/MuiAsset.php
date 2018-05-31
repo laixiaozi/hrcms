@@ -16,10 +16,16 @@ class MuiAsset extends AssetBundle
 
     public $js = array(
         'dist/js/mui.min.js',
+        'plugin/picker/js/mui.picker.js',
+        'plugin/picker/js/mui.poppicker.js',
+        'plugin/picker/js/mui.dtpicker.js'
     );
 
     public $css = array(
-        'dist/css/mui.min.css'
+        'dist/css/mui.min.css',
+        'plugin/picker/css/mui.dtpicker.css',
+        'plugin/picker/css/mui.picker.css',
+        'plugin/picker/css/mui.poppicker.css'
     );
 
     public $jsOptions = array(

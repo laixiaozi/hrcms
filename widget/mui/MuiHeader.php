@@ -21,8 +21,6 @@ class MuiHeader extends Widget
         if (empty($this->title)) {
             $this->title = '测试标题';
         }
-
-
     }
 
     public function run()
@@ -37,7 +35,7 @@ class MuiHeader extends Widget
             $back = 'mui-action-back';
         }
         $code = <<<COD
-        <header id="header" class="mui-bar mui-bar-nav">
+        <header id="header" class="mui-bar mui-bar-nav mui-bar-transparent">
 			<a class=" {$back} mui-icon mui-icon-left-nav mui-pull-left"></a>
 			<h1 class="mui-title">{$this->title}</h1>
 		</header>

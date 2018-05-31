@@ -17,9 +17,7 @@ MuiAsset::register($this);
 </head>
 <body>
 <?php $this->beginBody(); ?>
-<div class="mui-content">
 <?= $content ?>
-</div>
 <?php $this->endBody(); ?>
 </body>
 </html>
