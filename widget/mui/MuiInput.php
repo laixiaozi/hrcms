@@ -15,22 +15,21 @@ use yii\base\Widget;
 class MuiInput extends Widget
 {
 
-    public $title;
-
-    public $show;
+    public $type;
 
     public $view;
+
+    public $config = array();
 
     public function init()
     {
         parent::init();
-        if (empty($this->title)) {
-            $this->title = '测试标题';
+        if (empty($this->type)) {
+            $this->type = 'text';
         }
         if (empty($this->view)) {
             $this->view = Yii::$app->getView();
         }
-
     }
 
     public function run()
@@ -40,51 +39,29 @@ class MuiInput extends Widget
 
     public function getCode()
     {
-        $code = <<<COD
-             <form class="mui-input-group">
-                <div class="mui-input-row">
-                    <label>用户名</label>
-                <input type="text" class="mui-input-clear" placeholder="请输入用户名">
-                </div>
-                <div class="mui-input-row">
-                    <label>密码</label>
-                    <input type="password" class="mui-input-password" placeholder="请输入密码">
-                </div>
-                <div class="mui-button-row">
-                    <button type="button" class="mui-btn mui-btn-primary" >确认</button>
-                    <button type="button" class="mui-btn mui-btn-danger" >取消</button>
-                </div>
-            </form>
-
-            <form class="mui-input-group">
-                <div class="mui-input-row">
-                    <label>快速删除</label>
-                    <input type="text" class="mui-input-clear" placeholder="请输入内容">
-                </div>
-                
+        $label = isset($this->config['label']) ? trim($this->config['label']) : '字段';
+        $name = isset($this->config['name']) ? 'name="' . trim($this->config['name']) . '""' : '';
+        $placeholder = isset($this->config['placeholder']) ? trim($this->config['placeholder']) : '请输入..';
+        $id = isset($this->config['id']) ? 'id = "' . trim($this->config['id']) . '""' : ' ';
+        $password = $this->type == 'password' ? 'mui-input-password' : '';
+        $clean = $this->type == 'password' ? ' ' : 'mui-input-clear';
+        if ($this->config['type'] == 'search') {
+            $code = <<<COD
                 <div class="mui-input-row mui-search">
-                   <input type="search" class="mui-input-clear mui-input-speech " placeholder="">
+                    <input type="{$this->type}" class=" $clean   $password" placeholder="{$placeholder}" {$id} {$name} />
                 </div>
-            </form>
 COD;
+        } else {
+            $code = <<<COD
+                <div class="mui-input-row">
+                    <label>{$label}</label>
+                    <input type="{$this->type}" class=" $clean   $password" placeholder="{$placeholder}" {$id} {$name} />
+                </div>
+COD;
+        }
+
         return $code;
     }
-
-    public function Js()
-    {
-        $jscode = <<<JS
-         // var st = document.getElementById('showactionsheet');
-         //  st.addEventListener('click',function(e){
-         //       console.log('点击显示');
-         //  });
-          mui("body").on('click', '#showactionsheet' , function(){
-              mui("#sheet1").popover('toggle'); 
-          });
-          
-JS;
-        $this->view->registerJs($jscode, \yii\web\View::POS_END);
-    }
-
 
 }
 

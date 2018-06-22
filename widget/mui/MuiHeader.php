@@ -32,11 +32,11 @@ class MuiHeader extends Widget
     {
         $back = ' ';  //是否具有返回功能
         if($this->back == true){
-            $back = 'mui-action-back';
+            $back = '<a class=" mui-action-back mui-icon mui-icon-left-nav mui-pull-left"></a>';
         }
         $code = <<<COD
-        <header id="header" class="mui-bar mui-bar-nav mui-bar-transparent">
-			<a class=" {$back} mui-icon mui-icon-left-nav mui-pull-left"></a>
+        <header id="header" class="mui-bar mui-bar-nav ">
+			{$back}
 			<h1 class="mui-title">{$this->title}</h1>
 		</header>
 COD;

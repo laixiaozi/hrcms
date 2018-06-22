@@ -2,7 +2,7 @@
 
 $params = require __DIR__ . '/params.php';
 $db = require __DIR__ . '/db.php';
-
+$sqlite = require __DIR__ . '/sqlite.php';
 $config = [
     'id' => 'basic',
     'basePath' => dirname(__DIR__),
@@ -11,7 +11,7 @@ $config = [
         '@bower' => '@vendor/bower-asset',
         '@npm' => '@vendor/npm-asset',
         '@iview' => '@app/themes/iview',
-        '@mui'  => '@app/themes/mui',
+        '@mui' => '@app/themes/mui',
     ],
     'components' => [
         'request' => [
@@ -40,16 +40,24 @@ $config = [
             'targets' => [
                 [
                     'class' => 'yii\log\FileTarget',
-                    'levels' => ['error', 'warning'],
+                    'levels' => ['error', 'warning','info','trace','profile'],
+                    'categories' => ['wechat'],
+                    'logFile' => '@app/runtime/logs/wechat/wechat_'.date('Y-m-d') . '.log',
+                    'maxFileSize' => 1024 * 2,
+                    'maxLogFiles' => 20,
+                    'logVars' => [],//为空  get post server session 数据不会记录到日志中
                 ],
             ],
         ],
         'db' => $db,
+        'sqlite' => $sqlite,
+
 
         'urlManager' => [
-            'enablePrettyUrl' => true,
+            'enablePrettyUrl' => false,
             'showScriptName' => false,
             'rules' => [
+                '<controller>/<action>' => '<controller>/<action>',
                 //测试正则匹配
                 '<controller:(site|post)>/<action:(index|test)>/<id:\d+>' => '<controller>/<action>',
                 [
@@ -72,6 +80,12 @@ $config = [
                     ],
                 ],
                 //其他路由
+//                'assetManager'=>array(
+//                    // 设置存放assets的文件目录位置
+//                    'basePath'=>'public',
+//                    // 设置访问assets目录的url地址
+//                    'baseUrl'=>'/public',
+//                ),
 
             ], //end rules
 

@@ -39,10 +39,10 @@ class MuiGallery extends Widget
         $code = <<<COD
             <div class="mui-slider" >
               <div class="mui-slider-group">
-                <div class="mui-slider-item"><a href="#"><img src="public/img/cbd.jpg" /></a></div>
-                <div class="mui-slider-item"><a href="#"><img src="public/img/muwu.jpg" /></a></div>
-                <div class="mui-slider-item"><a href="#"><img src="public/img/shuijiao.jpg" /></a></div>
-                <div class="mui-slider-item"><a href="#"><img src="public/img/yuantiao.jpg" /></a></div>
+                <div class="mui-slider-item"><a href="#"><img src="/public/img/cbd.jpg" /></a></div>
+                <div class="mui-slider-item"><a href="#"><img src="/public/img/muwu.jpg" /></a></div>
+                <div class="mui-slider-item"><a href="#"><img src="/public/img/shuijiao.jpg" /></a></div>
+                <div class="mui-slider-item"><a href="#"><img src="/public/img/yuantiao.jpg" /></a></div>
               </div>
             </div>
 COD;

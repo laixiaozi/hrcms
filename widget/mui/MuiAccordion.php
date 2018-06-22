@@ -13,7 +13,7 @@ class MuiAccordion extends Widget
 
     public $title;
 
-    public $show;
+    public $id;
 
     public function init()
     {
@@ -22,30 +22,23 @@ class MuiAccordion extends Widget
             $this->title = '测试标题';
         }
 
-
+        if (empty($this->id)) {
+            $this->id = 'mui-accordion';
+        }
+        ob_start();
     }
 
     public function run()
     {
-        return $this->getCode();
+        $code = $this->getCode();
+        $code .= ob_get_clean();
+        $code .= '</ul>' . PHP_EOL;
+        return $code;
     }
 
     public function getCode()
     {
-        $show = ' ';  //是否具有返回功能
-        if ($this->show == true) {
-            $show = 'mui-active';
-        }
-        $code = <<<COD
-        <ul class="mui-table-view"> 
-        <li class="mui-table-view-cell mui-collapse  {$show}">
-            <a class="mui-navigate-right" href="#">面板1</a>
-            <div class="mui-collapse-content">
-                <p>面板1子内容</p>
-            </div>
-        </li>
-    </ul>
-COD;
+        $code = '<ul class="mui-table-view " id="'.$this->id.'" >' . PHP_EOL;
         return $code;
     }
 

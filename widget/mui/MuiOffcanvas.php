@@ -19,6 +19,8 @@ class MuiOffcanvas extends Widget
 
     public $view;
 
+    public $menuItems;
+
     public function init()
     {
         parent::init();
@@ -28,13 +30,63 @@ class MuiOffcanvas extends Widget
         if (empty($this->view)) {
             $this->view = Yii::$app->getView();
         }
+        ob_start();
 
     }
 
     public function run()
     {
         $this->Js();
-        return $this->getCode();
+        $code = $this->getHeadcode();
+        $code .= ob_get_clean();
+        $code .= $this->getFootCode();
+        return $code;
+    }
+
+    public function getFootCode()
+    {
+        $code = <<<COD
+                  </div>
+                </div>  
+              </div>
+            </div>
+COD;
+        return $code;
+    }
+
+    public function getHeadcode()
+    {
+        $code = <<<COD
+            <!-- 侧滑导航根容器 -->
+            <div class="mui-off-canvas-wrap mui-draggable">
+              <!-- 菜单容器 -->
+              <aside class="mui-off-canvas-left" id="offCanvasSide">
+                <div class="mui-scroll-wrapper" id="offCanvasSideScroll">
+                  <div class="mui-scroll">
+                    <!-- 菜单具体展示内容 -->
+                        <div style="margin:10% auto 10%;color:#ddd;">
+                            <p class="log" style="background:#ddd;border-radius:6px;width:30%;margin-left:10%;height: 50px;line-height: 50px;text-align: center;"> </p>
+                            <h3 style="text-indent:10%;">{$this->title}</h3>
+                        </div>
+                         <ul class ='mui-table-view mui-table-view-chevron mui-table-view-inverted'>
+                                <li class="mui-table-view-cell">-------------</li>
+                        </ul>
+                  </div>
+                  <!-- 菜单具体展示内容END -->
+                </div>
+              </aside>
+              <!-- 主页面容器 -->
+              <div class="mui-inner-wrap">
+                <!-- 主页面标题 -->
+                <header class="mui-bar mui-bar-nav">
+                  <a  href="#offCanvasSide" class="mui-icon mui-action-menu mui-icon-bars mui-pull-left"></a>
+                  <h1 class="mui-title">{$this->title}</h1>
+                </header>
+                <div class="mui-content mui-scroll-wrapper" id="offCanvasContentScroll">
+                  <div class="mui-scroll">
+                    <!-- 主界面具体展示内容 -->
+COD;
+        return $code;
     }
 
     /**
@@ -81,7 +133,7 @@ class MuiOffcanvas extends Widget
             <!-- 侧滑导航根容器 -->
             <div class="mui-off-canvas-wrap mui-draggable">
               <!-- 菜单容器 -->
-              <aside class="mui-off-canvas-left">
+              <aside class="mui-off-canvas-left" id="offCanvasSide">
                 <div class="mui-scroll-wrapper">
                   <div class="mui-scroll">
                     <!-- 菜单具体展示内容 -->
@@ -93,6 +145,7 @@ class MuiOffcanvas extends Widget
               <div class="mui-inner-wrap">
                 <!-- 主页面标题 -->
                 <header class="mui-bar mui-bar-nav">
+                  <a href="#offCanvasSide" class="mui-icon mui-action-menu mui-icon-bars mui-pull-left"></a>
                   <a class="mui-icon mui-action-menu mui-icon-bars mui-pull-left"></a>
                   <h1 class="mui-title">标题</h1>
                 </header>
@@ -111,15 +164,16 @@ COD;
     public function Js()
     {
         $jscode = <<<JS
-          mui("body").on('tap', '.offcanvas' , function(){
-              console.log('打开策划菜单');
-             mui('.mui-off-canvas-wrap').offCanvas('show');
-          });
-         mui("body").on('tap', '.offcanvasclose' , function(){
-              console.log('关闭菜单');
-              mui(".mui-off-canvas-wrap").offCanvas().close(); 
-          });
-          
+         //  mui("body").on('tap', '.offcanvas' , function(){
+         //      console.log('打开策划菜单');
+         //     mui('.mui-off-canvas-wrap').offCanvas('show');
+         //  });
+         // mui("body").on('tap', '.offcanvasclose' , function(){
+         //      console.log('关闭菜单');
+         //      mui(".mui-off-canvas-wrap").offCanvas().close(); 
+         //  });
+         mui('#offCanvasSideScroll').scroll();  
+         mui('#offCanvasContentScroll').scroll();  
 JS;
         $this->view->registerJs($jscode, \yii\web\View::POS_END);
     }

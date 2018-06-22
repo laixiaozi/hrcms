@@ -31,18 +31,13 @@ use yii\base\Widget;
 class MuiList extends Widget
 {
 
-    public $title;
-
-    public $show;
-
     public $view;
+
+    public $items;
 
     public function init()
     {
         parent::init();
-        if (empty($this->title)) {
-            $this->title = '测试标题';
-        }
         if (empty($this->view)) {
             $this->view = Yii::$app->getView();
         }
@@ -55,52 +50,40 @@ class MuiList extends Widget
 
     public function getCode()
     {
-        $code = <<<COD
-        <ul class="mui-table-view">
-            <li class="mui-table-view-cell">Item 1</li>
-            <li class="mui-table-view-cell">Item 2</li>
-            <li class="mui-table-view-cell">Item 3</li>
-        </ul>
-            <ul class="mui-table-view">
-            <li class="mui-table-view-cell mui-media">
-                <a href="javascript:;">
-                    <img class="mui-media-object mui-pull-left" src="public/img/shuijiao.jpg">
-                    <div class="mui-media-body">
-                        幸福
-                        <p class='mui-ellipsis'>能和心爱的人一起睡觉，是件幸福的事情；可是，打呼噜怎么办？</p>
-                    </div>
-                </a>
-            </li>
-            <li class="mui-table-view-cell mui-media">
-                <a href="javascript:;">
-                    <img class="mui-media-object mui-pull-left" src="public/img/muwu.jpg">
-                    <div class="mui-media-body">
-                        木屋
-                        <p class='mui-ellipsis'>想要这样一间小木屋，夏天挫冰吃瓜，冬天围炉取暖.</p>
-                    </div>
-                </a>
-            </li>
-            <li class="mui-table-view-cell mui-media">
-                <a href="javascript:;">
-                    <img class="mui-media-object mui-pull-left" src="public/img/cbd.jpg">
-                    <div class="mui-media-body">
-                        CBD
-                        <p class='mui-ellipsis'>烤炉模式的城，到黄昏，如同打翻的调色盘一般.</p>
-                    </div>
-                </a>
-            </li>
-        </ul>
-COD;
+        $code = '<ul class="mui-table-view">' . PHP_EOL;
+        if (isset($this->items) && is_array($this->items)) {
+            foreach ($this->items as $item) {
+                $code .= '<li class="mui-table-view-cell mui-media">' . PHP_EOL;
+                if (isset($item['href'])) {
+                    $code .= ' <a href="' . $item['href'] . '"  >' . PHP_EOL;
+                }
+                if (isset($item['icon'])) {
+                    $code .= '<span class=" mui-media-object ' . $item['icon'] . '  mui-pull-left"></span>' . PHP_EOL;
+                }
+                if (isset($item['img'])) {
+                    $code .= '<img class="mui-media-object mui-pull-left" src="' . $item['img'] . '">' . PHP_EOL;
+                }
+                $code .= '<div class="mui-media-body">' . PHP_EOL;
+                $code .= $item['title'];
+                if (isset($item['desc'])) {
+                    $code .= '<p class="mui-ellipsis">' . PHP_EOL;
+                    $code .= $item['desc'];
+                    $code .= '</p>' . PHP_EOL;
+                }
+                $code .= '</div>' . PHP_EOL;
+                if (isset($item['href'])) {
+                    $code .= ' </a>' . PHP_EOL;
+                }
+                $code .= '</li>' . PHP_EOL;
+            }
+        }
+        $code .= '</ul>' . PHP_EOL;
         return $code;
     }
 
     public function Js()
     {
         $jscode = <<<JS
-         // var st = document.getElementById('showactionsheet');
-         //  st.addEventListener('click',function(e){
-         //       console.log('点击显示');
-         //  });
           mui("body").on('click', '#showactionsheet' , function(){
               mui("#sheet1").popover('toggle'); 
           });

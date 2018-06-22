@@ -3,6 +3,7 @@
 namespace app\controllers;
 
 use Yii;
+use yii\helpers\Url;
 use yii\filters\AccessControl;
 use yii\web\Controller;
 use yii\web\Response;
@@ -10,6 +11,12 @@ use yii\filters\VerbFilter;
 use app\models\LoginForm;
 use app\models\ContactForm;
 use yii\base\ErrorException;
+use app\services\wechart\WechartErrCode;
+use app\services\utility\xml\XmlFile;
+use app\services\wechart\WechatApi;
+use app\services\business\Job;
+
+use app\models\JobList;
 
 class SiteController extends Controller
 {
@@ -67,7 +74,7 @@ class SiteController extends Controller
      */
     public function actionIndex()
     {
-        return $this->render('index');
+         Yii::$app->response->redirect(Url::to(['/job']));
     }
 
     /**
@@ -114,7 +121,6 @@ class SiteController extends Controller
         $model = new ContactForm();
         if ($model->load(Yii::$app->request->post()) && $model->contact(Yii::$app->params['adminEmail'])) {
             Yii::$app->session->setFlash('contactFormSubmitted');
-
             return $this->refresh();
         }
         return $this->render('contact', [
@@ -124,7 +130,6 @@ class SiteController extends Controller
 
     /**
      * Displays about page.
-     *
      * @return string
      */
     public function actionAbout()
@@ -153,4 +158,23 @@ class SiteController extends Controller
 //        }
 
     }
+
+
+    /**
+     * 用户注册
+     */
+    public function actionReg()
+    {
+        return $this->render('reg');
+    }
+
+    /**
+     *个人中心
+     */
+    public function actionPersonal()
+    {
+        return $this->render('personal');
+    }
+
+
 }

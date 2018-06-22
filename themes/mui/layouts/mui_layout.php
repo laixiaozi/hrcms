@@ -22,7 +22,7 @@ MuiAsset::register($this);
 </body>
 </html>
 <?php $this->beginBlock('aa'); ?>
-mui.init();
+
 <?php $this->endBlock(); ?>
 <?php $this->registerJs($this->blocks['aa'], \yii\web\View::POS_END); ?>
 <?php $this->endPage(); ?>

@@ -4,6 +4,12 @@ namespace app\widget\mui;
 
 /**
  * 按钮
+ * <button type="button" class="mui-btn">默认</button>
+ * <button type="button" class="mui-btn mui-btn-primary">蓝色</button>
+ * <button type="button" class="mui-btn mui-btn-success">绿色</button>
+ * <button type="button" class="mui-btn mui-btn-warning">黄色</button>
+ * <button type="button" class="mui-btn mui-btn-danger">红色</button>
+ * <button type="button" class="mui-btn mui-btn-royal">紫色</button>
  */
 use Yii;
 use yii\base\Widget;
@@ -11,17 +17,16 @@ use yii\base\Widget;
 class MuiButton extends Widget
 {
 
-    public $title;
 
-    public $show;
+    public $inform;
 
     public $view;
 
     public function init()
     {
         parent::init();
-        if (empty($this->title)) {
-            $this->title = '测试标题';
+        if (empty($this->inform)) {
+            $this->inform = false;
         }
         if (empty($this->view)) {
             $this->view = Yii::$app->getView();
@@ -36,14 +41,17 @@ class MuiButton extends Widget
 
     public function getCode()
     {
-        $code = <<<COD
-            <button type="button" class="mui-btn">默认</button>
-            <button type="button" class="mui-btn mui-btn-primary">蓝色</button>
-            <button type="button" class="mui-btn mui-btn-success">绿色</button>
-            <button type="button" class="mui-btn mui-btn-warning">黄色</button>
-            <button type="button" class="mui-btn mui-btn-danger">红色</button>
-            <button type="button" class="mui-btn mui-btn-royal">紫色</button> 
+        if ($this->inform) {
+            $code = <<<COD
+            <div class="mui-button-row">
+                <button type="button" class="mui-btn " >确认</button>
+                <button type="button" class="mui-btn " >取消</button>
+            </div>
 COD;
+        } else {
+            $code = '<button type="button" class="mui-btn">默认</button>';
+        }
+
         return $code;
     }
 
